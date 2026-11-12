@@ -6,18 +6,17 @@
 (function () {
   "use strict";
 
-  // 1. AUTO-INJECT CLEAN MULTI-PAGE BAR & THEME TOGGLE ON EVERY PAGE
   function setupUniversalHeaderAndTheme() {
     const header = document.querySelector(".top-header");
     if (!header) return;
 
-    // Fix inline display:flex overlap on mobile
+    // Remove inline display:flex overlap on mobile
     const oldQuickNav = header.querySelector(".desktop-quick-nav");
     if (oldQuickNav) {
       oldQuickNav.removeAttribute("style");
     }
 
-    // Add Dark/Light Theme Button automatically if missing
+    // Dark/Light Theme Button Setup
     let headerRight = header.querySelector(".header-right");
     if (!headerRight) {
       headerRight = document.createElement("div");
@@ -28,23 +27,25 @@
     const savedTheme = localStorage.getItem("ns_theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
-    if (!document.getElementById("themeToggleBtn")) {
-      const themeBtn = document.createElement("button");
+    let themeBtn = document.getElementById("themeToggleBtn");
+    if (!themeBtn) {
+      themeBtn = document.createElement("button");
       themeBtn.id = "themeToggleBtn";
       themeBtn.className = "theme-toggle-btn";
       themeBtn.setAttribute("aria-label", "Toggle Dark/Light Mode");
-      themeBtn.textContent = savedTheme === "light" ? "🌙" : "☀️";
-      themeBtn.addEventListener("click", () => {
-        const cur = document.documentElement.getAttribute("data-theme");
-        const next = cur === "light" ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("ns_theme", next);
-        themeBtn.textContent = next === "light" ? "🌙" : "☀️";
-      });
       headerRight.prepend(themeBtn);
     }
 
-    // Inject Clean Scrollable Multi-Page Strip right below Header (Zero Overlap!)
+    themeBtn.textContent = savedTheme === "light" ? "🌙" : "☀️";
+    themeBtn.onclick = () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      const next = cur === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("ns_theme", next);
+      themeBtn.textContent = next === "light" ? "🌙" : "☀️";
+    };
+
+    // Clean Scrollable Sub-Nav Bar right below Header
     if (!document.getElementById("universalSubNav")) {
       const currentFile = window.location.pathname.split("/").pop() || "index.html";
       const pages = [
@@ -91,6 +92,35 @@
 
       header.insertAdjacentElement("afterend", subNav);
     }
+  }
+
+  // Stop & Close Audio Player completely (Works on all pages!)
+  function setupPlayerCloseButton() {
+    const rightTools = document.querySelector(".player-right-tools");
+    const stickyBar = document.getElementById("stickyAudioPlayer");
+    const audioEl = document.getElementById("htmlAudioElement");
+    if (!rightTools || !stickyBar) return;
+
+    let closeBtn = document.getElementById("closePlayerBtn");
+    if (!closeBtn) {
+      closeBtn = document.createElement("button");
+      closeBtn.id = "closePlayerBtn";
+      closeBtn.className = "ctrl-btn";
+      closeBtn.title = "प्लेयर बंद करें";
+      closeBtn.innerHTML = "✕";
+      closeBtn.style.cssText = "font-size: 1.15rem; color: #f43f5e; font-weight: 800; margin-left: 4px;";
+      rightTools.appendChild(closeBtn);
+    }
+
+    closeBtn.onclick = () => {
+      if (audioEl) {
+        audioEl.pause();
+        audioEl.currentTime = 0;
+      }
+      window.NSConfig.state.isPlaying = false;
+      stickyBar.classList.add("hidden");
+      if (window.NSRenderer) window.NSRenderer.renderVoicesGrid();
+    };
   }
 
   function openDrawer() {
@@ -147,7 +177,6 @@
   function bindAllEvents() {
     const { state, showToast } = window.NSConfig;
 
-    // 3-Line Side Drawer Menu
     const openBtn = document.getElementById("openDrawerBtn");
     const closeBtn = document.getElementById("closeDrawerBtn");
     const overlay = document.getElementById("drawerOverlay");
@@ -172,7 +201,6 @@
       });
     });
 
-    // Pro Footer Category & Action Buttons
     document.querySelectorAll("[data-footer-cat]").forEach((btn) => {
       btn.addEventListener("click", () => setCategoryFilter(btn.dataset.footerCat, true));
     });
@@ -213,12 +241,10 @@
       });
     }
 
-    // Category Pills
     document.querySelectorAll(".cat-pill[data-category]").forEach((pill) => {
       pill.addEventListener("click", () => setCategoryFilter(pill.dataset.category, false));
     });
 
-    // Search & Sort Controls
     const searchInput = document.getElementById("voiceSearchInput");
     const clearSearchBtn = document.getElementById("clearSearchBtn");
     const sortSelect = document.getElementById("sortSelect");
@@ -258,7 +284,6 @@
       });
     }
 
-    // Modals
     const detailModal = document.getElementById("voiceDetailModal");
     const closeDetailBtn = document.getElementById("closeDetailModalBtn");
     const submitModal = document.getElementById("submitVoiceModal");
@@ -307,7 +332,6 @@
       });
     });
 
-    // Forms
     const commentForm = document.getElementById("commentForm");
     const curatedForm = document.getElementById("curatedSubmitForm");
 
@@ -324,7 +348,6 @@
       });
     }
 
-    // Sticky Bottom Audio Player Controls
     const mainPlayBtn = document.getElementById("mainPlayPauseBtn");
     const nextBtn = document.getElementById("nextTrackBtn");
     const prevBtn = document.getElementById("prevTrackBtn");
@@ -370,6 +393,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     setupUniversalHeaderAndTheme();
+    setupPlayerCloseButton();
     window.NSAudio.initAudioListeners();
     bindAllEvents();
     window.NSRenderer.updateGlobalStats();
