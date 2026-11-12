@@ -1,0 +1,10 @@
+{
+  "name": "Nischay Swar (निश्चय स्वर)",
+  "short_name": "Nischay Swar",
+  "description": "इतिहास के महापुरुषों से लेकर जंगली जीव-जंतुओं और पक्षियों तक 100% असली आवाज़ों का डिजिटल खज़ाना।",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#060912",
+  "theme_color": "#060912",
+  "orientation": "portrait"
+}
