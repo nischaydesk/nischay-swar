@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#060912" />
+  <meta name="description" content="Nischay Swar (निश्चय स्वर) — इतिहास के महापुरुषों से लेकर जंगली जीव-जंतुओं और पक्षियों तक 100% असली आवाज़ों का डिजिटल खज़ाना। Zero AI." />
+  <meta name="keywords" content="Nischay Swar, निश्चय स्वर, Real Voices Archive, Mahatma Gandhi Voice, Netaji Bose Voice, Wildlife Sounds, Indian Birds Sound, Prince Kumar" />
+  <meta name="author" content="Prince Kumar (Nischay Initiative)" />
+  <title>Nischay Swar (निश्चय स्वर) — 100% असली आवाज़ों का डिजिटल खज़ाना</title>
+
+  <!-- PWA Manifest & Google Fonts (5 Languages Support) -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Modular CSS Folder Links (Relative Paths for 100% GitHub Pages Support) -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/player.css" />
+</head>
+<body>
+
+  <!-- ==================== 1. 3-LINE SIDE DRAWER MENU ==================== -->
+  <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+  <aside id="sideDrawer" class="side-drawer" aria-label="Main Navigation Drawer">
+    <div class="drawer-header">
+      <div class="brand-lockup">
+        <div class="brand-badge">NS</div>
+        <div>
+          <h2 class="brand-title">NISCHAY SWAR</h2>
+          <span class="brand-sub" data-i18n="brandTag">निश्चय स्वर • 100% असली आवाज़</span>
+        </div>
+      </div>
+      <button id="closeDrawerBtn" class="icon-btn" aria-label="Close Menu">✕</button>
+    </div>
+
+    <div class="drawer-scroll">
+      <nav class="drawer-nav">
+        <p class="drawer-section-label" data-i18n="menuExplore">मुख्य नेविगेशन</p>
+        <button class="drawer-link active" data-nav="home">
+          <span class="nav-ico">🏠</span>
+          <span data-i18n="navHome">होम (संपूर्ण ध्वनि संग्रह)</span>
+        </button>
+        <button class="drawer-link" data-nav="trending">
+          <span class="nav-ico">🔥</span>
+          <span data-i18n="navTrending">सबसे ज़्यादा सुना गया (Trending)</span>
+        </button>
+        <button class="drawer-link" data-nav="timeline">
+          <span class="nav-ico">🕰️</span>
+          <span data-i18n="navTimeline">इतिहास की पहली आवाज़ें (1860–2026)</span>
+        </button>
+        <button class="drawer-link" data-nav="favorites">
+          <span class="nav-ico">❤️</span>
+          <span data-i18n="navFavorites">मेरी पसंदीदा आवाज़ें</span>
+          <span id="favBadgeCount" class="pill-count">0</span>
+        </button>
+
+        <p class="drawer-section-label" data-i18n="menuHumanAlbums">मानव इतिहास एल्बम</p>
+        <button class="drawer-link" data-cat-jump="legends">
+          <span class="nav-ico">🇮🇳</span>
+          <span data-i18n="catLegends">अमर वाणी (महापुरुष)</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="scientists">
+          <span class="nav-ico">🚀</span>
+          <span data-i18n="catScientists">विज्ञान और प्रेरणा</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="poets">
+          <span class="nav-ico">✒️</span>
+          <span data-i18n="catPoets">साहित्य और शायरी</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="rare">
+          <span class="nav-ico">📻</span>
+          <span data-i18n="catRare">पहली गूँज (दुर्लभ रिकॉर्डिंग)</span>
+        </button>
+
+        <p class="drawer-section-label" data-i18n="menuNatureAlbums">जीव-जंतु और प्रकृति</p>
+        <button class="drawer-link" data-cat-jump="wildlife">
+          <span class="nav-ico">🐅</span>
+          <span data-i18n="catWildlife">जंगली जानवर (Wildlife)</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="birds">
+          <span class="nav-ico">🦚</span>
+          <span data-i18n="catBirds">पक्षियों की चहचहाहट (Birds)</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="nature">
+          <span class="nav-ico">🌧️</span>
+          <span data-i18n="catNature">प्रकृति व अंतरिक्ष (Nature & Space)</span>
+        </button>
+        <button class="drawer-link" data-cat-jump="instruments">
+          <span class="nav-ico">🎶</span>
+          <span data-i18n="catInstruments">शास्त्रीय वाद्ययंत्र (Instruments)</span>
+        </button>
+
+        <p class="drawer-section-label" data-i18n="menuPlatform">प्लेटफॉर्म और सत्यापन</p>
+        <button id="openSubmitFromMenu" class="drawer-link highlight-link">
+          <span class="nav-ico">📩</span>
+          <span data-i18n="navSubmit">असली आवाज़ भेजें (Submit)</span>
+        </button>
+        <button id="openVerifyInfoBtn" class="drawer-link">
+          <span class="nav-ico">🛡️</span>
+          <span data-i18n="navVerify">100% Real Verification नियम</span>
+        </button>
+      </nav>
+
+      <div class="drawer-footer-card">
+        <div class="zero-ai-pill">✅ ZERO AI • 100% AUTHENTIC</div>
+        <p data-i18n="drawerNote">हर ऑडियो को ऐतिहासिक अभिलेखागार और प्राकृतिक स्रोतों से जाँचने के बाद ही प्रकाशित किया जाता है।</p>
+        <div class="drawer-credit">A Nischay Ecosystem Project • Prince Kumar</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== 2. STICKY TOP HEADER ==================== -->
+  <header class="top-header">
+    <div class="header-left">
+      <button id="openDrawerBtn" class="hamburger-btn" aria-label="Open Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="#top" class="header-brand" id="brandHomeReset">
+        <div class="logo-pulse">
+          <span class="bar b1"></span>
+          <span class="bar b2"></span>
+          <span class="bar b3"></span>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
+          <span class="sub-name" data-i18n="headerSub">निश्चय स्वर • असली आवाज़ों का डिजिटल खज़ाना</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Quick Desktop Nav Links -->
+    <nav class="desktop-quick-nav" aria-label="Quick Links">
+      <button class="q-nav-btn active" data-quick-cat="all" data-i18n="qAll">संपूर्ण संग्रह</button>
+      <button class="q-nav-btn" data-quick-cat="legends" data-i18n="qLegends">महापुरुष</button>
+      <button class="q-nav-btn" data-quick-cat="wildlife" data-i18n="qWildlife">जीव-जंतु व पक्षी</button>
+      <button class="q-nav-btn" data-quick-nav="timeline" data-i18n="qTimeline">इतिहास 1860+</button>
+    </nav>
+
+    <div class="header-right">
+      <!-- 5-Language Switcher Dropdown -->
+      <div class="lang-dropdown-wrap">
+        <button id="langToggleBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
+          <span class="globe-ico">🌐</span>
+          <span id="currentLangLabel">हिन्दी</span>
+          <span class="caret">▾</span>
+        </button>
+        <div id="langMenu" class="lang-menu" role="menu">
+          <button class="lang-option active" data-lang="hi" role="menuitem">
+            <span>🇮🇳 हिन्दी (Hindi)</span>
+            <span class="check-mark">✓</span>
+          </button>
+          <button class="lang-option" data-lang="en" role="menuitem">
+            <span>🇬🇧 English</span>
+            <span class="check-mark">✓</span>
+          </button>
+          <button class="lang-option" data-lang="bho" role="menuitem">
+            <span>🌾 भोजपुरी (Bhojpuri)</span>
+            <span class="check-mark">✓</span>
+          </button>
+          <button class="lang-option" data-lang="bn" role="menuitem">
+            <span>🏵️ বাংলা (Bengali)</span>
+            <span class="check-mark">✓</span>
+          </button>
+          <button class="lang-option" data-lang="ur" role="menuitem">
+            <span>📜 اردو (Urdu)</span>
+            <span class="check-mark">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 3. MAIN CONTENT AREA ==================== -->
+  <main id="top" class="main-container">
+
+    <!-- HERO SPOTLIGHT BANNER -->
+    <section class="hero-section" aria-label="Featured Archive">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge-verified">✅ 100% VERIFIED REAL AUDIO</span>
+          <span class="badge-era">1860 — 2026 DIGITAL ARCHIVE</span>
+        </div>
+        <h1 class="hero-title" data-i18n="heroTitle">
+          इतिहास से प्रकृति तक — 100% असली आवाज़ों का डिजिटल खज़ाना
+        </h1>
+        <p class="hero-desc" data-i18n="heroDesc">
+          महात्मा गांधी, नेताजी सुभाष चंद्र बोस और डॉ. कलाम की ऐतिहासिक वाणी से लेकर बंगाल टाइगर, मोर, कोयल और मंगल ग्रह की हवा तक — बिना किसी AI बनावट के सीधे मूल रूप में सुनें।
+        </p>
+
+        <!-- Live Platform Counters -->
+        <div class="hero-stats-grid">
+          <div class="stat-box">
+            <span id="totalVoicesCount" class="stat-num">0</span>
+            <span class="stat-lbl" data-i18n="statVoices">सत्यापित ध्वनियाँ</span>
+          </div>
+          <div class="stat-box">
+            <span id="totalPlaysCount" class="stat-num">0</span>
+            <span class="stat-lbl" data-i18n="statPlays">कुल बार सुना गया</span>
+          </div>
+          <div class="stat-box">
+            <span id="totalLikesCount" class="stat-num">0</span>
+            <span class="stat-lbl" data-i18n="statLikes">कुल लाइक्स ❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Voice Spotlight Card -->
+      <div id="heroSpotlightCard" class="spotlight-card">
+        <div class="spotlight-tag" data-i18n="spotlightTag">⭐ आज की विशेष ऐतिहासिक आवाज़</div>
+        <div class="spotlight-body">
+          <img id="spotlightImg" src="images/legends/gandhi.jpg" alt="Featured Voice" class="spotlight-avatar" onerror="this.src='https://placehold.co/200x200/1e293b/f59e0b?text=Nischay+Swar'" />
+          <div class="spotlight-info">
+            <span id="spotlightYear" class="spotlight-year">1931 • अमर वाणी</span>
+            <h3 id="spotlightName">महात्मा गांधी (Mahatma Gandhi)</h3>
+            <p id="spotlightQuote">"ईश्वर के अस्तित्व पर आध्यात्मिक संदेश — मूल ऐतिहासिक रिकॉर्डिंग"</p>
+            <div class="spotlight-actions">
+              <button id="spotlightPlayBtn" class="btn-primary-play">
+                <span>▶</span>
+                <span data-i18n="btnListenNow">अभी सुनें</span>
+              </button>
+              <button id="spotlightDetailBtn" class="btn-secondary-glass" data-i18n="btnStoryComments">
+                कहानी व कमेंट्स
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEARCH & FILTER TOOLBAR -->
+    <section class="filter-toolbar" aria-label="Search and Filters">
+      <div class="search-box-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          type="search"
+          id="voiceSearchInput"
+          class="search-input"
+          placeholder="महापुरुष, जानवर (जैसे Tiger, मोर), साल या विषय खोजें..."
+          data-i18n-placeholder="searchPlaceholder"
+          autocomplete="off"
+        />
+        <button id="clearSearchBtn" class="clear-search-btn hidden" aria-label="Clear Search">✕</button>
+      </div>
+
+      <div class="sort-wrap">
+        <select id="sortSelect" class="sort-select" aria-label="Sort Voices">
+          <option value="featured" data-i18n="sortFeatured">✨ विशेष चयन (Featured)</option>
+          <option value="mostPlayed" data-i18n="sortPlayed">🔥 सबसे ज़्यादा सुना गया</option>
+          <option value="mostLiked" data-i18n="sortLiked">❤️ सबसे ज़्यादा पसंदीदा</option>
+          <option value="oldest" data-i18n="sortOldest">🕰️ सबसे पुराना (1860 से)</option>
+          <option value="newest" data-i18n="sortNewest">🆕 नवीनतम रिकॉर्डिंग</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- CATEGORY PILLS (HUMAN + WILDLIFE + BIRDS + NATURE) -->
+    <nav class="category-bar" aria-label="Voice Categories">
+      <button class="cat-pill active" data-category="all">
+        <span>🌐</span> <span data-i18n="catAll">सभी आवाज़ें</span>
+      </button>
+      <button class="cat-pill" data-category="legends">
+        <span>🇮🇳</span> <span data-i18n="catLegends">महापुरुष</span>
+      </button>
+      <button class="cat-pill" data-category="scientists">
+        <span>🚀</span> <span data-i18n="catScientists">वैज्ञानिक</span>
+      </button>
+      <button class="cat-pill" data-category="poets">
+        <span>✒️</span> <span data-i18n="catPoets">कवि व शायर</span>
+      </button>
+      <button class="cat-pill" data-category="wildlife">
+        <span>🐅</span> <span data-i18n="catWildlife">जंगली जानवर</span>
+      </button>
+      <button class="cat-pill" data-category="birds">
+        <span>🦚</span> <span data-i18n="catBirds">पक्षी (Birds)</span>
+      </button>
+      <button class="cat-pill" data-category="nature">
+        <span>🌧️</span> <span data-i18n="catNature">प्रकृति व अंतरिक्ष</span>
+      </button>
+      <button class="cat-pill" data-category="instruments">
+        <span>🎶</span> <span data-i18n="catInstruments">वाद्ययंत्र</span>
+      </button>
+      <button class="cat-pill" data-category="rare">
+        <span>📻</span> <span data-i18n="catRare">दुर्लभ इतिहास</span>
+      </button>
+    </nav>
+
+    <!-- SECTION HEADING & RESULT COUNT -->
+    <div class="grid-header-bar">
+      <h2 id="activeSectionHeading" class="section-heading" data-i18n="headingAllVoices">
+        सभी प्रमाणित आवाज़ें (Verified Archive)
+      </h2>
+      <span id="visibleResultBadge" class="result-badge">0 Voices</span>
+    </div>
+
+    <!-- MAIN PHOTO + AUDIO CARDS GRID -->
+    <section id="voicesGrid" class="voices-grid" aria-live="polite">
+      <!-- Cards injected dynamically by js/card-builder.js -->
+    </section>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyStateBox" class="empty-state hidden">
+      <div class="empty-emoji">🎧</div>
+      <h3 data-i18n="emptyTitle">कोई आवाज़ नहीं मिली</h3>
+      <p data-i18n="emptyDesc">कृपया किसी दूसरे नाम, जीव-जंतु, साल या कैटेगरी से खोजने का प्रयास करें।</p>
+      <button id="resetAllFiltersBtn" class="btn-primary-play" data-i18n="btnResetFilter">सभी आवाज़ें दिखाएं</button>
+    </div>
+
+    <!-- HISTORICAL TIMELINE SECTION -->
+    <section id="timelineSection" class="timeline-section hidden">
+      <div class="timeline-header">
+        <h2 data-i18n="timelineTitle">🕰️ मानव इतिहास में आवाज़ रिकॉर्डिंग का सफ़र</h2>
+        <p data-i18n="timelineSub">1860 की पहली यांत्रिक तरंगों से लेकर आज के डिजिटल युग तक का प्रमाणित इतिहास</p>
+      </div>
+      <div id="timelineContainer" class="timeline-list"></div>
+    </section>
+
+    <!-- TRUST & ARCHIVE PILLARS BANNER -->
+    <section class="trust-pillars-section" aria-label="Why Nischay Swar">
+      <div class="pillar-card">
+        <div class="pillar-ico">🛡️</div>
+        <h3 data-i18n="pillar1Title">100% असली और सत्यापित</h3>
+        <p data-i18n="pillar1Desc">कोई AI जनरेटेड या नकली आवाज़ नहीं। हर रिकॉर्डिंग को मूल ऐतिहासिक व प्राकृतिक स्रोतों से जांचा जाता है।</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-ico">🌍</div>
+        <h3 data-i18n="pillar2Title">इतिहास से वन्यजीव तक</h3>
+        <p data-i18n="pillar2Desc">स्वतंत्रता सेनानियों के भाषणों से लेकर लुप्तप्राय पक्षियों, जानवरों और अंतरिक्ष की ध्वनियों का एकीकृत संग्रह।</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-ico">🇮🇳</div>
+        <h3 data-i18n="pillar3Title">5 भारतीय व वैश्विक भाषाएँ</h3>
+        <p data-i18n="pillar3Desc">हिन्दी, English, भोजपुरी, বাংলা और اردو में हर आवाज़ की पूरी कहानी और ऐतिहासिक संदर्भ पढ़ें।</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 4. PROFESSIONAL MULTI-COLUMN SITE FOOTER ==================== -->
+  <footer class="pro-site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Column 1: Brand & Mission -->
+        <div class="footer-col brand-col">
+          <div class="brand-lockup">
+            <div class="brand-badge">NS</div>
+            <div>
+              <h3 class="brand-title">NISCHAY SWAR</h3>
+              <span class="brand-sub">निश्चय स्वर डिजिटल आर्काइव</span>
+            </div>
+          </div>
+          <p class="footer-about-text" data-i18n="footerAbout">
+            Nischay Swar भारत का एक समर्पित डिजिटल ध्वनि संग्रहालय है, जिसका उद्देश्य मानव इतिहास की महान वाणियों, दुर्लभ रिकॉर्डिंग्स और प्रकृति के जीव-जंतुओं की 100% असली आवाज़ों को आने वाली पीढ़ियों के लिए सुरक्षित रखना है।
+          </p>
+          <div class="footer-badges-row">
+            <span class="f-badge">✅ ZERO AI ARCHIVE</span>
+            <span class="f-badge">🇮🇳 MADE IN BIHAR, INDIA</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Human Archives -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footerColHuman">मानव इतिहास संग्रह</h4>
+          <ul class="footer-links">
+            <li><button data-footer-cat="legends" data-i18n="catLegends">अमर वाणी (महापुरुष)</button></li>
+            <li><button data-footer-cat="scientists" data-i18n="catScientists">विज्ञान और प्रेरणा</button></li>
+            <li><button data-footer-cat="poets" data-i18n="catPoets">साहित्य और शायरी</button></li>
+            <li><button data-footer-cat="rare" data-i18n="catRare">1860+ दुर्लभ रिकॉर्डिंग</button></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Wildlife & Nature -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footerColNature">प्रकृति व जीव-जंतु</h4>
+          <ul class="footer-links">
+            <li><button data-footer-cat="wildlife" data-i18n="catWildlife">जंगली जानवर (Wildlife)</button></li>
+            <li><button data-footer-cat="birds" data-i18n="catBirds">पक्षियों की चहचहाहट</button></li>
+            <li><button data-footer-cat="nature" data-i18n="catNature">प्रकृति व अंतरिक्ष ध्वनियाँ</button></li>
+            <li><button data-footer-cat="instruments" data-i18n="catInstruments">भारतीय शास्त्रीय वाद्ययंत्र</button></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Platform & Ecosystem -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footerColPlatform">प्लेटफॉर्म व निश्चय नेटवर्क</h4>
+          <ul class="footer-links">
+            <li><button id="footerTimelineBtn" data-i18n="navTimeline">इतिहास की टाइमलाइन</button></li>
+            <li><button id="footerVerifyBtn" data-i18n="navVerify">सत्यापन (Verification) नियम</button></li>
+            <li><button id="footerSubmitBtn" data-i18n="navSubmit">असली आवाज़ भेजें</button></li>
+            <li><a href="https://nischaydesk.github.io" target="_blank" rel="noopener">🎓 NischayDesk EdTech Portal ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Legal & Copyright Bar -->
+      <div class="footer-bottom-bar">
+        <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Founded & Engineered by <strong>Prince Kumar</strong> (Jamui, Bihar). All Rights Reserved.</p>
+        <p class="footer-disclaimer" data-i18n="footerDisclaimer">
+          सभी ऐतिहासिक व वन्यजीव ऑडियो Public Domain, Wikimedia Commons और प्रमाणित शैक्षिक अभिलेखागारों से साभार संकलित हैं।
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 5. VOICE DETAIL, REAL STATS & COMMENTS MODAL ==================== -->
+  <div id="voiceDetailModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalSpeakerName">
+    <div class="modal-card detail-modal-card">
+      <button id="closeDetailModalBtn" class="modal-close-btn" aria-label="Close Details">✕</button>
+
+      <div class="detail-top">
+        <div class="detail-photo-wrap">
+          <img id="modalSpeakerImg" src="" alt="" class="detail-photo" />
+          <span id="modalVerifiedTag" class="detail-verified-badge">✅ Verified Real</span>
+        </div>
+
+        <div class="detail-meta">
+          <div class="detail-chips">
+            <span id="modalCategoryChip" class="chip-gold">Category</span>
+            <span id="modalYearChip" class="chip-dark">Year</span>
+            <span id="modalDurationChip" class="chip-dark">00:45</span>
+          </div>
+          <h2 id="modalSpeakerName" class="detail-name">Speaker / Animal Name</h2>
+          <p id="modalSpeakerRole" class="detail-role">Role / Scientific Name & Habitat</p>
+          <p id="modalSpeakerBio" class="detail-bio">Detailed historical or wildlife context...</p>
+
+          <div class="detail-source-box">
+            <strong>🏛️ मूल स्रोत (Archive Source):</strong>
+            <span id="modalSourceText">Wikimedia Commons / Public Domain</span>
+          </div>
+
+          <div class="detail-actions-row">
+            <button id="modalPlayBtn" class="btn-primary-play">
+              <span>▶</span> <span data-i18n="btnPlayVoice">आवाज़ चलाएं</span>
+            </button>
+
+            <button id="modalLikeBtn" class="btn-like-action">
+              <span class="heart-ico">❤️</span>
+              <span id="modalLikeCount">0</span>
+            </button>
+
+            <div class="stat-pill-readonly" title="Total Real Listens">
+              <span>👁️</span>
+              <span id="modalPlayCount">0</span>
+              <span data-i18n="lblListens">सुना गया</span>
+            </div>
+
+            <button id="modalShareBtn" class="btn-share-wa">
+              <span>📲</span> <span data-i18n="btnShare">शेयर करें</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAFE & FILTERED COMMENTS SECTION -->
+      <div class="comments-wrapper">
+        <div class="comments-head">
+          <h3>💬 <span data-i18n="commentsHeading">श्रोताओं की प्रतिक्रिया (Comments)</span> <span id="modalCommentCount" class="comment-counter">0</span></h3>
+          <span class="safe-badge">🛡️ Safe & Filtered</span>
+        </div>
+
+        <form id="commentForm" class="comment-form">
+          <div class="comment-inputs">
+            <input
+              type="text"
+              id="commentAuthorInput"
+              class="c-input-name"
+              maxlength="35"
+              placeholder="आपका नाम (जैसे: प्रिंस कुमार)"
+              data-i18n-placeholder="commentNamePh"
+              required
+            />
+            <input
+              type="text"
+              id="commentTextInput"
+              class="c-input-msg"
+              maxlength="160"
+              placeholder="इस असली आवाज़ पर अपने विचार लिखें (अधिकतम 160 अक्षर)..."
+              data-i18n-placeholder="commentTextPh"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-post-comment" data-i18n="btnPostComment">पोस्ट करें ➤</button>
+        </form>
+        <p id="commentFeedbackMsg" class="comment-feedback hidden"></p>
+
+        <div id="commentsList" class="comments-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 6. SUBMIT VOICE MODAL ==================== -->
+  <div id="submitVoiceModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card small-modal-card">
+      <button id="closeSubmitModalBtn" class="modal-close-btn" aria-label="Close">✕</button>
+      <div class="modal-icon-top">🎙️</div>
+      <h2 data-i18n="submitModalTitle">असली आवाज़ सत्यापन हेतु भेजें</h2>
+      <p class="modal-subtext" data-i18n="submitModalDesc">
+        Nischay Swar पर कोई भी AI या नकली आवाज़ स्वीकार नहीं की जाती। यदि आपके पास किसी महापुरुष की दुर्लभ रिकॉर्डिंग या किसी पक्षी/जीव की साफ़ प्राकृतिक आवाज़ है, तो हमें भेजें।
+      </p>
+
+      <div class="verification-rules-box">
+        <h4 data-i18n="rulesHeading">✅ प्रकाशन के 3 अनिवार्य नियम:</h4>
+        <ul>
+          <li data-i18n="rule1">1. आवाज़ 100% असली मानव या प्रकृति की होनी चाहिए (AI सख्त मना है)।</li>
+          <li data-i18n="rule2">2. ऑडियो साफ़ होना चाहिए और लंबाई 15 सेकंड से 3 मिनट के बीच हो।</li>
+          <li data-i18n="rule3">3. एडमिन टीम द्वारा सत्यापन के बाद ही फोटो सहित लाइव किया जाएगा।</li>
+        </ul>
+      </div>
+
+      <form id="curatedSubmitForm" class="submit-request-form">
+        <input type="text" id="reqSenderName" placeholder="आपका पूरा नाम व शहर" required />
+        <input type="text" id="reqVoiceTitle" placeholder="आवाज़ किसकी है? (जैसे: कोयल पक्षी / ऐतिहासिक भाषण)" required />
+        <textarea id="reqVoiceDesc" rows="3" placeholder="संक्षिप्त विवरण या Google Drive / Archive ऑडियो लिंक..." required></textarea>
+        <button type="submit" class="btn-primary-play full-width-btn">
+          📩 <span data-i18n="btnSendRequest">सत्यापन के लिए अनुरोध भेजें</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 7. VERIFICATION POLICY MODAL ==================== -->
+  <div id="verifyPolicyModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card small-modal-card">
+      <button id="closeVerifyModalBtn" class="modal-close-btn" aria-label="Close">✕</button>
+      <div class="modal-icon-top">🛡️</div>
+      <h2 data-i18n="verifyTitle">हम असली आवाज़ की पहचान कैसे करते हैं?</h2>
+      <p class="modal-subtext" data-i18n="verifyDesc">
+        Nischay Swar का उद्देश्य इतिहास और प्रकृति की सच्ची ध्वनियों को बिना किसी मिलावट के सुरक्षित रखना है:
+      </p>
+      <div class="verification-rules-box">
+        <ul>
+          <li><strong>🏛️ ऐतिहासिक अभिलेखागार:</strong> प्रसार भारती, Wikimedia Commons और Internet Archive के प्रमाणित दस्तावेज़।</li>
+          <li><strong>🌿 वन्यजीव व प्रकृति स्रोत:</strong> Xeno-canto, Cornell Lab और NASA के प्रमाणित फील्ड रिकॉर्डिंग्स।</li>
+          <li><strong>🚫 जीरो AI गारंटी:</strong> बिना एडमिन अप्रूवल के कोई भी ऑडियो सीधे लाइव नहीं होता।</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 8. STICKY BOTTOM AUDIO PLAYER (SPOTIFY STYLE) ==================== -->
+  <div id="stickyAudioPlayer" class="sticky-player hidden" role="region" aria-label="Audio Player">
+    <audio id="htmlAudioElement" preload="metadata"></audio>
+
+    <div class="player-progress-wrap" id="progressBarContainer">
+      <div id="playerProgressFill" class="player-progress-fill"></div>
+    </div>
+
+    <div class="player-inner">
+      <div class="player-track-info" id="playerOpenDetailTrigger" title="कहानी व कमेंट्स खोलें">
+        <img id="playerAvatar" src="images/legends/gandhi.jpg" alt="Speaker" class="player-thumb" />
+        <div class="player-meta">
+          <div class="player-title-row">
+            <span id="playerTrackTitle" class="player-title">महात्मा गांधी</span>
+            <span class="verified-mini">✅</span>
+          </div>
+          <span id="playerTrackSub" class="player-sub">1931 • ऐतिहासिक भाषण</span>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <button id="prevTrackBtn" class="ctrl-btn" aria-label="Previous Voice" title="पिछली आवाज़">⏮</button>
+        <button id="mainPlayPauseBtn" class="play-pause-circle" aria-label="Play or Pause">▶</button>
+        <button id="nextTrackBtn" class="ctrl-btn" aria-label="Next Voice" title="अगली आवाज़">⏭</button>
+      </div>
+
+      <div class="player-right-tools">
+        <span class="time-display">
+          <span id="currentTimeText">0:00</span> / <span id="durationTimeText">0:00</span>
+        </span>
+        <button id="playerSpeedBtn" class="speed-pill" title="Playback Speed">1x</button>
+        <button id="playerQuickLikeBtn" class="player-like-btn" aria-label="Like">🤍</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
+
+  <!-- ==================== 9. MODULAR DATA & JS ENGINE SCRIPTS ==================== -->
+  <script src="data/lang-hi-en.js"></script>
+  <script src="data/lang-regional.js"></script>
+  <script src="data/db-humans.js"></script>
+  <script src="data/db-wildlife-nature.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/engagement.js"></script>
+  <script src="js/ui-renderer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
