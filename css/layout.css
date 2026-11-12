@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NISCHAY SWAR (निश्चय स्वर) — CORE LAYOUT, HEADER, DRAWER & PRO FOOTER
+   NISCHAY SWAR (निश्चय स्वर) — CORE LAYOUT, DARK/LIGHT THEME, DRAWER & FOOTER
    File: css/layout.css
    ========================================================================== */
 
@@ -30,6 +30,15 @@ body {
   line-height: 1.55;
   padding-bottom: 92px; /* Space for sticky audio player */
   overflow-x: hidden;
+  transition: background-color 0.28s ease, color 0.28s ease;
+}
+
+/* Light Mode Subtle Background Override */
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(217, 119, 6, 0.07), transparent 38%),
+    radial-gradient(circle at 88% 20%, rgba(14, 165, 233, 0.06), transparent 42%),
+    var(--bg-main);
 }
 
 body.lang-ur {
@@ -63,6 +72,9 @@ button, input, select, textarea {
   background: #24314a;
   border-radius: 10px;
 }
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold-primary);
 }
@@ -76,25 +88,33 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 18px;
+  gap: 10px;
+  padding: 10px 16px;
   background: var(--bg-glass);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border-subtle);
+  transition: background-color 0.28s ease;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 /* 3-Line Hamburger Button */
 .hamburger-btn {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -110,7 +130,7 @@ button, input, select, textarea {
 
 .hamburger-btn span {
   display: block;
-  width: 20px;
+  width: 19px;
   height: 2.2px;
   background: var(--text-primary);
   border-radius: 2px;
@@ -123,7 +143,7 @@ button, input, select, textarea {
 }
 
 .hamburger-btn:hover span:nth-child(2) {
-  width: 14px;
+  width: 13px;
   background: var(--gold-bright);
 }
 
@@ -131,15 +151,15 @@ button, input, select, textarea {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   text-decoration: none;
   color: inherit;
   min-width: 0;
 }
 
 .logo-pulse {
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   border-radius: 11px;
   background: linear-gradient(135deg, var(--gold-primary), var(--gold-deep));
   display: flex;
@@ -172,9 +192,9 @@ button, input, select, textarea {
 }
 
 .main-name {
-  font-size: 1.06rem;
+  font-size: 1.02rem;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   line-height: 1.15;
   white-space: nowrap;
 }
@@ -183,8 +203,12 @@ button, input, select, textarea {
   color: var(--gold-bright);
 }
 
+html[data-theme="light"] .accent-gold {
+  color: var(--gold-deep);
+}
+
 .sub-name {
-  font-size: 0.71rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
@@ -195,21 +219,22 @@ button, input, select, textarea {
 .desktop-quick-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.03);
+  gap: 5px;
+  background: rgba(128, 128, 128, 0.08);
   padding: 4px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
 }
 
 .q-nav-btn {
-  padding: 6px 14px;
+  padding: 6px 13px;
   border-radius: var(--radius-full);
   border: none;
   background: transparent;
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 600;
   color: var(--text-secondary);
+  text-decoration: none;
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
@@ -224,6 +249,31 @@ button, input, select, textarea {
   color: var(--gold-bright);
 }
 
+html[data-theme="light"] .q-nav-btn.active {
+  background: rgba(217, 119, 6, 0.14);
+  color: var(--gold-deep);
+}
+
+/* Dark / Light Theme Toggle Button */
+.theme-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  place-items: center;
+  font-size: 1.02rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--gold-primary);
+  transform: rotate(15deg);
+}
+
 /* 5-Language Toggle Dropdown */
 .lang-dropdown-wrap {
   position: relative;
@@ -233,16 +283,20 @@ button, input, select, textarea {
 .lang-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 13px;
+  gap: 5px;
+  padding: 7px 12px;
   border-radius: var(--radius-full);
   background: var(--bg-card);
   border: 1px solid var(--border-gold);
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--gold-bright);
   cursor: pointer;
   transition: var(--transition);
+}
+
+html[data-theme="light"] .lang-btn {
+  color: var(--gold-deep);
 }
 
 .lang-btn:hover {
@@ -254,11 +308,11 @@ button, input, select, textarea {
   right: 0;
   top: calc(100% + 8px);
   width: 210px;
-  background: #0f172a;
+  background: var(--bg-surface);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-md);
   padding: 6px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.82);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
   display: none;
   flex-direction: column;
   gap: 3px;
@@ -284,6 +338,7 @@ button, input, select, textarea {
   border: none;
   border-radius: 10px;
   background: transparent;
+  color: var(--text-primary);
   font-size: 0.86rem;
   text-align: left;
   cursor: pointer;
@@ -291,7 +346,7 @@ button, input, select, textarea {
 }
 
 .lang-option:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(128, 128, 128, 0.1);
 }
 
 .lang-option .check-mark {
@@ -306,6 +361,10 @@ button, input, select, textarea {
   font-weight: 700;
 }
 
+html[data-theme="light"] .lang-option.active {
+  color: var(--gold-deep);
+}
+
 .lang-option.active .check-mark {
   opacity: 1;
 }
@@ -314,7 +373,7 @@ button, input, select, textarea {
 .drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.76);
+  background: rgba(2, 6, 23, 0.72);
   backdrop-filter: blur(4px);
   z-index: 1100;
   opacity: 0;
@@ -334,14 +393,15 @@ button, input, select, textarea {
   bottom: 0;
   width: 305px;
   max-width: 86vw;
-  background: #090e1c;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   border-right: 1px solid var(--border-subtle);
   z-index: 1200;
   display: flex;
   flex-direction: column;
   transform: translateX(-102%);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.85);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.28s ease;
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.45);
 }
 
 .side-drawer.open {
@@ -379,6 +439,7 @@ button, input, select, textarea {
   font-size: 0.98rem;
   font-weight: 800;
   letter-spacing: 0.5px;
+  color: var(--text-primary);
 }
 
 .brand-sub {
@@ -393,6 +454,7 @@ button, input, select, textarea {
   border-radius: 10px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -425,7 +487,10 @@ button, input, select, textarea {
   gap: 4px;
 }
 
-.drawer-link {
+/* Fix for both <button> and <a> inside Drawer (Prevents default blue link color) */
+.drawer-link,
+.drawer-link:link,
+.drawer-link:visited {
   display: flex;
   align-items: center;
   gap: 11px;
@@ -434,6 +499,8 @@ button, input, select, textarea {
   border-radius: 12px;
   border: 1px solid transparent;
   background: transparent;
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
   font-size: 0.88rem;
   font-weight: 500;
   text-align: left;
@@ -442,20 +509,25 @@ button, input, select, textarea {
 }
 
 .drawer-link:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(128, 128, 128, 0.1);
+  color: var(--gold-bright) !important;
 }
 
 .drawer-link.active {
   background: rgba(245, 158, 11, 0.14);
   border-color: var(--border-gold);
-  color: var(--gold-bright);
+  color: var(--gold-bright) !important;
   font-weight: 700;
+}
+
+html[data-theme="light"] .drawer-link.active {
+  color: var(--gold-deep) !important;
 }
 
 .drawer-link.highlight-link {
   background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(16, 185, 129, 0.12));
   border-color: var(--border-gold);
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   font-weight: 600;
 }
 
@@ -484,7 +556,7 @@ button, input, select, textarea {
   padding: 3px 9px;
   border-radius: var(--radius-full);
   background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
+  color: #10b981;
   font-weight: 700;
   font-size: 0.7rem;
   margin-bottom: 8px;
@@ -496,6 +568,10 @@ button, input, select, textarea {
   border-top: 1px solid var(--border-subtle);
   color: var(--gold-bright);
   font-weight: 600;
+}
+
+html[data-theme="light"] .drawer-credit {
+  color: var(--gold-deep);
 }
 
 /* ==================== 3. MAIN CONTAINER & TRUST PILLARS ==================== */
@@ -517,8 +593,9 @@ button, input, select, textarea {
 .pillar-card {
   padding: 20px;
   border-radius: var(--radius-md);
-  background: linear-gradient(160deg, var(--bg-card), rgba(11, 17, 32, 0.7));
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
   transition: var(--transition);
 }
 
@@ -539,6 +616,10 @@ button, input, select, textarea {
   margin-bottom: 6px;
 }
 
+html[data-theme="light"] .pillar-card h3 {
+  color: var(--gold-deep);
+}
+
 .pillar-card p {
   font-size: 0.84rem;
   color: var(--text-secondary);
@@ -550,6 +631,7 @@ button, input, select, textarea {
   border-top: 1px solid var(--border-gold);
   margin-top: 24px;
   padding: 46px 16px 34px;
+  transition: background-color 0.28s ease;
 }
 
 .footer-container {
@@ -581,11 +663,15 @@ button, input, select, textarea {
 .f-badge {
   padding: 4px 10px;
   border-radius: var(--radius-full);
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.12);
   border: 1px solid var(--border-gold);
   color: var(--gold-bright);
   font-size: 0.7rem;
   font-weight: 700;
+}
+
+html[data-theme="light"] .f-badge {
+  color: var(--gold-deep);
 }
 
 .footer-heading {
@@ -615,13 +701,15 @@ button, input, select, textarea {
 }
 
 .footer-links button,
-.footer-links a {
+.footer-links a,
+.footer-links a:link,
+.footer-links a:visited {
   background: none;
   border: none;
   padding: 0;
   font-size: 0.84rem;
-  color: var(--text-secondary);
-  text-decoration: none;
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
   text-align: left;
   cursor: pointer;
   transition: var(--transition);
@@ -629,8 +717,13 @@ button, input, select, textarea {
 
 .footer-links button:hover,
 .footer-links a:hover {
-  color: var(--gold-bright);
+  color: var(--gold-bright) !important;
   transform: translateX(3px);
+}
+
+html[data-theme="light"] .footer-links button:hover,
+html[data-theme="light"] .footer-links a:hover {
+  color: var(--gold-deep) !important;
 }
 
 .footer-bottom-bar {
@@ -648,15 +741,52 @@ button, input, select, textarea {
   color: var(--gold-bright);
 }
 
+html[data-theme="light"] .footer-bottom-bar strong {
+  color: var(--gold-deep);
+}
+
 .footer-disclaimer {
   font-size: 0.74rem;
   color: var(--text-muted);
 }
 
-/* ==================== 5. RESPONSIVE BREAKPOINTS ==================== */
+/* ==================== 5. LIGHT MODE GLOBAL OVERRIDES ==================== */
+html[data-theme="light"] .hero-section {
+  background: linear-gradient(145deg, #ffffff 0%, #fef9c3 100%);
+}
+
+html[data-theme="light"] .hero-title {
+  background: linear-gradient(90deg, #0f172a, #b45309);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html[data-theme="light"] .spotlight-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(217, 119, 6, 0.28);
+}
+
+html[data-theme="light"] .stat-box {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+html[data-theme="light"] .modal-card {
+  background: #ffffff;
+}
+
+html[data-theme="light"] .sticky-player {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+html[data-theme="light"] .toast-banner {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ==================== 6. RESPONSIVE BREAKPOINTS (MOBILE OVERLAP FIX) ==================== */
 @media (max-width: 960px) {
   .desktop-quick-nav {
-    display: none;
+    display: none !important;
   }
 
   .footer-grid {
