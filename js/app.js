@@ -1,10 +1,97 @@
 /* ==========================================================================
-   NISCHAY SWAR (निश्चय स्वर) — MASTER BOOT CONTROLLER & EVENT ROUTER
+   NISCHAY SWAR (निश्चय स्वर) — MASTER CENTRAL CONTROLLER (ALL PAGES)
    File: js/app.js
    ========================================================================== */
 
 (function () {
   "use strict";
+
+  // 1. AUTO-INJECT CLEAN MULTI-PAGE BAR & THEME TOGGLE ON EVERY PAGE
+  function setupUniversalHeaderAndTheme() {
+    const header = document.querySelector(".top-header");
+    if (!header) return;
+
+    // Fix inline display:flex overlap on mobile
+    const oldQuickNav = header.querySelector(".desktop-quick-nav");
+    if (oldQuickNav) {
+      oldQuickNav.removeAttribute("style");
+    }
+
+    // Add Dark/Light Theme Button automatically if missing
+    let headerRight = header.querySelector(".header-right");
+    if (!headerRight) {
+      headerRight = document.createElement("div");
+      headerRight.className = "header-right";
+      header.appendChild(headerRight);
+    }
+
+    const savedTheme = localStorage.getItem("ns_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
+    if (!document.getElementById("themeToggleBtn")) {
+      const themeBtn = document.createElement("button");
+      themeBtn.id = "themeToggleBtn";
+      themeBtn.className = "theme-toggle-btn";
+      themeBtn.setAttribute("aria-label", "Toggle Dark/Light Mode");
+      themeBtn.textContent = savedTheme === "light" ? "🌙" : "☀️";
+      themeBtn.addEventListener("click", () => {
+        const cur = document.documentElement.getAttribute("data-theme");
+        const next = cur === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("ns_theme", next);
+        themeBtn.textContent = next === "light" ? "🌙" : "☀️";
+      });
+      headerRight.prepend(themeBtn);
+    }
+
+    // Inject Clean Scrollable Multi-Page Strip right below Header (Zero Overlap!)
+    if (!document.getElementById("universalSubNav")) {
+      const currentFile = window.location.pathname.split("/").pop() || "index.html";
+      const pages = [
+        { href: "index.html", label: "🏠 होम" },
+        { href: "legends.html", label: "🇮🇳 महापुरुष" },
+        { href: "wildlife.html", label: "🐅 जीव-जंतु" },
+        { href: "timeline.html", label: "🕰️ टाइमलाइन" },
+        { href: "quiz.html", label: "🎮 क्विज़" },
+        { href: "about.html", label: "🛡️ मिशन" }
+      ];
+
+      const subNav = document.createElement("nav");
+      subNav.id = "universalSubNav";
+      subNav.style.cssText = `
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 8px 14px;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-subtle);
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      `;
+
+      subNav.innerHTML = pages
+        .map((p) => {
+          const isActive = currentFile === p.href;
+          return `
+            <a href="${p.href}" style="
+              text-decoration: none;
+              white-space: nowrap;
+              padding: 6px 13px;
+              border-radius: 999px;
+              font-size: 0.8rem;
+              font-weight: 700;
+              border: 1px solid ${isActive ? "var(--gold-primary)" : "var(--border-subtle)"};
+              background: ${isActive ? "rgba(245, 158, 11, 0.16)" : "var(--bg-card)"};
+              color: ${isActive ? "var(--gold-bright)" : "var(--text-primary)"};
+            ">${p.label}</a>
+          `;
+        })
+        .join("");
+
+      header.insertAdjacentElement("afterend", subNav);
+    }
+  }
 
   function openDrawer() {
     const drawer = document.getElementById("sideDrawer");
@@ -29,10 +116,6 @@
       p.classList.toggle("active", p.dataset.category === catKey);
     });
 
-    document.querySelectorAll(".q-nav-btn").forEach((b) => {
-      b.classList.toggle("active", b.dataset.quickCat === catKey);
-    });
-
     window.NSRenderer.renderVoicesGrid();
 
     if (scrollToGrid) {
@@ -54,10 +137,6 @@
       p.classList.toggle("active", p.dataset.category === "all");
     });
 
-    document.querySelectorAll(".q-nav-btn").forEach((b) => {
-      b.classList.toggle("active", b.dataset.quickNav === viewName || (viewName === "home" && b.dataset.quickCat === "all"));
-    });
-
     window.NSRenderer.renderVoicesGrid();
 
     if (scrollToTop) {
@@ -68,7 +147,7 @@
   function bindAllEvents() {
     const { state, showToast } = window.NSConfig;
 
-    // 1. 3-Line Side Drawer Menu
+    // 3-Line Side Drawer Menu
     const openBtn = document.getElementById("openDrawerBtn");
     const closeBtn = document.getElementById("closeDrawerBtn");
     const overlay = document.getElementById("drawerOverlay");
@@ -77,7 +156,6 @@
     if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
     if (overlay) overlay.addEventListener("click", closeDrawer);
 
-    // Drawer Navigation Links
     document.querySelectorAll(".drawer-link[data-nav]").forEach((btn) => {
       btn.addEventListener("click", () => {
         setNavView(btn.dataset.nav, true);
@@ -85,7 +163,6 @@
       });
     });
 
-    // Drawer Category Jumps
     document.querySelectorAll(".drawer-link[data-cat-jump]").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".drawer-link").forEach((b) => b.classList.remove("active"));
@@ -93,15 +170,6 @@
         setCategoryFilter(btn.dataset.catJump, true);
         closeDrawer();
       });
-    });
-
-    // Desktop Quick Nav Buttons
-    document.querySelectorAll(".q-nav-btn[data-quick-cat]").forEach((btn) => {
-      btn.addEventListener("click", () => setCategoryFilter(btn.dataset.quickCat, true));
-    });
-
-    document.querySelectorAll(".q-nav-btn[data-quick-nav]").forEach((btn) => {
-      btn.addEventListener("click", () => setNavView(btn.dataset.quickNav, true));
     });
 
     // Pro Footer Category & Action Buttons
@@ -114,10 +182,16 @@
     const footerSubmitBtn = document.getElementById("footerSubmitBtn");
 
     if (footerTimelineBtn) footerTimelineBtn.addEventListener("click", () => setNavView("timeline", true));
-    if (footerVerifyBtn) footerVerifyBtn.addEventListener("click", () => document.getElementById("verifyPolicyModal").classList.remove("hidden"));
-    if (footerSubmitBtn) footerSubmitBtn.addEventListener("click", () => document.getElementById("submitVoiceModal").classList.remove("hidden"));
+    if (footerVerifyBtn) footerVerifyBtn.addEventListener("click", () => {
+      const m = document.getElementById("verifyPolicyModal");
+      if (m) m.classList.remove("hidden");
+    });
+    if (footerSubmitBtn) footerSubmitBtn.addEventListener("click", () => {
+      const m = document.getElementById("submitVoiceModal");
+      if (m) m.classList.remove("hidden");
+    });
 
-    // 2. 5-Language Switcher Dropdown
+    // 5-Language Switcher Dropdown
     const langBtn = document.getElementById("langToggleBtn");
     const langMenu = document.getElementById("langMenu");
 
@@ -139,12 +213,12 @@
       });
     }
 
-    // 3. Horizontal Category Pills
-    document.querySelectorAll(".cat-pill").forEach((pill) => {
+    // Category Pills
+    document.querySelectorAll(".cat-pill[data-category]").forEach((pill) => {
       pill.addEventListener("click", () => setCategoryFilter(pill.dataset.category, false));
     });
 
-    // 4. Search & Sort Controls
+    // Search & Sort Controls
     const searchInput = document.getElementById("voiceSearchInput");
     const clearSearchBtn = document.getElementById("clearSearchBtn");
     const sortSelect = document.getElementById("sortSelect");
@@ -184,7 +258,7 @@
       });
     }
 
-    // 5. Modals (Detail, Submit & Verification Policy)
+    // Modals
     const detailModal = document.getElementById("voiceDetailModal");
     const closeDetailBtn = document.getElementById("closeDetailModalBtn");
     const submitModal = document.getElementById("submitVoiceModal");
@@ -233,7 +307,7 @@
       });
     });
 
-    // 6. Forms (Comments & Curated Submission)
+    // Forms
     const commentForm = document.getElementById("commentForm");
     const curatedForm = document.getElementById("curatedSubmitForm");
 
@@ -250,7 +324,7 @@
       });
     }
 
-    // 7. Sticky Bottom Audio Player Controls
+    // Sticky Bottom Audio Player Controls
     const mainPlayBtn = document.getElementById("mainPlayPauseBtn");
     const nextBtn = document.getElementById("nextTrackBtn");
     const prevBtn = document.getElementById("prevTrackBtn");
@@ -287,7 +361,6 @@
     }
   }
 
-  // Expose Public API for Card Inline Handlers
   window.NSApp = {
     playVoice: (id) => window.NSAudio.playVoiceById(id),
     toggleLike: (id) => window.NSEngagement.toggleVoiceLike(id),
@@ -295,8 +368,8 @@
     shareVoice: (id) => window.NSEngagement.shareVoice(id)
   };
 
-  // Boot Nischay Swar
   document.addEventListener("DOMContentLoaded", () => {
+    setupUniversalHeaderAndTheme();
     window.NSAudio.initAudioListeners();
     bindAllEvents();
     window.NSRenderer.updateGlobalStats();
