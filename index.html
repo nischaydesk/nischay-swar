@@ -164,6 +164,9 @@
     </nav>
 
     <div class="header-right">
+      <!-- Dark / Light Mode Toggle Button -->
+      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark/Light Theme" title="डार्क / लाइट मोड बदलें">☀️</button>
+
       <!-- 5-Language Switcher Dropdown -->
       <div class="lang-dropdown-wrap">
         <button id="langToggleBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
@@ -215,7 +218,7 @@
           महात्मा गांधी, नेताजी सुभाष चंद्र बोस और डॉ. कलाम की ऐतिहासिक वाणी से लेकर बंगाल टाइगर, मोर, कोयल और मंगल ग्रह की हवा तक — बिना किसी AI बनावट के सीधे मूल रूप में सुनें।
         </p>
 
-        <!-- Multi-Page Quick Entry Buttons (Visible on Mobile & Desktop) -->
+        <!-- Multi-Page Quick Entry Buttons -->
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
           <a href="legends.html" class="btn-secondary-glass" style="text-decoration:none;">🇮🇳 महापुरुष व वैज्ञानिक</a>
           <a href="wildlife.html" class="btn-secondary-glass" style="text-decoration:none;">🐅 जीव-जंतु व अंतरिक्ष</a>
@@ -289,7 +292,7 @@
       </div>
     </section>
 
-    <!-- CATEGORY PILLS (HUMAN + WILDLIFE + BIRDS + NATURE) -->
+    <!-- CATEGORY PILLS -->
     <nav class="category-bar" aria-label="Voice Categories">
       <button class="cat-pill active" data-category="all">
         <span>🌐</span> <span data-i18n="catAll">सभी आवाज़ें</span>
@@ -373,7 +376,6 @@
   <footer class="pro-site-footer">
     <div class="footer-container">
       <div class="footer-grid">
-        <!-- Column 1: Brand & Mission -->
         <div class="footer-col brand-col">
           <div class="brand-lockup">
             <div class="brand-badge">NS</div>
@@ -391,7 +393,6 @@
           </div>
         </div>
 
-        <!-- Column 2: Dedicated Pages -->
         <div class="footer-col">
           <h4 class="footer-heading">समर्पित पेज (Pages)</h4>
           <ul class="footer-links">
@@ -404,7 +405,6 @@
           </ul>
         </div>
 
-        <!-- Column 3: Quick Categories -->
         <div class="footer-col">
           <h4 class="footer-heading" data-i18n="footerColNature">त्वरित श्रेणियाँ</h4>
           <ul class="footer-links">
@@ -416,7 +416,6 @@
           </ul>
         </div>
 
-        <!-- Column 4: Platform & Ecosystem -->
         <div class="footer-col">
           <h4 class="footer-heading" data-i18n="footerColPlatform">प्लेटफॉर्म व निश्चय नेटवर्क</h4>
           <ul class="footer-links">
@@ -427,7 +426,6 @@
         </div>
       </div>
 
-      <!-- Bottom Legal & Copyright Bar -->
       <div class="footer-bottom-bar">
         <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Founded & Engineered by <strong>Prince Kumar</strong> (Jamui, Bihar). All Rights Reserved.</p>
         <p class="footer-disclaimer" data-i18n="footerDisclaimer">
@@ -611,7 +609,7 @@
   <!-- Toast Notification -->
   <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
 
-  <!-- ==================== 9. MODULAR DATA & JS ENGINE SCRIPTS (FIXED js/ PATHS) ==================== -->
+  <!-- ==================== 9. MODULAR DATA & JS ENGINE SCRIPTS ==================== -->
   <script src="js/lang-hi-en.js"></script>
   <script src="js/lang-regional.js"></script>
   <script src="js/db-humans.js"></script>
