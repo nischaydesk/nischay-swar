@@ -1,0 +1,54 @@
+/* ==========================================================================
+   NISCHAY SWAR (निश्चय स्वर) — MASTER THEME VARIABLES (css/variables.css)
+   Royal Gold & Studio Dark Palette • 5-Language Typography Tokens
+   ========================================================================== */
+
+:root {
+  /* Core Surfaces */
+  --bg-main: #060912;
+  --bg-surface: #0c1222;
+  --bg-card: #11192e;
+  --bg-card-hover: #17223d;
+  --bg-glass: rgba(12, 18, 34, 0.88);
+  --bg-footer: #04070e;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(245, 158, 11, 0.35);
+  --border-emerald: rgba(16, 185, 129, 0.35);
+
+  /* Brand Accents */
+  --gold-primary: #f59e0b;
+  --gold-bright: #fbbf24;
+  --gold-deep: #d97706;
+  --gold-glow: rgba(245, 158, 11, 0.22);
+
+  /* Status & Interaction Colors */
+  --emerald-verified: #10b981;
+  --rose-like: #f43f5e;
+  --wa-green: #22c55e;
+  --sky-info: #38bdf8;
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Radii & Shadows */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+  --shadow-card: 0 12px 30px -8px rgba(0, 0, 0, 0.65);
+  --shadow-gold: 0 8px 24px -5px rgba(245, 158, 11, 0.35);
+
+  /* Font Stacks */
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Noto Sans Devanagari', sans-serif;
+
+  /* Layout Metrics */
+  --header-height: 66px;
+  --player-height: 76px;
+  --max-width: 1240px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
