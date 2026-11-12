@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>आवाज़ पहचानो क्विज़ (Voice Quiz) | Nischay Swar</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <style>
+    .quiz-box { max-width: 680px; margin: 20px auto; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-card); text-align: center; }
+    .quiz-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; font-size: 0.9rem; font-weight: 700; color: var(--gold-bright); }
+    .quiz-play-big { width: 84px; height: 84px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); color: #060912; font-size: 2rem; cursor: pointer; margin: 14px auto; display: grid; place-items: center; box-shadow: var(--shadow-gold); transition: transform 0.2s; }
+    .quiz-play-big:hover { transform: scale(1.07); }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; text-align: left; }
+    .quiz-opt-btn { padding: 14px 16px; border-radius: 14px; background: var(--bg-surface); border: 1px solid var(--border-subtle); font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .quiz-opt-btn:hover:not(:disabled) { border-color: var(--gold-primary); background: rgba(245,158,11,0.1); }
+    .quiz-opt-btn.correct { background: rgba(16,185,129,0.22); border-color: #10b981; color: #6ee7b7; }
+    .quiz-opt-btn.wrong { background: rgba(244,63,94,0.22); border-color: #f43f5e; color: #fda4af; }
+    @media (max-width: 560px) { .quiz-options { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="header-left">
+      <a href="index.html" class="header-brand">
+        <div class="logo-pulse"><span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span></div>
+        <div class="brand-text-wrap">
+          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
+          <span class="sub-name">असली आवाज़ पहचानो चैलेंज</span>
+        </div>
+      </a>
+    </div>
+    <nav class="desktop-quick-nav" style="display:flex; overflow-x:auto;">
+      <a href="index.html" class="q-nav-btn" style="text-decoration:none;">🏠 होम</a>
+      <a href="legends.html" class="q-nav-btn" style="text-decoration:none;">🇮🇳 महापुरुष</a>
+      <a href="wildlife.html" class="q-nav-btn" style="text-decoration:none;">🐅 जीव-जंतु</a>
+      <a href="quiz.html" class="q-nav-btn active" style="text-decoration:none;">🎮 आवाज़ क्विज़</a>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="quiz-box" id="quizContainer">
+      <div class="quiz-top-bar">
+        <span id="qProgress">प्रश्न 1 / 5</span>
+        <span id="qScore">स्कोर: 0 🏆</span>
+      </div>
+
+      <span class="badge-verified">🎧 LISTEN & GUESS THE REAL VOICE</span>
+      <h2 style="margin-top:12px; font-size:1.3rem;">इस असली आवाज़ को सुनें और सही नाम चुनें!</h2>
+      <p id="qHint" style="color:var(--text-secondary); font-size:0.86rem; margin-top:4px;">संकेत: प्ले बटन दबाकर ध्यान से सुनें</p>
+
+      <audio id="quizAudioEl" preload="metadata"></audio>
+      <button id="quizPlayBtn" class="quiz-play-big" title="Play Voice">▶</button>
+      <div id="qStatusText" style="font-size:0.8rem; color:var(--gold-bright);">आवाज़ सुनने के लिए ऊपर बटन दबाएं</div>
+
+      <div id="quizOptionsGrid" class="quiz-options"></div>
+
+      <button id="nextQuestionBtn" class="btn-primary-play hidden" style="margin-top:20px; width:100%;">अगला प्रश्न ➤</button>
+    </div>
+  </main>
+
+  <footer class="pro-site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom-bar">
+        <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Prince Kumar (Jamui, Bihar)</p>
+        <p><a href="index.html" style="color:var(--gold-bright); text-decoration:none;">← मुख्य संग्रहालय पर वापस जाएं</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/db-humans.js"></script>
+  <script src="js/db-wildlife-nature.js"></script>
+  <script>
+    (function() {
+      const allVoices = (window.NISCHAY_VOICES_DATA || []).slice();
+      const shuffled = allVoices.sort(() => Math.random() - 0.5).slice(0, 5);
+      let currentIdx = 0;
+      let score = 0;
+      let answered = false;
+
+      const audioEl = document.getElementById("quizAudioEl");
+      const playBtn = document.getElementById("quizPlayBtn");
+      const statusText = document.getElementById("qStatusText");
+      const optionsGrid = document.getElementById("quizOptionsGrid");
+      const nextBtn = document.getElementById("nextQuestionBtn");
+
+      function loadQuestion() {
+        answered = false;
+        nextBtn.classList.add("hidden");
+        const target = shuffled[currentIdx];
+        document.getElementById("qProgress").textContent = `प्रश्न ${currentIdx + 1} / ${shuffled.length}`;
+        document.getElementById("qScore").textContent = `स्कोर: ${score} 🏆`;
+        document.getElementById("qHint").textContent = `संकेत: वर्ष ${target.year} • ${target.role.hi}`;
+
+        audioEl.src = target.audioUrl;
+        playBtn.textContent = "▶";
+        statusText.textContent = "आवाज़ सुनने के लिए बटन दबाएं";
+
+        // Pick 3 wrong options + 1 correct option
+        const others = allVoices.filter(v => v.id !== target.id).sort(() => Math.random() - 0.5).slice(0, 3);
+        const choices = [target, ...others].sort(() => Math.random() - 0.5);
+
+        optionsGrid.innerHTML = choices.map(c => `
+          <button class="quiz-opt-btn" data-id="${c.id}">${c.name.hi}</button>
+        `).join("");
+
+        optionsGrid.querySelectorAll(".quiz-opt-btn").forEach(btn => {
+          btn.addEventListener("click", () => handleAnswer(btn, target.id));
+        });
+      }
+
+      function handleAnswer(selectedBtn, correctId) {
+        if (answered) return;
+        answered = true;
+        audioEl.pause();
+        playBtn.textContent = "▶";
+
+        const chosenId = selectedBtn.dataset.id;
+        optionsGrid.querySelectorAll(".quiz-opt-btn").forEach(btn => {
+          btn.disabled = true;
+          if (btn.dataset.id === correctId) btn.classList.add("correct");
+        });
+
+        if (chosenId === correctId) {
+          score += 20;
+          selectedBtn.classList.add("correct");
+          statusText.textContent = "🎉 बिल्कुल सही जवाब! +20 अंक";
+        } else {
+          selectedBtn.classList.add("wrong");
+          statusText.textContent = "❌ गलत जवाब! हरा वाला विकल्प सही उत्तर है।";
+        }
+
+        document.getElementById("qScore").textContent = `स्कोर: ${score} 🏆`;
+        nextBtn.textContent = currentIdx < shuffled.length - 1 ? "अगला प्रश्न ➤" : "परिणाम देखें 🏆";
+        nextBtn.classList.remove("hidden");
+      }
+
+      playBtn.addEventListener("click", () => {
+        if (audioEl.paused) {
+          audioEl.play();
+          playBtn.textContent = "⏸";
+          statusText.textContent = "🎧 असली आवाज़ चल रही है... ध्यान से पहचानें!";
+        } else {
+          audioEl.pause();
+          playBtn.textContent = "▶";
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentIdx++;
+        if (currentIdx < shuffled.length) {
+          loadQuestion();
+        } else {
+          document.getElementById("quizContainer").innerHTML = `
+            <div style="font-size:3rem;">🏆</div>
+            <h2 style="margin:10px 0;">क्विज़ पूरा हुआ!</h2>
+            <p style="font-size:1.2rem; color:var(--gold-bright); font-weight:800;">आपका कुल स्कोर: ${score} / ${shuffled.length * 20}</p>
+            <p style="color:var(--text-secondary); margin:10px 0 20px;">निश्चय स्वर पर इतिहास और प्रकृति की असली आवाज़ों को पहचानने के लिए धन्यवाद!</p>
+            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+              <button onclick="location.reload()" class="btn-primary-play">🔄 दोबारा खेलें</button>
+              <a href="index.html" class="btn-secondary-glass" style="text-decoration:none;">🏠 होम पेज पर जाएं</a>
+            </div>
+          `;
+        }
+      });
+
+      loadQuestion();
+    })();
+  </script>
+</body>
+</html>
