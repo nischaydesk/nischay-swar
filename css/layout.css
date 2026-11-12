@@ -858,3 +858,55 @@ html[dir="rtl"] .drawer-link .pill-count { margin-left: 0; margin-right: auto; }
   .lang-btn { padding: 6px 9px; }
   .universal-sub-nav .q-nav-btn { font-size: 0.76rem; padding: 6px 11px; }
 }
+
+
+/* Universal navigation refinement: one scrollable page-nav row below the header. */
+.desktop-quick-nav { display: none !important; }
+.header-left { flex: 1 1 auto; min-width: 0; }
+.header-brand { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.brand-text-wrap { overflow: hidden; }
+.main-name { overflow: hidden; text-overflow: ellipsis; }
+.header-right { flex: 0 0 auto; }
+.universal-sub-nav { width: 100%; overscroll-behavior-x: contain; }
+.universal-sub-nav .q-nav-btn { min-height: 38px; }
+
+@media (max-width: 960px) {
+  .top-header { gap: 7px; }
+  .desktop-quick-nav { display: none !important; }
+}
+
+@media (max-width: 380px) {
+  .top-header { padding-inline: 8px; gap: 5px; }
+  .header-left { gap: 6px; }
+  .header-brand { gap: 6px; }
+  .hamburger-btn { width: 36px; height: 36px; }
+  .logo-pulse { width: 31px; height: 31px; }
+  .main-name { font-size: 0.83rem; letter-spacing: 0; }
+  .header-right { gap: 4px; }
+  .lang-btn { gap: 3px; padding-inline: 6px; font-size: 0.75rem; }
+}
+
+html[dir="rtl"] .side-drawer {
+  left: auto;
+  right: 0;
+  border-right: 0;
+  border-left: 1px solid var(--border-subtle);
+  transform: translateX(102%);
+}
+html[dir="rtl"] .side-drawer.open { transform: translateX(0); }
+html[dir="rtl"] .header-left,
+html[dir="rtl"] .header-right,
+html[dir="rtl"] .player-inner { direction: rtl; }
+html[dir="rtl"] .search-icon { left: auto; right: 15px; }
+html[dir="rtl"] .search-input { padding: 12px 42px 12px 38px; }
+html[dir="rtl"] .clear-search-btn { right: auto; left: 12px; }
+html[dir="rtl"] .timeline-list { border-left: 0; border-right: 2px solid var(--gold-primary); padding-left: 0; padding-right: 20px; margin-left: 0; margin-right: 10px; }
+html[dir="rtl"] .timeline-item::before { left: auto; right: -27px; }
+
+.footer-universal-links { display:flex; flex-wrap:wrap; gap:14px 20px; justify-content:center; padding:16px 0; border-top:1px solid var(--border-subtle); }
+.footer-universal-links a { color:var(--text-secondary); text-decoration:none; padding:4px 2px; }
+.footer-universal-links a:hover { color:var(--gold-bright); }
+.top-header :focus-visible, .universal-sub-nav :focus-visible, .side-drawer :focus-visible, .footer-universal-links a:focus-visible { outline:3px solid var(--gold-primary); outline-offset:3px; border-radius:6px; }
+
+/* Shared visibility utility used throughout page and player markup. */
+.hidden, [hidden] { display:none !important; }

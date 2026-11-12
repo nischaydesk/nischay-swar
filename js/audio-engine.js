@@ -28,16 +28,20 @@ window.NSAudio = (function () {
     const playPauseBtn = document.getElementById("mainPlayPauseBtn");
     const quickLikeBtn = document.getElementById("playerQuickLikeBtn");
 
-    if (avatar) {
-      avatar.src = voice.photo;
-      avatar.onerror = () => {
-        if (window.NSImageFallback) window.NSImageFallback(avatar);
-      };
-    }
+    if (avatar && window.NSRenderer?.setVoiceImage) window.NSRenderer.setVoiceImage(avatar, voice);
     if (title) title.textContent = getLocalizedField(voice.name);
     if (sub) sub.textContent = `${voice.year} • ${getLocalizedField(voice.role)}`;
-    if (playPauseBtn) playPauseBtn.textContent = state.isPlaying ? "⏸" : "▶";
+    if (playPauseBtn) {
+      playPauseBtn.textContent = state.isPlaying ? "⏸" : "▶";
+      playPauseBtn.setAttribute("aria-label", window.NSConfig.t("playerPlayPause"));
+    }
     if (quickLikeBtn) quickLikeBtn.textContent = isVoiceLiked(voice.id) ? "❤️" : "🤍";
+    const prevBtn = document.getElementById("prevTrackBtn");
+    const nextBtn = document.getElementById("nextTrackBtn");
+    const speedBtn = document.getElementById("playerSpeedBtn");
+    if (prevBtn) prevBtn.setAttribute("aria-label", window.NSConfig.t("playerPrev"));
+    if (nextBtn) nextBtn.setAttribute("aria-label", window.NSConfig.t("playerNext"));
+    if (speedBtn) speedBtn.setAttribute("aria-label", window.NSConfig.t("playerSpeed"));
   }
 
   function playVoiceById(voiceId) {
@@ -161,6 +165,7 @@ window.NSAudio = (function () {
       if (audio.duration) {
         const pct = (audio.currentTime / audio.duration) * 100;
         if (progressFill) progressFill.style.width = `${pct}%`;
+        if (progressWrap) progressWrap.setAttribute("aria-valuenow", String(Math.round(pct)));
         if (curTimeEl) curTimeEl.textContent = window.NSConfig.formatSeconds(audio.currentTime);
         if (durTimeEl) durTimeEl.textContent = window.NSConfig.formatSeconds(audio.duration);
       }
@@ -178,6 +183,14 @@ window.NSAudio = (function () {
         const rect = progressWrap.getBoundingClientRect();
         const ratio = (e.clientX - rect.left) / rect.width;
         audio.currentTime = ratio * audio.duration;
+      });
+      progressWrap.addEventListener("keydown", (e) => {
+        if (!audio.duration || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+        e.preventDefault();
+        if (e.key === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - 5);
+        if (e.key === "ArrowRight") audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+        if (e.key === "Home") audio.currentTime = 0;
+        if (e.key === "End") audio.currentTime = audio.duration;
       });
     }
   }

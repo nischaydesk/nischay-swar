@@ -9,10 +9,38 @@ window.NSRenderer = (function () {
   const DEFAULT_IMAGE = "assets/voice-fallback.svg";
   window.NS_DEFAULT_IMAGE = DEFAULT_IMAGE;
 
-  function applyImageFallback(image) {
-    if (!image || image.dataset.fallbackApplied === "true") return;
-    image.dataset.fallbackApplied = "true";
-    image.src = DEFAULT_IMAGE;
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+  }
+
+  function fallbackDataUri(name, category) {
+    const icons = { legends: "🏛", scientists: "🔬", poets: "✒", rare: "📻", wildlife: "🐾", birds: "🪶", nature: "🌿", space: "🪐", instruments: "🎶" };
+    const icon = icons[category] || "🎙";
+    const safeName = escapeHtml(name || "Nischay Swar");
+    const label = safeName.length > 38 ? `${safeName.slice(0, 35)}…` : safeName;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#101a2d"/><stop offset="1" stop-color="#251b08"/></linearGradient></defs><rect width="800" height="520" rx="28" fill="url(#g)"/><circle cx="400" cy="190" r="116" fill="#f59e0b" fill-opacity=".12" stroke="#fbbf24" stroke-width="4"/><text x="400" y="235" text-anchor="middle" font-size="112">${icon}</text><path d="M70 356h660" stroke="#fbbf24" stroke-opacity=".55" stroke-width="3"/><text x="400" y="410" fill="#f8fafc" font-family="sans-serif" font-size="30" font-weight="700" text-anchor="middle">${label}</text><text x="400" y="460" fill="#fbbf24" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">NISCHAY SWAR • REAL AUDIO ARCHIVE</text></svg>`;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  }
+
+  function applyImageFallback(image, voice) {
+    if (!image) return;
+    const source = image.dataset.attemptedSource || image.currentSrc || image.src;
+    if (image.dataset.fallbackFor === source) return;
+    image.dataset.fallbackFor = source;
+    const name = voice ? window.NSConfig.getLocalizedField(voice.name) : image.dataset.fallbackName;
+    const category = voice ? voice.category : image.dataset.fallbackCategory;
+    image.onerror = null;
+    image.src = fallbackDataUri(name, category);
+  }
+
+  function setVoiceImage(image, voice) {
+    if (!image || !voice) return;
+    image.dataset.fallbackFor = "";
+    image.dataset.attemptedSource = voice.photo || DEFAULT_IMAGE;
+    image.dataset.fallbackName = window.NSConfig.getLocalizedField(voice.name);
+    image.dataset.fallbackCategory = voice.category || "";
+    image.onerror = () => applyImageFallback(image, voice);
+    image.src = voice.photo || DEFAULT_IMAGE;
   }
 
   window.NSImageFallback = applyImageFallback;
@@ -56,10 +84,7 @@ window.NSRenderer = (function () {
     const playBtn = document.getElementById("spotlightPlayBtn");
     const detailBtn = document.getElementById("spotlightDetailBtn");
 
-    if (img) {
-      img.src = featured.photo;
-      img.onerror = () => applyImageFallback(img);
-    }
+    if (img) setVoiceImage(img, featured);
     if (yr) yr.textContent = `${featured.year} • ${getCategoryLabel(featured.category)}`;
     if (name) name.textContent = getLocalizedField(featured.name);
     if (quote) quote.textContent = `"${getLocalizedField(featured.bio)}"`;
@@ -74,6 +99,10 @@ window.NSRenderer = (function () {
 
     if (state.navView === "favorites") {
       list = list.filter((v) => isVoiceLiked(v.id));
+    }
+
+    if (state.pageFilter === "space-rare") {
+      list = list.filter((v) => v.category === "space" || v.category === "rare");
     }
 
     if (state.category !== "all") {
@@ -138,7 +167,7 @@ window.NSRenderer = (function () {
     }
 
     const voices = getFilteredVoices();
-    if (badgeEl) badgeEl.textContent = `${voices.length} Voices`;
+    if (badgeEl) badgeEl.textContent = `${voices.length} ${window.NSConfig.t("labelVoices")}`;
 
     if (voices.length === 0) {
       gridEl.innerHTML = "";
@@ -163,8 +192,10 @@ window.NSRenderer = (function () {
           <article class="voice-card ${isCurrent ? "is-playing" : ""}" data-voice-id="${voice.id}">
             <div class="card-media-box" onclick="window.NSApp.playVoice('${voice.id}')">
               <img
-                src="${voice.photo}"
-                alt="${getLocalizedField(voice.name)}"
+                src="${escapeHtml(voice.photo || DEFAULT_IMAGE)}"
+                alt="${escapeHtml(getLocalizedField(voice.name))}"
+                data-fallback-name="${escapeHtml(getLocalizedField(voice.name))}"
+                data-fallback-category="${escapeHtml(voice.category)}"
                 class="card-photo"
                 loading="lazy"
                 onerror="window.NSImageFallback(this)"
@@ -172,7 +203,7 @@ window.NSRenderer = (function () {
               <div class="card-media-gradient"></div>
               <div class="card-top-badges">
                 <span class="year-tag">📅 ${voice.year}</span>
-                <span class="verified-chip">✅ Verified Real</span>
+                <span class="verified-chip">✅ ${escapeHtml(t("labelVerified"))}</span>
               </div>
               <span class="duration-overlay">🎧 ${voice.duration}</span>
               <button class="card-play-fab" aria-label="Play ${getLocalizedField(voice.name)}">
@@ -181,19 +212,19 @@ window.NSRenderer = (function () {
             </div>
 
             <div class="card-body">
-              <span class="card-cat-label">${getCategoryLabel(voice.category)}</span>
+              <span class="card-cat-label">${escapeHtml(getCategoryLabel(voice.category))}</span>
               <h3 class="card-title" onclick="window.NSApp.openDetail('${voice.id}')">
-                ${getLocalizedField(voice.name)}
+                ${escapeHtml(getLocalizedField(voice.name))}
               </h3>
-              <p class="card-desc">${getLocalizedField(voice.bio)}</p>
+              <p class="card-desc">${escapeHtml(getLocalizedField(voice.bio))}</p>
 
               <div class="card-stats-footer">
                 <div class="mini-stat-group">
-                  <span title="Real Listens">👁️ ${plays}</span>
+                  <span title="${escapeHtml(t("lblListens"))}">👁️ ${plays}</span>
                   <button
                     class="mini-action-btn ${liked ? "liked" : ""}"
                     onclick="window.NSApp.toggleLike('${voice.id}')"
-                    aria-label="Like"
+                    aria-label="${escapeHtml(t("labelLike"))}"
                   >
                     ${liked ? "❤️" : "🤍"} ${likes}
                   </button>
@@ -203,14 +234,14 @@ window.NSRenderer = (function () {
                   <button
                     class="mini-action-btn"
                     onclick="window.NSApp.openDetail('${voice.id}')"
-                    title="Comments & Story"
+                    title="${escapeHtml(t("commentsHeading"))}"
                   >
                     💬 ${commentsCount}
                   </button>
                   <button
                     class="mini-action-btn"
                     onclick="window.NSApp.shareVoice('${voice.id}')"
-                    title="Share"
+                    title="${escapeHtml(t("btnShare"))}"
                   >
                     📲
                   </button>
@@ -228,15 +259,24 @@ window.NSRenderer = (function () {
     const events = window.NISCHAY_TIMELINE_EVENTS || [];
     if (!container) return;
 
-    container.innerHTML = events
+    const customEvents = (window.NISCHAY_CUSTOM_VOICES || []).map((voice) => ({
+      year: String(voice.year),
+      title: voice.name,
+      desc: voice.bio,
+      voiceId: voice.id
+    }));
+    const allEvents = [...events, ...customEvents].sort((a, b) => Number.parseInt(a.year, 10) - Number.parseInt(b.year, 10));
+
+    container.innerHTML = allEvents
       .map(
         (item) => `
         <div class="timeline-item">
-          <span class="timeline-year-badge">${item.year}</span>
-          <h3>${window.NSConfig.getLocalizedField(item.title)}</h3>
+          <span class="timeline-year-badge">${escapeHtml(item.year)}</span>
+          <h3>${escapeHtml(window.NSConfig.getLocalizedField(item.title))}</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">
-            ${window.NSConfig.getLocalizedField(item.desc)}
+            ${escapeHtml(window.NSConfig.getLocalizedField(item.desc))}
           </p>
+          ${item.voiceId ? `<button type="button" class="timeline-play-btn" onclick="window.NSApp.playVoice('${item.voiceId}')" aria-label="${escapeHtml(window.NSConfig.t("btnPlayVoice"))}">▶</button>` : ""}
         </div>
       `
       )
@@ -251,8 +291,7 @@ window.NSRenderer = (function () {
 
     state.activeModalVoiceId = voiceId;
     const imgEl = document.getElementById("modalSpeakerImg");
-    imgEl.src = voice.photo;
-    imgEl.onerror = () => applyImageFallback(imgEl);
+    setVoiceImage(imgEl, voice);
 
     document.getElementById("modalCategoryChip").textContent = getCategoryLabel(voice.category);
     document.getElementById("modalYearChip").textContent = `📅 ${voice.year}`;
@@ -274,56 +313,6 @@ window.NSRenderer = (function () {
 
     window.NSEngagement.renderCommentsList(voice);
     modal.classList.remove("hidden");
-  }
-
-  // UNIVERSAL TRANSLATOR FOR ALL PAGES (legends.html, wildlife.html, timeline.html, etc.)
-  function translateSubPages(langCode) {
-    const pageDict = {
-      hi: {
-        subNav: ["🏠 होम", "🇮🇳 महापुरुष", "🐅 जीव-जंतु", "🕰️ टाइमलाइन", "🎮 क्विज़", "🛡️ मिशन"],
-        legendsTitle: "इतिहास के महापुरुष, वैज्ञानिक और अमर कवियों की असली आवाज़",
-        wildlifeTitle: "जंगली जानवर, पक्षियों की चहचहाहट, प्रकृति और अंतरिक्ष की असली ध्वनियाँ",
-        searchPh: "नाम, जीव-जंतु या साल खोजें..."
-      },
-      en: {
-        subNav: ["🏠 Home", "🇮🇳 Legends", "🐅 Wildlife", "🕰️ Timeline", "🎮 Quiz", "🛡️ Mission"],
-        legendsTitle: "Authentic Voices of Historical Legends, Scientists & Immortal Poets",
-        wildlifeTitle: "Real Sounds of Wild Animals, Birds, Nature & Outer Space",
-        searchPh: "Search legend, animal, or year..."
-      },
-      bho: {
-        subNav: ["🏠 होम", "🇮🇳 महापुरुष", "🐅 जीव-जंतु", "🕰️ टाइमलाइन", "🎮 क्विज़", "🛡️ मिशन"],
-        legendsTitle: "इतिहास के महापुरुष, वैज्ञानिक आ अमर कवि लोगन के असली आवाज़",
-        wildlifeTitle: "जंगली जानवर, चिड़िया, प्रकृति आ अंतरिक्ष के असली आवाज़",
-        searchPh: "नाम, जानवर भा साल खोजीं..."
-      },
-      bn: {
-        subNav: ["🏠 হোম", "🇮🇳 মহাপুরুষ", "🐅 বন্যপ্রাণী", "🕰️ টাইমলাইন", "🎮 কুইজ", "🛡️ মিশন"],
-        legendsTitle: "ইতিহাসের মহাপুরুষ, বিজ্ঞানী ও অমর কবিদের আসল কণ্ঠস্বর",
-        wildlifeTitle: "বন্যপ্রাণী, পাখির ডাক, প্রকৃতি ও মহাকাশের আসল শব্দ",
-        searchPh: "নাম, প্রাণী বা সাল খুঁজুন..."
-      },
-      ur: {
-        subNav: ["🏠 ہوم", "🇮🇳 شخصیات", "🐅 جنگلی حیات", "🕰️ ٹائم لائن", "🎮 کوئز", "🛡️ مشن"],
-        legendsTitle: "تاریخ کی عظیم شخصیات، سائنسدانوں اور شعراء کی اصل آوازیں",
-        wildlifeTitle: "جنگلی جانوروں، پرندوں، فطرت اور خلا کی اصل آوازیں",
-        searchPh: "نام، جانور یا سال تلاش کریں..."
-      }
-    };
-
-    const d = pageDict[langCode] || pageDict.hi;
-    const subLinks = document.querySelectorAll("#universalSubNav a");
-    subLinks.forEach((a, i) => {
-      if (d.subNav[i]) a.textContent = d.subNav[i];
-    });
-
-    const currentFile = window.location.pathname.split("/").pop() || "index.html";
-    const h1 = document.querySelector(".hero-title");
-    if (h1 && currentFile === "legends.html") h1.textContent = d.legendsTitle;
-    if (h1 && currentFile === "wildlife.html") h1.textContent = d.wildlifeTitle;
-
-    const searchInp = document.getElementById("voiceSearchInput");
-    if (searchInp && currentFile !== "index.html") searchInp.placeholder = d.searchPh;
   }
 
   function applyLanguage(langCode) {
@@ -355,6 +344,23 @@ window.NSRenderer = (function () {
       if (langObj[key]) el.setAttribute("placeholder", langObj[key]);
     });
 
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-aria-label");
+      if (langObj[key]) el.setAttribute("aria-label", langObj[key]);
+    });
+    document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-title");
+      if (langObj[key]) el.setAttribute("title", langObj[key]);
+    });
+    const closePlayerBtn = document.getElementById("closePlayerBtn");
+    if (closePlayerBtn) {
+      closePlayerBtn.setAttribute("aria-label", langObj.playerClose);
+      closePlayerBtn.title = langObj.playerClose;
+    }
+    const langButton = document.getElementById("langToggleBtn");
+    const langMenu = document.getElementById("langMenu");
+    if (langButton && langMenu) langButton.setAttribute("aria-expanded", String(langMenu.classList.contains("open")));
+
     if (window.NSPageI18n) window.NSPageI18n.apply(langCode);
     window.dispatchEvent(new CustomEvent("ns-language-changed", { detail: { lang: langCode } }));
     updateSpotlightBanner();
@@ -372,6 +378,7 @@ window.NSRenderer = (function () {
     updateSpotlightBanner,
     renderVoicesGrid,
     renderTimeline,
+    setVoiceImage,
     openDetailModal,
     applyLanguage
   };

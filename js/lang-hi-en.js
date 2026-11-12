@@ -204,3 +204,81 @@ window.NISCHAY_LANGUAGES.en = {
   verifyTitle: "How Do We Verify Authentic Sounds?",
   verifyDesc: "Nischay Swar is committed to preserving genuine historical and natural sounds without any manipulation:"
 };
+
+
+// Shared labels used by the universal shell, cards, and player.
+Object.assign(window.NISCHAY_LANGUAGES.hi, {
+  navPageSpaceRare: "अंतरिक्ष व दुर्लभ ध्वनियाँ",
+  navPageFavorites: "मेरी पसंदीदा आवाज़ें",
+  qSpaceRare: "अंतरिक्ष व दुर्लभ",
+  qFavorites: "पसंदीदा",
+  catSpace: "अंतरिक्ष",
+  labelVerified: "प्रमाणित असली",
+  labelVoices: "आवाज़ें",
+  labelLike: "पसंद करें",
+  playerPrev: "पिछली आवाज़",
+  playerNext: "अगली आवाज़",
+  playerPlayPause: "चलाएं या रोकें",
+  playerSpeed: "प्लेबैक गति",
+  playerClose: "प्लेयर बंद करें",
+  toastFavAdd: "❤️ पसंदीदा आवाज़ों में जोड़ा गया!",
+  toastFavRemove: "पसंदीदा से हटाया गया"
+});
+Object.assign(window.NISCHAY_LANGUAGES.en, {
+  navPageSpaceRare: "Space & Rare Sounds",
+  navPageFavorites: "My Favorite Voices",
+  qSpaceRare: "Space & Rare",
+  qFavorites: "Favorites",
+  catSpace: "Space",
+  labelVerified: "Verified Real",
+  labelVoices: "Voices",
+  labelLike: "Like",
+  playerPrev: "Previous voice",
+  playerNext: "Next voice",
+  playerPlayPause: "Play or pause",
+  playerSpeed: "Playback speed",
+  playerClose: "Close player",
+  toastFavAdd: "❤️ Added to favorites!",
+  toastFavRemove: "Removed from favorites"
+});
+
+Object.assign(window.NISCHAY_LANGUAGES.hi, { sourceLabel: "स्रोत", clearSearch: "खोज साफ़ करें" });
+Object.assign(window.NISCHAY_LANGUAGES.en, { sourceLabel: "Source", clearSearch: "Clear search" });
+
+Object.assign(window.NISCHAY_LANGUAGES.hi, { safeBadge: "🛡️ सुरक्षित व फ़िल्टर किया गया" });
+Object.assign(window.NISCHAY_LANGUAGES.en, { safeBadge: "🛡️ Safe & filtered" });
+
+Object.assign(window.NISCHAY_LANGUAGES.hi, { sortLabel: "आवाज़ें क्रम में दिखाएँ", toggleTheme: "डार्क या लाइट थीम बदलें", openMenu: "नेविगेशन मेन्यू खोलें", closeMenu: "मेन्यू बंद करें", chooseLanguage: "भाषा चुनें", audioPlayer: "ऑडियो प्लेयर", audioProgress: "ऑडियो की स्थिति", openTrackDetails: "आवाज़ की कहानी खोलें" });
+Object.assign(window.NISCHAY_LANGUAGES.en, { sortLabel: "Sort voices", toggleTheme: "Toggle dark or light theme", openMenu: "Open navigation menu", closeMenu: "Close menu", chooseLanguage: "Choose language", audioPlayer: "Audio player", audioProgress: "Audio progress", openTrackDetails: "Open voice details" });
+
+Object.assign(window.NISCHAY_LANGUAGES.hi, { catNature: "प्रकृति" });
+Object.assign(window.NISCHAY_LANGUAGES.en, { catNature: "Nature" });
+
+Object.assign(window.NISCHAY_LANGUAGES.hi, {
+  noComments: "अभी तक कोई प्रतिक्रिया नहीं है। सबसे पहले अपने विचार लिखें!",
+  commentBlocked: "⚠️ सुरक्षा नियम: अभद्र भाषा या बाहरी लिंक पोस्ट करना मना है।",
+  commentSuccess: "✅ आपकी प्रतिक्रिया सफलतापूर्वक जोड़ दी गई है!",
+  justNow: "अभी",
+  shareIntro: "Nischay Swar पर {name} ({year}) की असली आवाज़ सुनें!",
+  shareNow: "अभी सुनें:",
+  toastSubmit: "✅ धन्यवाद! आपका अनुरोध एडमिन सत्यापन के लिए भेज दिया गया है।"
+});
+Object.assign(window.NISCHAY_LANGUAGES.en, {
+  noComments: "No comments yet. Be the first to share your thoughts!",
+  commentBlocked: "⚠️ Safety rule: abusive language and external links are not allowed.",
+  commentSuccess: "✅ Your comment was added successfully!",
+  justNow: "Just now",
+  shareIntro: "Listen to the authentic voice of {name} ({year}) on Nischay Swar!",
+  shareNow: "Listen now:",
+  toastSubmit: "✅ Thanks! Your request has been sent for administrator review."
+});
+
+Object.assign(window.NISCHAY_LANGUAGES.en, {
+  navPageHome: "Home — Complete Archive",
+  navPageLegends: "Legends, Scientists & Poets",
+  navPageWildlife: "Wildlife, Birds & Nature",
+  navPageQuiz: "Voice Quiz",
+  navPageAbout: "Mission & Verification",
+  qQuiz: "Voice Quiz",
+  qAbout: "Mission"
+});

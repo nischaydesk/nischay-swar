@@ -33,7 +33,7 @@ window.NSEngagement = (function () {
   }
 
   function toggleVoiceLike(voiceId) {
-    const { state, isVoiceLiked, saveStorage, showToast, formatNumber, getVoiceLikes } = window.NSConfig;
+    const { state, isVoiceLiked, saveStorage, showToast, formatNumber, getVoiceLikes, t } = window.NSConfig;
     const voice = getVoices().find((v) => v.id === voiceId);
     if (!voice) return;
 
@@ -41,11 +41,11 @@ window.NSEngagement = (function () {
     if (alreadyLiked) {
       state.likedIds = state.likedIds.filter((id) => id !== voiceId);
       state.extraLikes[voiceId] = Math.max(0, (state.extraLikes[voiceId] || 1) - 1);
-      showToast("पसंदीदा से हटाया गया");
+      showToast(t("toastFavRemove"));
     } else {
       state.likedIds.push(voiceId);
       state.extraLikes[voiceId] = (state.extraLikes[voiceId] || 0) + 1;
-      showToast("❤️ पसंदीदा आवाज़ों में जोड़ा गया!");
+      showToast(t("toastFavAdd"));
       syncToCloud({ action: "like", voiceId: voice.id });
     }
 
@@ -74,7 +74,8 @@ window.NSEngagement = (function () {
 
     const title = getLocalizedField(voice.name);
     const bio = getLocalizedField(voice.bio);
-    const shareText = `🎙️ *Nischay Swar (निश्चय स्वर)* पर सुनें *${title} (${voice.year})* की 100% असली आवाज़!\n\n"${bio}"\n\nअभी सुनें 👇\n${window.location.href}`;
+    const intro = window.NSConfig.t("shareIntro").replace("{name}", title).replace("{year}", voice.year);
+    const shareText = `🎙️ *${intro}*\n\n"${bio}"\n\n${window.NSConfig.t("shareNow")} 👇\n${window.location.href}`;
 
     if (navigator.share) {
       navigator.share({
@@ -98,7 +99,7 @@ window.NSEngagement = (function () {
     if (countEl) countEl.textContent = combined.length;
 
     if (combined.length === 0) {
-      listEl.innerHTML = `<p style="color:var(--text-muted); font-size:0.84rem; text-align:center; padding:12px;">अभी तक कोई प्रतिक्रिया नहीं है। सबसे पहले अपने विचार लिखें!</p>`;
+      listEl.innerHTML = `<p style="color:var(--text-muted); font-size:0.84rem; text-align:center; padding:12px;">${escapeHtml(window.NSConfig.t("noComments"))}</p>`;
       return;
     }
 
@@ -137,7 +138,7 @@ window.NSEngagement = (function () {
       text.includes("http://") ||
       text.includes("https://")
     ) {
-      feedbackEl.textContent = "⚠️ सुरक्षा नियम: अभद्र भाषा या बाहरी लिंक पोस्ट करना मना है।";
+      feedbackEl.textContent = window.NSConfig.t("commentBlocked");
       feedbackEl.className = "comment-feedback error";
       feedbackEl.classList.remove("hidden");
       return;
@@ -146,7 +147,7 @@ window.NSEngagement = (function () {
     const newComment = {
       author,
       text,
-      time: "अभी (Just now)"
+      time: window.NSConfig.t("justNow")
     };
 
     if (!state.userComments[state.activeModalVoiceId]) {
@@ -156,7 +157,7 @@ window.NSEngagement = (function () {
     saveStorage();
 
     textInput.value = "";
-    feedbackEl.textContent = "✅ आपकी प्रतिक्रिया सफलतापूर्वक जोड़ दी गई है!";
+    feedbackEl.textContent = window.NSConfig.t("commentSuccess");
     feedbackEl.className = "comment-feedback success";
     feedbackEl.classList.remove("hidden");
 

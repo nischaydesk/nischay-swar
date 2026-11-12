@@ -316,3 +316,101 @@ window.NISCHAY_LANGUAGES.ur = {
   verifyTitle: "ہم اصلی آواز کی شناخت کیسے کرتے ہیں؟",
   verifyDesc: "Nischay Swar تاریخ اور فطرت کی سچی آوازوں کو بغیر کسی ملاوٹ کے محفوظ رکھنے کے لیے پرعزم ہے:"
 };
+
+
+// Shared labels used by the universal shell, cards, and player.
+Object.assign(window.NISCHAY_LANGUAGES.bho, {
+  navPageSpaceRare: "अंतरिक्ष आ दुर्लभ आवाज़",
+  navPageFavorites: "हमर पसंदीदा आवाज़",
+  qSpaceRare: "अंतरिक्ष आ दुर्लभ",
+  qFavorites: "पसंदीदा",
+  catSpace: "अंतरिक्ष",
+  labelVerified: "असली आ जाँचल",
+  labelVoices: "आवाज़",
+  labelLike: "पसंद करीं",
+  playerPrev: "पिछला आवाज़",
+  playerNext: "अगिला आवाज़",
+  playerPlayPause: "चलाईं भा रोकीं",
+  playerSpeed: "प्लेबैक के गति",
+  playerClose: "प्लेयर बंद करीं",
+  toastFavAdd: "❤️ पसंदीदा आवाज़ में जोड़ल गइल!",
+  toastFavRemove: "पसंदीदा से हटावल गइल"
+});
+Object.assign(window.NISCHAY_LANGUAGES.bn, {
+  navPageSpaceRare: "মহাকাশ ও বিরল শব্দ",
+  navPageFavorites: "আমার প্রিয় কণ্ঠস্বর",
+  qSpaceRare: "মহাকাশ ও বিরল",
+  qFavorites: "প্রিয়",
+  catSpace: "মহাকাশ",
+  labelVerified: "যাচাইকৃত আসল",
+  labelVoices: "কণ্ঠস্বর",
+  labelLike: "পছন্দ করুন",
+  playerPrev: "আগের কণ্ঠস্বর",
+  playerNext: "পরের কণ্ঠস্বর",
+  playerPlayPause: "চালান বা থামান",
+  playerSpeed: "চালানোর গতি",
+  playerClose: "প্লেয়ার বন্ধ করুন",
+  toastFavAdd: "❤️ পছন্দের তালিকায় যোগ করা হয়েছে!",
+  toastFavRemove: "পছন্দের তালিকা থেকে সরানো হয়েছে"
+});
+Object.assign(window.NISCHAY_LANGUAGES.ur, {
+  navPageSpaceRare: "خلائی اور نایاب آوازیں",
+  navPageFavorites: "میری پسندیدہ آوازیں",
+  qSpaceRare: "خلائی و نایاب",
+  qFavorites: "پسندیدہ",
+  catSpace: "خلا",
+  labelVerified: "مستند اور اصلی",
+  labelVoices: "آوازیں",
+  labelLike: "پسند کریں",
+  playerPrev: "پچھلی آواز",
+  playerNext: "اگلی آواز",
+  playerPlayPause: "چلائیں یا روکیں",
+  playerSpeed: "پلے بیک کی رفتار",
+  playerClose: "پلیئر بند کریں",
+  toastFavAdd: "❤️ پسندیدہ آوازوں میں شامل کر دیا گیا!",
+  toastFavRemove: "پسندیدہ فہرست سے ہٹا دیا گیا"
+});
+
+Object.assign(window.NISCHAY_LANGUAGES.bho, { sourceLabel: "स्रोत", clearSearch: "खोज साफ करीं" });
+Object.assign(window.NISCHAY_LANGUAGES.bn, { sourceLabel: "উৎস", clearSearch: "অনুসন্ধান মুছুন" });
+Object.assign(window.NISCHAY_LANGUAGES.ur, { sourceLabel: "ماخذ", clearSearch: "تلاش صاف کریں" });
+
+Object.assign(window.NISCHAY_LANGUAGES.bho, { safeBadge: "🛡️ सुरक्षित आ छानल" });
+Object.assign(window.NISCHAY_LANGUAGES.bn, { safeBadge: "🛡️ নিরাপদ ও যাচাইকৃত" });
+Object.assign(window.NISCHAY_LANGUAGES.ur, { safeBadge: "🛡️ محفوظ اور فلٹر شدہ" });
+
+Object.assign(window.NISCHAY_LANGUAGES.bho, { sortLabel: "आवाज़ के क्रम बदलीं", toggleTheme: "डार्क भा लाइट थीम बदलीं", openMenu: "नेविगेशन मेन्यू खोलीं", closeMenu: "मेन्यू बंद करीं", chooseLanguage: "भाषा चुनीं", audioPlayer: "ऑडियो प्लेयर", audioProgress: "ऑडियो के स्थिति", openTrackDetails: "आवाज़ के कहानी खोलीं" });
+Object.assign(window.NISCHAY_LANGUAGES.bn, { sortLabel: "কণ্ঠস্বর সাজান", toggleTheme: "ডার্ক বা লাইট থিম বদলান", openMenu: "নেভিগেশন মেনু খুলুন", closeMenu: "মেনু বন্ধ করুন", chooseLanguage: "ভাষা বেছে নিন", audioPlayer: "অডিও প্লেয়ার", audioProgress: "অডিওর অগ্রগতি", openTrackDetails: "কণ্ঠস্বরের বিবরণ খুলুন" });
+Object.assign(window.NISCHAY_LANGUAGES.ur, { sortLabel: "آوازوں کی ترتیب", toggleTheme: "ڈارک یا لائٹ تھیم تبدیل کریں", openMenu: "نیویگیشن مینیو کھولیں", closeMenu: "مینیو بند کریں", chooseLanguage: "زبان منتخب کریں", audioPlayer: "آڈیو پلیئر", audioProgress: "آڈیو کی پیش رفت", openTrackDetails: "آواز کی تفصیل کھولیں" });
+
+Object.assign(window.NISCHAY_LANGUAGES.bho, { catNature: "प्रकृति" });
+Object.assign(window.NISCHAY_LANGUAGES.bn, { catNature: "প্রকৃতি" });
+Object.assign(window.NISCHAY_LANGUAGES.ur, { catNature: "فطرت" });
+
+Object.assign(window.NISCHAY_LANGUAGES.bho, {
+  noComments: "अभी ले कवनो प्रतिक्रिया नइखे। पहिले आपन विचार लिखीं!",
+  commentBlocked: "⚠️ सुरक्षा नियम: अभद्र भाषा आ बाहरी लिंक पोस्ट कइल मना बा।",
+  commentSuccess: "✅ रउआ प्रतिक्रिया सफलतापूर्वक जोड़ल गइल!",
+  justNow: "अभी",
+  shareIntro: "Nischay Swar पर {name} ({year}) के असली आवाज़ सुनीं!",
+  shareNow: "अभी सुनीं:",
+  toastSubmit: "✅ धन्यवाद! रउआ अनुरोध एडमिन जाँच खातिर भेजल गइल।"
+});
+Object.assign(window.NISCHAY_LANGUAGES.bn, {
+  noComments: "এখনও কোনো মন্তব্য নেই। আপনার মতামত প্রথমে জানান!",
+  commentBlocked: "⚠️ নিরাপত্তা নিয়ম: অশালীন ভাষা বা বাইরের লিঙ্ক পোস্ট করা যাবে না।",
+  commentSuccess: "✅ আপনার মন্তব্য সফলভাবে যোগ হয়েছে!",
+  justNow: "এইমাত্র",
+  shareIntro: "নিশ্চয় স্বরে {name} ({year})-এর আসল কণ্ঠস্বর শুনুন!",
+  shareNow: "এখনই শুনুন:",
+  toastSubmit: "✅ ধন্যবাদ! আপনার অনুরোধ প্রশাসকের যাচাইয়ের জন্য পাঠানো হয়েছে।"
+});
+Object.assign(window.NISCHAY_LANGUAGES.ur, {
+  noComments: "ابھی تک کوئی تبصرہ نہیں۔ اپنی رائے سب سے پہلے لکھیں!",
+  commentBlocked: "⚠️ حفاظتی اصول: نازیبا زبان یا بیرونی روابط کی اجازت نہیں۔",
+  commentSuccess: "✅ آپ کا تبصرہ کامیابی سے شامل کر دیا گیا!",
+  justNow: "ابھی",
+  shareIntro: "نشچئے سَوَر پر {name} ({year}) کی اصلی آواز سنیں!",
+  shareNow: "ابھی سنیں:",
+  toastSubmit: "✅ شکریہ! آپ کی درخواست منتظم کی جانچ کے لیے بھیج دی گئی ہے۔"
+});

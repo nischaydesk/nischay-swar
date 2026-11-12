@@ -36,9 +36,9 @@
       <div class="search-box-wrap">
         <span class="search-icon">🔍</span>
         <input type="search" id="voiceSearchInput" class="search-input" data-page-i18n-placeholder="legends.search" placeholder="महापुरुष, वैज्ञानिक, कवि या साल (जैसे 1931, 1944) खोजें..." />
-        <button id="clearSearchBtn" class="clear-search-btn hidden">✕</button>
+        <button id="clearSearchBtn" class="clear-search-btn hidden" type="button" data-i18n-aria-label="clearSearch" aria-label="Clear search">✕</button>
       </div>
-      <select id="sortSelect" class="sort-select">
+      <select id="sortSelect" class="sort-select" data-i18n-aria-label="sortLabel" aria-label="Sort voices">
         <option value="featured" data-page-i18n="legends.featured">✨ विशेष चयन</option>
         <option value="oldest" data-page-i18n="legends.oldest">🕰️ सबसे पुराना (1860 से)</option>
         <option value="mostPlayed" data-page-i18n="legends.played">🔥 सबसे ज़्यादा सुना गया</option>
@@ -71,7 +71,7 @@
             <div class="brand-badge">NS</div>
             <div>
               <h3 class="brand-title">NISCHAY SWAR</h3>
-              <span class="brand-sub">निश्चय स्वर डिजिटल आर्काइव</span>
+              <span class="brand-sub" data-i18n="headerSub">निश्चय स्वर डिजिटल आर्काइव</span>
             </div>
           </div>
           <p class="footer-about-text" data-page-i18n="legends.about">100% असली मानवीय और प्राकृतिक ध्वनियों का समर्पित डिजिटल संग्रहालय। Zero AI.</p>
@@ -96,6 +96,11 @@
         <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Prince Kumar (Jamui, Bihar)</p>
       </div>
     </div>
+  
+      <nav class="footer-universal-links" aria-label="Additional pages">
+        <a href="space-rare.html" data-page-i18n="common.footerSpaceRare">🪐 अंतरिक्ष व दुर्लभ ध्वनियाँ</a>
+        <a href="favorites.html" data-page-i18n="common.footerFavorites">❤️ मेरी पसंदीदा आवाज़ें</a>
+      </nav>
   </footer>
 
   <!-- DETAIL MODAL & STICKY PLAYER -->
@@ -105,7 +110,7 @@
       <div class="detail-top">
         <div class="detail-photo-wrap">
           <img id="modalSpeakerImg" src="" alt="" class="detail-photo" />
-          <span class="detail-verified-badge">✅ Verified Real</span>
+          <span class="detail-verified-badge" data-i18n="labelVerified">✅ Verified Real</span>
         </div>
         <div class="detail-meta">
           <div class="detail-chips">
@@ -116,26 +121,26 @@
           <h2 id="modalSpeakerName" class="detail-name">Name</h2>
           <p id="modalSpeakerRole" class="detail-role">Role</p>
           <p id="modalSpeakerBio" class="detail-bio">Bio</p>
-          <div class="detail-source-box"><strong>🏛️ स्रोत:</strong> <span id="modalSourceText">Archive</span></div>
+          <div class="detail-source-box"><strong>🏛️ <span data-i18n="sourceLabel">स्रोत</span>:</strong> <span id="modalSourceText">Archive</span></div>
           <div class="detail-actions-row">
-            <button id="modalPlayBtn" class="btn-primary-play"><span>▶</span> <span>आवाज़ चलाएं</span></button>
+            <button id="modalPlayBtn" class="btn-primary-play" data-i18n="btnPlayVoice"><span>▶</span> <span>आवाज़ चलाएं</span></button>
             <button id="modalLikeBtn" class="btn-like-action"><span>❤️</span> <span id="modalLikeCount">0</span></button>
             <div class="stat-pill-readonly"><span>👁️</span> <span id="modalPlayCount">0</span></div>
-            <button id="modalShareBtn" class="btn-share-wa"><span>📲</span> <span>शेयर</span></button>
+            <button id="modalShareBtn" class="btn-share-wa" data-i18n="btnShare"><span>📲</span> <span>शेयर</span></button>
           </div>
         </div>
       </div>
       <div class="comments-wrapper">
         <div class="comments-head">
-          <h3>💬 श्रोताओं की प्रतिक्रिया <span id="modalCommentCount" class="comment-counter">0</span></h3>
-          <span class="safe-badge">🛡️ Safe & Filtered</span>
+          <h3>💬 <span data-i18n="commentsHeading">श्रोताओं की प्रतिक्रिया</span> <span id="modalCommentCount" class="comment-counter">0</span></h3>
+          <span class="safe-badge" data-i18n="safeBadge">🛡️ Safe & Filtered</span>
         </div>
         <form id="commentForm" class="comment-form">
           <div class="comment-inputs">
-            <input type="text" id="commentAuthorInput" class="c-input-name" maxlength="35" placeholder="आपका नाम" required />
-            <input type="text" id="commentTextInput" class="c-input-msg" maxlength="160" placeholder="अपने विचार लिखें..." required />
+            <input type="text" id="commentAuthorInput" class="c-input-name" maxlength="35" data-i18n-placeholder="commentNamePh" placeholder="आपका नाम" required />
+            <input type="text" id="commentTextInput" class="c-input-msg" maxlength="160" data-i18n-placeholder="commentTextPh" placeholder="अपने विचार लिखें..." required />
           </div>
-          <button type="submit" class="btn-post-comment">पोस्ट करें ➤</button>
+          <button type="submit" class="btn-post-comment" data-i18n="btnPostComment">पोस्ट करें ➤</button>
         </form>
         <p id="commentFeedbackMsg" class="comment-feedback hidden"></p>
         <div id="commentsList" class="comments-list"></div>
@@ -148,7 +153,7 @@
     <div class="player-progress-wrap" id="progressBarContainer"><div id="playerProgressFill" class="player-progress-fill"></div></div>
     <div class="player-inner">
       <div class="player-track-info" id="playerOpenDetailTrigger">
-        <img id="playerAvatar" src="" alt="" class="player-thumb" />
+        <img id="playerAvatar" src="assets/voice-fallback.svg" alt="" class="player-thumb" />
         <div class="player-meta">
           <div class="player-title-row"><span id="playerTrackTitle" class="player-title">Track</span><span>✅</span></div>
           <span id="playerTrackSub" class="player-sub">Archive</span>
@@ -175,6 +180,8 @@
   <script src="js/site-shell.js"></script>
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
+  <script src="js/db-extended-archive.js"></script>
+  <script src="js/db-custom-uploads.js"></script>
   <script src="js/config.js"></script>
   <script src="js/audio-engine.js"></script>
   <script src="js/engagement.js"></script>
@@ -197,5 +204,6 @@
       });
     });
   </script>
+  <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));</script>
 </body>
 </html>

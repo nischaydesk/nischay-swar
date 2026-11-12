@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="hi" data-theme="dark">
+<html lang="hi" dir="ltr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060912" />
   <title>404 — आवाज़ नहीं मिली | Nischay Swar</title>
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" /><link rel="stylesheet" href="css/layout.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="css/player.css" />
+  <style>.error-card{max-width:600px;margin:50px auto;text-align:center;padding:36px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}.footer-universal-links{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:18px 0}.footer-universal-links a{color:var(--text-secondary);text-decoration:none}.footer-universal-links a:hover{color:var(--gold-bright)}</style>
 </head>
-<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; text-align:center;">
-  <div style="max-width:480px; background:var(--bg-card); border:1px solid var(--border-gold); border-radius:22px; padding:34px; box-shadow:var(--shadow-card);">
-    <div style="font-size:3.5rem; margin-bottom:10px;">🔇</div>
-    <span class="badge-era">ERROR 404</span>
-    <h1 style="font-size:1.6rem; margin:12px 0 8px;">यह आवाज़ अभिलेखागार में नहीं मिली</h1>
-    <p style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:22px;">
-      शायद आप जिस लिंक पर आए हैं वह बदल गया है या मौजूद नहीं है। मुख्य ध्वनि संग्रह पर वापस जाएं।
-    </p>
-    <a href="index.html" class="btn-primary-play" style="text-decoration:none; width:100%;">
-      🏠 निश्चय स्वर होम पर जाएं
-    </a>
-  </div>
+<body data-page="404">
+  <main class="main-container"><section class="error-card"><div style="font-size:3.5rem" aria-hidden="true">🔇</div><span class="badge-era">ERROR 404</span><h1 class="hero-title" data-page-i18n="404.title">यह पेज नहीं मिला</h1><p class="hero-desc" data-page-i18n="404.desc">शायद यह लिंक बदल गया है या अब उपलब्ध नहीं है। मुख्य संग्रह में वापस जाएँ।</p><a href="index.html" class="btn-primary-play" style="text-decoration:none" data-page-i18n="404.home">🏠 होम पेज पर जाएँ</a></section></main>
+  <footer class="pro-site-footer"><div class="footer-container"><div class="footer-grid"><div class="footer-col"><h3 class="brand-title">NISCHAY SWAR</h3><p class="footer-about-text" data-i18n="headerSub">निश्चय स्वर • असली आवाज़ों का डिजिटल खज़ाना</p></div><div class="footer-col"><h4 class="footer-heading" data-page-i18n="common.footerPages">समर्पित पेज</h4><ul class="footer-links"><li><a href="index.html" data-page-i18n="common.footerHome">मुख्य होम</a></li><li><a href="legends.html" data-page-i18n="common.footerLegends">महापुरुष</a></li><li><a href="wildlife.html" data-page-i18n="common.footerWildlife">जीव-जंतु</a></li><li><a href="timeline.html" data-page-i18n="common.footerTimeline">टाइमलाइन</a></li><li><a href="quiz.html" data-page-i18n="common.footerQuiz">क्विज़</a></li></ul></div><div class="footer-col"><h4 class="footer-heading" data-page-i18n="common.footerNetwork">निश्चय नेटवर्क</h4><ul class="footer-links"><li><a href="space-rare.html" data-page-i18n="common.footerSpaceRare">अंतरिक्ष व दुर्लभ ध्वनियाँ</a></li><li><a href="favorites.html" data-page-i18n="common.footerFavorites">मेरी पसंदीदा आवाज़ें</a></li><li><a href="about.html" data-page-i18n="common.footerAbout">मिशन व सत्यापन नीति</a></li></ul></div></div><div class="footer-bottom-bar"><p>© 2026 <strong>Nischay Swar</strong></p></div></div></footer>
+  <div id="stickyAudioPlayer" class="sticky-player hidden" role="region" aria-label="Audio player" data-i18n-aria-label="audioPlayer" data-i18n-aria-label="audioPlayer"><audio id="htmlAudioElement" preload="metadata"></audio><div class="player-progress-wrap" id="progressBarContainer" role="slider" tabindex="0" aria-label="Audio progress" data-i18n-aria-label="audioProgress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="audioProgress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="playerProgressFill" class="player-progress-fill"></div></div><div class="player-inner"><div class="player-track-info" id="playerOpenDetailTrigger" role="button" tabindex="0" aria-label="Open voice details" data-i18n-aria-label="openTrackDetails" aria-label="Open voice details" data-i18n-aria-label="openTrackDetails"><img id="playerAvatar" src="assets/voice-fallback.svg" alt="" class="player-thumb" /><div class="player-meta"><div class="player-title-row"><span id="playerTrackTitle" class="player-title"></span><span class="verified-mini">✅</span></div><span id="playerTrackSub" class="player-sub"></span></div></div><div class="player-controls"><button id="prevTrackBtn" class="ctrl-btn" type="button" aria-label="Previous voice">⏮</button><button id="mainPlayPauseBtn" class="play-pause-circle" type="button" aria-label="Play or pause">▶</button><button id="nextTrackBtn" class="ctrl-btn" type="button" aria-label="Next voice">⏭</button></div><div class="player-right-tools"><span class="time-display"><span id="currentTimeText">0:00</span> / <span id="durationTimeText">0:00</span></span><button id="playerSpeedBtn" class="speed-pill" type="button" aria-label="Playback speed">1x</button><button id="playerQuickLikeBtn" class="player-like-btn" type="button" aria-label="Like">🤍</button></div></div></div>
+  <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
+  <script src="js/lang-hi-en.js"></script><script src="js/lang-regional.js"></script><script src="js/page-i18n.js"></script><script src="js/site-shell.js"></script><script src="js/db-humans.js"></script><script src="js/db-wildlife-nature.js"></script><script src="js/db-extended-archive.js"></script><script src="js/db-custom-uploads.js"></script><script src="js/config.js"></script><script src="js/audio-engine.js"></script><script src="js/engagement.js"></script><script src="js/ui-renderer.js"></script><script src="js/app.js"></script>
+  <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));</script>
 </body>
 </html>

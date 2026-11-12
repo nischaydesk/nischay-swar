@@ -23,6 +23,7 @@
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("ns_theme", next);
         themeBtn.textContent = next === "light" ? "🌙" : "☀️";
+        themeBtn.setAttribute("aria-label", next === "light" ? "Switch to dark theme" : "Switch to light theme");
       };
     }
 
@@ -41,11 +42,14 @@
       closeBtn = document.createElement("button");
       closeBtn.id = "closePlayerBtn";
       closeBtn.className = "ctrl-btn player-close-btn";
-      closeBtn.title = "प्लेयर बंद करें";
-      closeBtn.setAttribute("aria-label", "Close audio player");
+      closeBtn.type = "button";
       closeBtn.innerHTML = "✕";
       rightTools.appendChild(closeBtn);
     }
+    closeBtn.classList.add("player-close-btn");
+    closeBtn.title = window.NSConfig.t("playerClose");
+    closeBtn.setAttribute("aria-label", window.NSConfig.t("playerClose"));
+    closeBtn.type = "button";
 
     closeBtn.onclick = () => {
       if (audioEl) {
@@ -56,6 +60,14 @@
       }
       window.NSConfig.state.isPlaying = false;
       window.NSConfig.state.playCountedForCurrentTrack = false;
+      const progressFill = document.getElementById("playerProgressFill");
+      const progressWrap = document.getElementById("progressBarContainer");
+      const currentTime = document.getElementById("currentTimeText");
+      const durationTime = document.getElementById("durationTimeText");
+      if (progressFill) progressFill.style.width = "0%";
+      if (progressWrap) progressWrap.setAttribute("aria-valuenow", "0");
+      if (currentTime) currentTime.textContent = "0:00";
+      if (durationTime) durationTime.textContent = "0:00";
       stickyBar.classList.add("hidden");
       if (window.NSRenderer) window.NSRenderer.renderVoicesGrid();
     };
@@ -65,14 +77,21 @@
     const drawer = document.getElementById("sideDrawer");
     const overlay = document.getElementById("drawerOverlay");
     if (drawer) drawer.classList.add("open");
-    if (overlay) overlay.classList.add("open");
+    if (drawer) { drawer.inert = false; drawer.setAttribute("aria-hidden", "false"); }
+    if (overlay) { overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); }
+    const openBtn = document.getElementById("openDrawerBtn");
+    if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+    document.getElementById("closeDrawerBtn")?.focus();
   }
 
   function closeDrawer() {
     const drawer = document.getElementById("sideDrawer");
     const overlay = document.getElementById("drawerOverlay");
     if (drawer) drawer.classList.remove("open");
-    if (overlay) overlay.classList.remove("open");
+    if (drawer) { drawer.inert = true; drawer.setAttribute("aria-hidden", "true"); }
+    if (overlay) { overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); }
+    const openBtn = document.getElementById("openDrawerBtn");
+    if (openBtn) openBtn.setAttribute("aria-expanded", "false");
   }
 
   function setCategoryFilter(catKey, scrollToGrid) {
@@ -122,6 +141,13 @@
     if (openBtn) openBtn.addEventListener("click", openDrawer);
     if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
     if (overlay) overlay.addEventListener("click", closeDrawer);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeDrawer();
+        document.getElementById("langMenu")?.classList.remove("open");
+        document.getElementById("langToggleBtn")?.setAttribute("aria-expanded", "false");
+      }
+    });
 
     document.querySelectorAll(".drawer-link[data-nav]").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -165,17 +191,20 @@
       langBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         langMenu.classList.toggle("open");
+        langBtn.setAttribute("aria-expanded", String(langMenu.classList.contains("open")));
       });
 
       document.querySelectorAll(".lang-option").forEach((opt) => {
         opt.addEventListener("click", () => {
           window.NSRenderer.applyLanguage(opt.dataset.lang);
           langMenu.classList.remove("open");
+          langBtn.setAttribute("aria-expanded", "false");
         });
       });
 
       document.addEventListener("click", () => {
         langMenu.classList.remove("open");
+        langBtn.setAttribute("aria-expanded", "false");
       });
     }
 
@@ -282,7 +311,7 @@
         e.preventDefault();
         curatedForm.reset();
         if (submitModal) submitModal.classList.add("hidden");
-        showToast("✅ धन्यवाद! आपका अनुरोध एडमिन सत्यापन के लिए भेज दिया गया है।");
+        showToast(window.NSConfig.t("toastSubmit"));
       });
     }
 
@@ -318,6 +347,11 @@
         const voices = window.NISCHAY_VOICES_DATA || [];
         const current = voices[state.currentTrackIndex];
         if (current) window.NSRenderer.openDetailModal(current.id);
+      });
+      playerInfoTrigger.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        playerInfoTrigger.click();
       });
     }
   }

@@ -101,11 +101,11 @@
           data-i18n-placeholder="searchPlaceholder"
           autocomplete="off"
         />
-        <button id="clearSearchBtn" class="clear-search-btn hidden" aria-label="Clear Search">✕</button>
+        <button id="clearSearchBtn" class="clear-search-btn hidden" type="button" data-i18n-aria-label="clearSearch" aria-label="Clear search" aria-label="Clear Search">✕</button>
       </div>
 
       <div class="sort-wrap">
-        <select id="sortSelect" class="sort-select" aria-label="Sort Voices">
+        <select id="sortSelect" class="sort-select" data-i18n-aria-label="sortLabel" aria-label="Sort voices" aria-label="Sort Voices">
           <option value="featured" data-i18n="sortFeatured">✨ विशेष चयन (Featured)</option>
           <option value="mostPlayed" data-i18n="sortPlayed">🔥 सबसे ज़्यादा सुना गया</option>
           <option value="mostLiked" data-i18n="sortLiked">❤️ सबसे ज़्यादा पसंदीदा</option>
@@ -136,7 +136,10 @@
         <span>🦚</span> <span data-i18n="catBirds">पक्षी (Birds)</span>
       </button>
       <button class="cat-pill" data-category="nature">
-        <span>🌧️</span> <span data-i18n="catNature">प्रकृति व अंतरिक्ष</span>
+        <span>🌧️</span> <span data-i18n="catNature">प्रकृति</span>
+      </button>
+      <button class="cat-pill" data-category="space">
+        <span>🪐</span> <span data-i18n="catSpace">अंतरिक्ष</span>
       </button>
       <button class="cat-pill" data-category="instruments">
         <span>🎶</span> <span data-i18n="catInstruments">वाद्ययंत्र</span>
@@ -204,7 +207,7 @@
             <div class="brand-badge">NS</div>
             <div>
               <h3 class="brand-title">NISCHAY SWAR</h3>
-              <span class="brand-sub">निश्चय स्वर डिजिटल आर्काइव</span>
+              <span class="brand-sub" data-i18n="headerSub">निश्चय स्वर डिजिटल आर्काइव</span>
             </div>
           </div>
           <p class="footer-about-text" data-i18n="footerAbout">
@@ -256,6 +259,11 @@
         </p>
       </div>
     </div>
+  
+      <nav class="footer-universal-links" aria-label="Additional pages">
+        <a href="space-rare.html" data-page-i18n="common.footerSpaceRare">🪐 अंतरिक्ष व दुर्लभ ध्वनियाँ</a>
+        <a href="favorites.html" data-page-i18n="common.footerFavorites">❤️ मेरी पसंदीदा आवाज़ें</a>
+      </nav>
   </footer>
 
   <!-- ==================== 5. VOICE DETAIL, REAL STATS & COMMENTS MODAL ==================== -->
@@ -280,7 +288,7 @@
           <p id="modalSpeakerBio" class="detail-bio">Detailed historical or wildlife context...</p>
 
           <div class="detail-source-box">
-            <strong>🏛️ मूल स्रोत (Archive Source):</strong>
+            <strong>🏛️ <span data-i18n="sourceLabel">मूल स्रोत</span>:</strong>
             <span id="modalSourceText">Wikimedia Commons / Public Domain</span>
           </div>
 
@@ -311,7 +319,7 @@
       <div class="comments-wrapper">
         <div class="comments-head">
           <h3>💬 <span data-i18n="commentsHeading">श्रोताओं की प्रतिक्रिया (Comments)</span> <span id="modalCommentCount" class="comment-counter">0</span></h3>
-          <span class="safe-badge">🛡️ Safe & Filtered</span>
+          <span class="safe-badge" data-i18n="safeBadge">🛡️ Safe & Filtered</span>
         </div>
 
         <form id="commentForm" class="comment-form">
@@ -440,6 +448,7 @@
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
   <script src="js/db-extended-archive.js"></script>
+  <script src="js/db-custom-uploads.js"></script>
   <script src="js/config.js"></script>
   <script src="js/audio-engine.js"></script>
   <script src="js/engagement.js"></script>

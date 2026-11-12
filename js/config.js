@@ -16,11 +16,21 @@ window.NSConfig = (function () {
     "sex", "porn", "xxx", "nude", "idiot", "stupid", "bakwas", "ganda"
   ];
 
+  function readStorage(key, fallback, validate) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "null");
+      return validate(value) ? value : fallback;
+    } catch (_) {
+      return fallback;
+    }
+  }
+
   // Shared Application State
   const state = {
     lang: localStorage.getItem("ns_lang") || "hi",
     category: "all",
     navView: "home", // home | trending | timeline | favorites
+    pageFilter: null,
     searchQuery: "",
     sortBy: "featured",
     currentTrackIndex: 0,
@@ -28,10 +38,10 @@ window.NSConfig = (function () {
     playbackSpeed: 1,
     playCountedForCurrentTrack: false,
     activeModalVoiceId: null,
-    likedIds: JSON.parse(localStorage.getItem("ns_liked_ids") || "[]"),
-    extraPlays: JSON.parse(localStorage.getItem("ns_extra_plays") || "{}"),
-    extraLikes: JSON.parse(localStorage.getItem("ns_extra_likes") || "{}"),
-    userComments: JSON.parse(localStorage.getItem("ns_user_comments") || "{}")
+    likedIds: readStorage("ns_liked_ids", [], Array.isArray),
+    extraPlays: readStorage("ns_extra_plays", {}, (value) => value && typeof value === "object" && !Array.isArray(value)),
+    extraLikes: readStorage("ns_extra_likes", {}, (value) => value && typeof value === "object" && !Array.isArray(value)),
+    userComments: readStorage("ns_user_comments", {}, (value) => value && typeof value === "object" && !Array.isArray(value))
   };
 
   function t(key) {
@@ -79,6 +89,7 @@ window.NSConfig = (function () {
       wildlife: t("catWildlife"),
       birds: t("catBirds"),
       nature: t("catNature"),
+      space: t("catSpace"),
       instruments: t("catInstruments"),
       rare: t("catRare")
     };

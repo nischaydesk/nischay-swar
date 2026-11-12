@@ -7,7 +7,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
@@ -56,10 +56,25 @@
         <p><a href="index.html" style="color:var(--gold-bright); text-decoration:none;" data-page-i18n="quiz.back">← मुख्य संग्रहालय पर वापस जाएं</a></p>
       </div>
     </div>
+  
+      <nav class="footer-universal-links" aria-label="Additional pages">
+        <a href="space-rare.html" data-page-i18n="common.footerSpaceRare">🪐 अंतरिक्ष व दुर्लभ ध्वनियाँ</a>
+        <a href="favorites.html" data-page-i18n="common.footerFavorites">❤️ मेरी पसंदीदा आवाज़ें</a>
+      </nav>
   </footer>
 
-  <script src="js/db-humans.js"></script>
-  <script src="js/db-wildlife-nature.js"></script>
+
+  <div id="stickyAudioPlayer" class="sticky-player hidden" role="region" aria-label="Audio player" data-i18n-aria-label="audioPlayer">
+    <audio id="htmlAudioElement" preload="metadata"></audio>
+    <div class="player-progress-wrap" id="progressBarContainer" role="slider" tabindex="0" aria-label="Audio progress" data-i18n-aria-label="audioProgress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="playerProgressFill" class="player-progress-fill"></div></div>
+    <div class="player-inner">
+      <div class="player-track-info" id="playerOpenDetailTrigger" role="button" tabindex="0" aria-label="Open voice details" data-i18n-aria-label="openTrackDetails"><img id="playerAvatar" src="assets/voice-fallback.svg" alt="" class="player-thumb" /><div class="player-meta"><div class="player-title-row"><span id="playerTrackTitle" class="player-title"></span><span class="verified-mini">✅</span></div><span id="playerTrackSub" class="player-sub"></span></div></div>
+      <div class="player-controls"><button id="prevTrackBtn" class="ctrl-btn" type="button" aria-label="Previous voice">⏮</button><button id="mainPlayPauseBtn" class="play-pause-circle" type="button" aria-label="Play or pause">▶</button><button id="nextTrackBtn" class="ctrl-btn" type="button" aria-label="Next voice">⏭</button></div>
+      <div class="player-right-tools"><span class="time-display"><span id="currentTimeText">0:00</span> / <span id="durationTimeText">0:00</span></span><button id="playerSpeedBtn" class="speed-pill" type="button" aria-label="Playback speed">1x</button><button id="playerQuickLikeBtn" class="player-like-btn" type="button" aria-label="Like">🤍</button></div>
+    </div>
+  </div>
+  <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
+
   <script src="js/lang-hi-en.js"></script>
   <script src="js/lang-regional.js"></script>
   <script src="js/page-i18n.js"></script>
@@ -67,6 +82,7 @@
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
   <script src="js/db-extended-archive.js"></script>
+  <script src="js/db-custom-uploads.js"></script>
   <script src="js/config.js"></script>
   <script src="js/audio-engine.js"></script>
   <script src="js/engagement.js"></script>
@@ -74,11 +90,13 @@
   <script src="js/app.js"></script>
   <script>
     (function() {
-      const allVoices = (window.NISCHAY_VOICES_DATA || []).slice();
-      const shuffled = allVoices.sort(() => Math.random() - 0.5).slice(0, 5);
+      const allVoices = Array.from(new Map((window.NISCHAY_VOICES_DATA || []).map((voice) => [voice.id, voice])).values());
+      const shuffled = allVoices.slice().sort(() => Math.random() - 0.5).slice(0, 5);
       let currentIdx = 0;
       let score = 0;
       let answered = false;
+      let finished = false;
+      let lastWasCorrect = false;
 
       const audioEl = document.getElementById("quizAudioEl");
       const playBtn = document.getElementById("quizPlayBtn");
@@ -87,6 +105,7 @@
       const nextBtn = document.getElementById("nextQuestionBtn");
 
       function loadQuestion() {
+        if (finished || !shuffled.length) return;
         answered = false;
         nextBtn.classList.add("hidden");
         const target = shuffled[currentIdx];
@@ -125,9 +144,11 @@
 
         if (chosenId === correctId) {
           score += 20;
+          lastWasCorrect = true;
           selectedBtn.classList.add("correct");
           statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.correct");
         } else {
+          lastWasCorrect = false;
           selectedBtn.classList.add("wrong");
           statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.wrong");
         }
@@ -139,37 +160,57 @@
 
       playBtn.addEventListener("click", () => {
         if (audioEl.paused) {
-          audioEl.play();
-          playBtn.textContent = "⏸";
-          statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.playing");
+          audioEl.play().then(() => {
+            playBtn.textContent = "⏸";
+            statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.playing");
+          }).catch(() => {
+            statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.status");
+          });
         } else {
           audioEl.pause();
           playBtn.textContent = "▶";
         }
       });
 
+      function renderResult() {
+        finished = true;
+        const get = (key, vars) => window.NSPageI18n.get(window.NSConfig.state.lang, `quiz.${key}`, vars);
+        document.getElementById("quizContainer").innerHTML = `
+          <div style="font-size:3rem;" aria-hidden="true">🏆</div>
+          <h2 style="margin:10px 0;">${get("complete")}</h2>
+          <p style="font-size:1.2rem; color:var(--gold-bright); font-weight:800;">${get("total", { score, total: shuffled.length * 20 })}</p>
+          <p style="color:var(--text-secondary); margin:10px 0 20px;">${get("thanks")}</p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button onclick="location.reload()" class="btn-primary-play">🔄 ${get("replay")}</button>
+            <a href="index.html" class="btn-secondary-glass" style="text-decoration:none;">🏠 ${get("back")}</a>
+          </div>`;
+      }
+
       nextBtn.addEventListener("click", () => {
         currentIdx++;
         if (currentIdx < shuffled.length) {
           loadQuestion();
-        } else {
-          document.getElementById("quizContainer").innerHTML = `
-            <div style="font-size:3rem;">🏆</div>
-            <h2 style="margin:10px 0;">क्विज़ पूरा हुआ!</h2>
-            <p style="font-size:1.2rem; color:var(--gold-bright); font-weight:800;">आपका कुल स्कोर: ${score} / ${shuffled.length * 20}</p>
-            <p style="color:var(--text-secondary); margin:10px 0 20px;">निश्चय स्वर पर इतिहास और प्रकृति की असली आवाज़ों को पहचानने के लिए धन्यवाद!</p>
-            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-              <button onclick="location.reload()" class="btn-primary-play">🔄 दोबारा खेलें</button>
-              <a href="index.html" class="btn-secondary-glass" style="text-decoration:none;">🏠 होम पेज पर जाएं</a>
-            </div>
-          `;
-        }
+        } else renderResult();
       });
 
       loadQuestion();
-      window.addEventListener("ns-language-changed", () => loadQuestion());
+      window.addEventListener("ns-language-changed", () => {
+        if (finished) { renderResult(); return; }
+        const target = shuffled[currentIdx];
+        if (!target) return;
+        document.getElementById("qProgress").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.progress", { n: currentIdx + 1, total: shuffled.length });
+        document.getElementById("qScore").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.score", { score });
+        document.getElementById("qHint").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.hintYear", { year: target.year, role: window.NSConfig.getLocalizedField(target.role) });
+        optionsGrid.querySelectorAll(".quiz-opt-btn").forEach((btn) => {
+          const voice = allVoices.find((item) => item.id === btn.dataset.id);
+          if (voice) btn.textContent = window.NSConfig.getLocalizedField(voice.name);
+        });
+        statusText.textContent = answered ? window.NSPageI18n.get(window.NSConfig.state.lang, lastWasCorrect ? "quiz.correct" : "quiz.wrong") : window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.status");
+        if (!nextBtn.classList.contains("hidden")) nextBtn.textContent = currentIdx < shuffled.length - 1 ? window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.next") : window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.result");
+      });
     })();
   </script>
 
+  <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));</script>
 </body>
 </html>

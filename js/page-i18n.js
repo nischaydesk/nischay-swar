@@ -58,6 +58,59 @@
     }
   };
 
+  const additions = {
+    hi: {
+      common: { footerSpaceRare: "अंतरिक्ष व दुर्लभ ध्वनियाँ", footerFavorites: "मेरी पसंदीदा आवाज़ें" },
+      index: { title: "Nischay Swar — असली आवाज़ों का डिजिटल खज़ाना" },
+      timeline: { title: "आवाज़ रिकॉर्डिंग का इतिहास (1860–2026)" },
+      "space-rare": { badge1: "🪐 अंतरिक्ष और इतिहास की दुर्लभ आवाज़ें", badge2: "1860 — 2021 अभिलेख", title: "अंतरिक्ष और दुर्लभ इतिहास की असली ध्वनियाँ", desc: "Apollo 11, NASA Perseverance के मंगल पवन और 1860 की पहली रिकॉर्ड की गई आवाज़ जैसे अभिलेखीय क्षण सुनें। यहाँ केवल परियोजना डेटाबेस में मौजूद रिकॉर्डिंग दिखाई जाती हैं।", heading: "अंतरिक्ष व दुर्लभ ध्वनि संग्रह", about: "मौजूदा संग्रह की अंतरिक्ष और दुर्लभ ऐतिहासिक रिकॉर्डिंग।" },
+      favorites: { badge: "❤️ आपकी सहेजी हुई आवाज़ें", title: "मेरी पसंदीदा आवाज़ें", desc: "इस डिवाइस पर पसंद की गई आवाज़ें यहाँ मिलेंगी। पसंदीदा सूची आपके ब्राउज़र में सहेजी जाती है।", emptyTitle: "अभी कोई पसंदीदा आवाज़ नहीं", emptyDesc: "किसी आवाज़ के कार्ड पर दिल दबाएँ; वह यहाँ दिखाई देगी।" },
+      "404": { title: "यह पेज नहीं मिला", desc: "शायद यह लिंक बदल गया है या अब उपलब्ध नहीं है। मुख्य संग्रह में वापस जाएँ।", home: "🏠 होम पेज पर जाएँ" }
+    },
+    en: {
+      common: { footerSpaceRare: "Space & Rare Sounds", footerFavorites: "My Favorite Voices" },
+      index: { title: "Nischay Swar — Digital Archive of Real Voices" },
+      timeline: { title: "History of Sound Recording (1860–2026)" },
+      "space-rare": { badge1: "🪐 Rare Sounds from Space & History", badge2: "1860 — 2021 ARCHIVE", title: "Authentic Space and Rare Historical Sounds", desc: "Explore archive moments such as Apollo 11, NASA Perseverance's Martian wind, and the first recorded sound from 1860. Only recordings already present in the project database are shown here.", heading: "Space & Rare Sound Archive", about: "Space and rare historical recordings from the existing collection." },
+      favorites: { badge: "❤️ Your saved voices", title: "My Favorite Voices", desc: "Voices you like on this device appear here. Favorites are saved in your browser.", emptyTitle: "No favorites yet", emptyDesc: "Tap the heart on any voice card to save it here." },
+      "404": { title: "Page not found", desc: "This link may have changed or is no longer available. Return to the main archive.", home: "🏠 Go to Home" }
+    },
+    bho: {
+      common: { footerSpaceRare: "अंतरिक्ष आ दुर्लभ आवाज़", footerFavorites: "हमर पसंदीदा आवाज़" },
+      index: { title: "निश्चय स्वर — असली आवाज़ के डिजिटल खज़ाना" },
+      timeline: { title: "आवाज़ रिकॉर्डिंग के इतिहास (1860–2026)" },
+      "space-rare": { badge1: "🪐 अंतरिक्ष आ इतिहास के दुर्लभ आवाज़", badge2: "1860 — 2021 के संग्रह", title: "अंतरिक्ष आ दुर्लभ इतिहास के असली आवाज़", desc: "Apollo 11, NASA Perseverance से मंगल के हवा आ 1860 के पहिला रिकॉर्ड कइल आवाज़ जइसन ऐतिहासिक रिकॉर्डिंग सुनीं। इहाँ खाली परियोजना के डेटाबेस में पहिले से मौजूद रिकॉर्डिंग देखाई।", heading: "अंतरिक्ष आ दुर्लभ आवाज़ संग्रह", about: "मौजूदा संग्रह के अंतरिक्ष आ दुर्लभ ऐतिहासिक रिकॉर्डिंग।" },
+      favorites: { badge: "❤️ रउआ सहेजल आवाज़", title: "हमर पसंदीदा आवाज़", desc: "एह डिवाइस पर पसंद कइल आवाज़ इहाँ देखाई। पसंदीदा सूची ब्राउज़र में सहेजल जाला।", emptyTitle: "अभी कवनो पसंदीदा आवाज़ नइखे", emptyDesc: "कवनो आवाज़ के कार्ड पर दिल दबाईं; ऊ इहाँ देखाई।" },
+      "404": { title: "ई पन्ना ना मिलल", desc: "शायद लिंक बदल गइल बा भा अब उपलब्ध नइखे। मुख्य संग्रह पर लौट चलीं।", home: "🏠 होम पेज पर चलीं" }
+    },
+    bn: {
+      common: { footerSpaceRare: "মহাকাশ ও বিরল শব্দ", footerFavorites: "আমার প্রিয় কণ্ঠস্বর" },
+      index: { title: "নিশ্চয় স্বর — আসল কণ্ঠস্বরের ডিজিটাল ভাণ্ডার" },
+      timeline: { title: "শব্দ রেকর্ডিংয়ের ইতিহাস (১৮৬০–২০২৬)" },
+      "space-rare": { badge1: "🪐 মহাকাশ ও ইতিহাসের বিরল শব্দ", badge2: "১৮৬০ — ২০২১ আর্কাইভ", title: "মহাকাশ ও বিরল ঐতিহাসিক আসল শব্দ", desc: "অ্যাপোলো ১১, NASA Perseverance-এর মঙ্গলের বাতাস এবং ১৮৬০ সালের প্রথম রেকর্ড করা শব্দের মতো ঐতিহাসিক রেকর্ড শুনুন। এখানে শুধু প্রকল্পের ডেটাবেসে আগে থেকে থাকা রেকর্ডিং দেখানো হয়।", heading: "মহাকাশ ও বিরল শব্দের সংগ্রহ", about: "বর্তমান সংগ্রহের মহাকাশ ও বিরল ঐতিহাসিক রেকর্ডিং।" },
+      favorites: { badge: "❤️ আপনার সংরক্ষিত কণ্ঠস্বর", title: "আমার প্রিয় কণ্ঠস্বর", desc: "এই ডিভাইসে পছন্দ করা কণ্ঠস্বর এখানে দেখা যাবে। প্রিয় তালিকা আপনার ব্রাউজারে সংরক্ষিত হয়।", emptyTitle: "এখনও কোনো প্রিয় কণ্ঠস্বর নেই", emptyDesc: "যেকোনো কণ্ঠস্বরের কার্ডে হৃদয় চিহ্নে চাপ দিলে সেটি এখানে আসবে।" },
+      "404": { title: "পৃষ্ঠা পাওয়া যায়নি", desc: "লিঙ্কটি বদলে গেছে বা আর উপলব্ধ নেই। মূল সংগ্রহে ফিরে যান।", home: "🏠 হোম পৃষ্ঠায় যান" }
+    },
+    ur: {
+      common: { footerSpaceRare: "خلائی اور نایاب آوازیں", footerFavorites: "میری پسندیدہ آوازیں" },
+      index: { title: "نشچئے سوَر — اصلی آوازوں کا ڈیجیٹل خزانہ" },
+      timeline: { title: "آواز کی ریکارڈنگ کی تاریخ (1860–2026)" },
+      "space-rare": { badge1: "🪐 خلا اور تاریخ کی نایاب آوازیں", badge2: "1860 — 2021 کا ذخیرہ", title: "خلا اور تاریخ کی مستند نایاب آوازیں", desc: "اپولو 11، NASA Perseverance کی مریخی ہوا اور 1860 کی پہلی ریکارڈ شدہ آواز جیسے تاریخی ریکارڈ سنیں۔ یہاں صرف وہ ریکارڈنگ دکھائی جاتی ہیں جو پہلے سے منصوبے کے ڈیٹابیس میں موجود ہیں۔", heading: "خلائی اور نایاب آوازوں کا ذخیرہ", about: "موجودہ مجموعے کی خلائی اور نایاب تاریخی ریکارڈنگز۔" },
+      favorites: { badge: "❤️ آپ کی محفوظ کردہ آوازیں", title: "میری پسندیدہ آوازیں", desc: "اس آلے پر پسند کی گئی آوازیں یہاں دکھائی دیں گی۔ پسندیدہ فہرست آپ کے براؤزر میں محفوظ ہوتی ہے۔", emptyTitle: "ابھی کوئی پسندیدہ آواز نہیں", emptyDesc: "کسی بھی آواز کے کارڈ پر دل کے نشان کو دبائیں؛ وہ یہاں دکھائی دے گی۔" },
+      "404": { title: "صفحہ نہیں ملا", desc: "ممکن ہے یہ ربط بدل گیا ہو یا اب دستیاب نہ ہو۔ مرکزی ذخیرے پر واپس جائیں۔", home: "🏠 ہوم صفحے پر جائیں" }
+    }
+  };
+  Object.keys(additions).forEach((lang) => {
+    Object.keys(additions[lang]).forEach((scope) => {
+      Object.assign(text[lang][scope] || (text[lang][scope] = {}), additions[lang][scope]);
+    });
+  });
+  text.hi.wildlife.nature = "🌿 प्रकृति";
+  text.en.wildlife.nature = "🌿 Nature";
+  text.bho.wildlife.nature = "🌿 प्रकृति";
+  text.bn.wildlife.nature = "🌿 প্রকৃতি";
+  text.ur.wildlife.nature = "🌿 فطرت";
+
   function get(lang, key, vars) {
     const [scope, name] = key.split(".");
     const value = text[lang]?.[scope]?.[name] ?? text.hi?.[scope]?.[name] ?? key;
