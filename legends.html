@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>अमर वाणी — महापुरुष, वैज्ञानिक और कवि | Nischay Swar</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/player.css" />
+</head>
+<body data-page-filter="humans">
+
+  <!-- TOP HEADER WITH REAL MULTI-PAGE LINKS -->
+  <header class="top-header">
+    <div class="header-left">
+      <a href="index.html" class="header-brand">
+        <div class="logo-pulse">
+          <span class="bar b1"></span>
+          <span class="bar b2"></span>
+          <span class="bar b3"></span>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
+          <span class="sub-name">अमर वाणी • मानव इतिहास अभिलेखागार</span>
+        </div>
+      </a>
+    </div>
+
+    <nav class="desktop-quick-nav" style="display:flex; overflow-x:auto;">
+      <a href="index.html" class="q-nav-btn" style="text-decoration:none;">🏠 होम</a>
+      <a href="legends.html" class="q-nav-btn active" style="text-decoration:none;">🇮🇳 महापुरुष व वैज्ञानिक</a>
+      <a href="wildlife.html" class="q-nav-btn" style="text-decoration:none;">🐅 जीव-जंतु व प्रकृति</a>
+      <a href="quiz.html" class="q-nav-btn" style="text-decoration:none;">🎮 आवाज़ क्विज़</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="lang-dropdown-wrap">
+        <button id="langToggleBtn" class="lang-btn">
+          <span>🌐</span> <span id="currentLangLabel">हिन्दी</span> <span>▾</span>
+        </button>
+        <div id="langMenu" class="lang-menu">
+          <button class="lang-option active" data-lang="hi"><span>🇮🇳 हिन्दी</span><span class="check-mark">✓</span></button>
+          <button class="lang-option" data-lang="en"><span>🇬🇧 English</span><span class="check-mark">✓</span></button>
+          <button class="lang-option" data-lang="bho"><span>🌾 भोजपुरी</span><span class="check-mark">✓</span></button>
+          <button class="lang-option" data-lang="bn"><span>🏵️ বাংলা</span><span class="check-mark">✓</span></button>
+          <button class="lang-option" data-lang="ur"><span>📜 اردو</span><span class="check-mark">✓</span></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- DEDICATED HUMAN ARCHIVE HERO -->
+    <section class="hero-section" style="grid-template-columns: 1fr;">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge-verified">🇮🇳 NATIONAL & WORLD ARCHIVE</span>
+          <span class="badge-era">1860 — 2007 AUTHENTIC SPEECHES</span>
+        </div>
+        <h1 class="hero-title">इतिहास के महापुरुष, वैज्ञानिक और अमर कवियों की असली आवाज़</h1>
+        <p class="hero-desc">
+          महात्मा गांधी, नेताजी सुभाष चंद्र बोस, डॉ. ए.पी.जे. अब्दुल कलाम, गुरुदेव रवींद्रनाथ टैगोर और अल्बर्ट आइंस्टीन की मूल ऐतिहासिक रिकॉर्डिंग्स — बिना किसी संपादन के सीधे सुनें।
+        </p>
+      </div>
+    </section>
+
+    <!-- SEARCH & SUB-CATEGORY FILTER -->
+    <section class="filter-toolbar">
+      <div class="search-box-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="voiceSearchInput" class="search-input" placeholder="महापुरुष, वैज्ञानिक, कवि या साल (जैसे 1931, 1944) खोजें..." />
+        <button id="clearSearchBtn" class="clear-search-btn hidden">✕</button>
+      </div>
+      <select id="sortSelect" class="sort-select">
+        <option value="featured">✨ विशेष चयन</option>
+        <option value="oldest">🕰️ सबसे पुराना (1860 से)</option>
+        <option value="mostPlayed">🔥 सबसे ज़्यादा सुना गया</option>
+        <option value="mostLiked">❤️ सबसे ज़्यादा पसंदीदा</option>
+      </select>
+    </section>
+
+    <nav class="category-bar">
+      <button class="cat-pill active" data-human-cat="all">🇮🇳 सभी मानव आवाज़ें</button>
+      <button class="cat-pill" data-human-cat="legends">🏛️ स्वतंत्रता सेनानी</button>
+      <button class="cat-pill" data-human-cat="scientists">🚀 महान वैज्ञानिक</button>
+      <button class="cat-pill" data-human-cat="poets">✒️ कवि व साहित्यकार</button>
+      <button class="cat-pill" data-human-cat="rare">📻 1860+ दुर्लभ रिकॉर्डिंग</button>
+    </nav>
+
+    <div class="grid-header-bar">
+      <h2 id="activeSectionHeading" class="section-heading">मानव इतिहास अभिलेखागार (Human Voice Vault)</h2>
+      <span id="visibleResultBadge" class="result-badge">0 Voices</span>
+    </div>
+
+    <section id="voicesGrid" class="voices-grid"></section>
+  </main>
+
+  <!-- PRO MULTI-PAGE FOOTER -->
+  <footer class="pro-site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <div class="brand-lockup">
+            <div class="brand-badge">NS</div>
+            <div>
+              <h3 class="brand-title">NISCHAY SWAR</h3>
+              <span class="brand-sub">निश्चय स्वर डिजिटल आर्काइव</span>
+            </div>
+          </div>
+          <p class="footer-about-text">100% असली मानवीय और प्राकृतिक ध्वनियों का समर्पित डिजिटल संग्रहालय। Zero AI.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">सभी समर्पित पेज</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">🏠 मुख्य होम पेज</a></li>
+            <li><a href="legends.html">🇮🇳 महापुरुष व वैज्ञानिक</a></li>
+            <li><a href="wildlife.html">🐅 जीव-जंतु व प्रकृति</a></li>
+            <li><a href="quiz.html">🎮 आवाज़ पहचानो क्विज़</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">निश्चय नेटवर्क</h4>
+          <ul class="footer-links">
+            <li><a href="https://nischaydesk.github.io" target="_blank" rel="noopener">🎓 NischayDesk Portal ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Prince Kumar (Jamui, Bihar)</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DETAIL MODAL & STICKY PLAYER -->
+  <div id="voiceDetailModal" class="modal-backdrop hidden">
+    <div class="modal-card detail-modal-card">
+      <button id="closeDetailModalBtn" class="modal-close-btn">✕</button>
+      <div class="detail-top">
+        <div class="detail-photo-wrap">
+          <img id="modalSpeakerImg" src="" alt="" class="detail-photo" />
+          <span class="detail-verified-badge">✅ Verified Real</span>
+        </div>
+        <div class="detail-meta">
+          <div class="detail-chips">
+            <span id="modalCategoryChip" class="chip-gold">Category</span>
+            <span id="modalYearChip" class="chip-dark">Year</span>
+            <span id="modalDurationChip" class="chip-dark">00:45</span>
+          </div>
+          <h2 id="modalSpeakerName" class="detail-name">Name</h2>
+          <p id="modalSpeakerRole" class="detail-role">Role</p>
+          <p id="modalSpeakerBio" class="detail-bio">Bio</p>
+          <div class="detail-source-box"><strong>🏛️ स्रोत:</strong> <span id="modalSourceText">Archive</span></div>
+          <div class="detail-actions-row">
+            <button id="modalPlayBtn" class="btn-primary-play"><span>▶</span> <span>आवाज़ चलाएं</span></button>
+            <button id="modalLikeBtn" class="btn-like-action"><span>❤️</span> <span id="modalLikeCount">0</span></button>
+            <div class="stat-pill-readonly"><span>👁️</span> <span id="modalPlayCount">0</span></div>
+            <button id="modalShareBtn" class="btn-share-wa"><span>📲</span> <span>शेयर</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="comments-wrapper">
+        <div class="comments-head">
+          <h3>💬 श्रोताओं की प्रतिक्रिया <span id="modalCommentCount" class="comment-counter">0</span></h3>
+          <span class="safe-badge">🛡️ Safe & Filtered</span>
+        </div>
+        <form id="commentForm" class="comment-form">
+          <div class="comment-inputs">
+            <input type="text" id="commentAuthorInput" class="c-input-name" maxlength="35" placeholder="आपका नाम" required />
+            <input type="text" id="commentTextInput" class="c-input-msg" maxlength="160" placeholder="अपने विचार लिखें..." required />
+          </div>
+          <button type="submit" class="btn-post-comment">पोस्ट करें ➤</button>
+        </form>
+        <p id="commentFeedbackMsg" class="comment-feedback hidden"></p>
+        <div id="commentsList" class="comments-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="stickyAudioPlayer" class="sticky-player hidden">
+    <audio id="htmlAudioElement" preload="metadata"></audio>
+    <div class="player-progress-wrap" id="progressBarContainer"><div id="playerProgressFill" class="player-progress-fill"></div></div>
+    <div class="player-inner">
+      <div class="player-track-info" id="playerOpenDetailTrigger">
+        <img id="playerAvatar" src="" alt="" class="player-thumb" />
+        <div class="player-meta">
+          <div class="player-title-row"><span id="playerTrackTitle" class="player-title">Track</span><span>✅</span></div>
+          <span id="playerTrackSub" class="player-sub">Archive</span>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button id="prevTrackBtn" class="ctrl-btn">⏮</button>
+        <button id="mainPlayPauseBtn" class="play-pause-circle">▶</button>
+        <button id="nextTrackBtn" class="ctrl-btn">⏭</button>
+      </div>
+      <div class="player-right-tools">
+        <span class="time-display"><span id="currentTimeText">0:00</span> / <span id="durationTimeText">0:00</span></span>
+        <button id="playerSpeedBtn" class="speed-pill">1x</button>
+        <button id="playerQuickLikeBtn" class="player-like-btn">🤍</button>
+      </div>
+    </div>
+  </div>
+  <div id="toastBanner" class="toast-banner"></div>
+
+  <!-- SCRIPTS (Matching your exact js/ folder structure) -->
+  <script src="js/lang-hi-en.js"></script>
+  <script src="js/lang-regional.js"></script>
+  <script src="js/db-humans.js"></script>
+  <script src="js/db-wildlife-nature.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/engagement.js"></script>
+  <script src="js/ui-renderer.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Filter only human categories on legends.html
+    document.addEventListener("DOMContentLoaded", () => {
+      const humanCats = ["legends", "scientists", "poets", "rare"];
+      window.NISCHAY_VOICES_DATA = (window.NISCHAY_VOICES_DATA || []).filter(v => humanCats.includes(v.category));
+      window.NSRenderer.renderVoicesGrid();
+
+      document.querySelectorAll("[data-human-cat]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("[data-human-cat]").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          window.NSConfig.state.category = btn.dataset.humanCat;
+          window.NSRenderer.renderVoicesGrid();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
