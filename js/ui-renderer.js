@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NISCHAY SWAR (निश्चय स्वर) — DYNAMIC UI, CARDS, TIMELINE & MODAL RENDERER
+   NISCHAY SWAR (निश्चय स्वर) — UNIVERSAL UI & 5-LANGUAGE RENDERER (ALL PAGES)
    File: js/ui-renderer.js
    ========================================================================== */
 
@@ -269,6 +269,56 @@ window.NSRenderer = (function () {
     modal.classList.remove("hidden");
   }
 
+  // UNIVERSAL TRANSLATOR FOR ALL PAGES (legends.html, wildlife.html, timeline.html, etc.)
+  function translateSubPages(langCode) {
+    const pageDict = {
+      hi: {
+        subNav: ["🏠 होम", "🇮🇳 महापुरुष", "🐅 जीव-जंतु", "🕰️ टाइमलाइन", "🎮 क्विज़", "🛡️ मिशन"],
+        legendsTitle: "इतिहास के महापुरुष, वैज्ञानिक और अमर कवियों की असली आवाज़",
+        wildlifeTitle: "जंगली जानवर, पक्षियों की चहचहाहट, प्रकृति और अंतरिक्ष की असली ध्वनियाँ",
+        searchPh: "नाम, जीव-जंतु या साल खोजें..."
+      },
+      en: {
+        subNav: ["🏠 Home", "🇮🇳 Legends", "🐅 Wildlife", "🕰️ Timeline", "🎮 Quiz", "🛡️ Mission"],
+        legendsTitle: "Authentic Voices of Historical Legends, Scientists & Immortal Poets",
+        wildlifeTitle: "Real Sounds of Wild Animals, Birds, Nature & Outer Space",
+        searchPh: "Search legend, animal, or year..."
+      },
+      bho: {
+        subNav: ["🏠 होम", "🇮🇳 महापुरुष", "🐅 जीव-जंतु", "🕰️ टाइमलाइन", "🎮 क्विज़", "🛡️ मिशन"],
+        legendsTitle: "इतिहास के महापुरुष, वैज्ञानिक आ अमर कवि लोगन के असली आवाज़",
+        wildlifeTitle: "जंगली जानवर, चिड़िया, प्रकृति आ अंतरिक्ष के असली आवाज़",
+        searchPh: "नाम, जानवर भा साल खोजीं..."
+      },
+      bn: {
+        subNav: ["🏠 হোম", "🇮🇳 মহাপুরুষ", "🐅 বন্যপ্রাণী", "🕰️ টাইমলাইন", "🎮 কুইজ", "🛡️ মিশন"],
+        legendsTitle: "ইতিহাসের মহাপুরুষ, বিজ্ঞানী ও অমর কবিদের আসল কণ্ঠস্বর",
+        wildlifeTitle: "বন্যপ্রাণী, পাখির ডাক, প্রকৃতি ও মহাকাশের আসল শব্দ",
+        searchPh: "নাম, প্রাণী বা সাল খুঁজুন..."
+      },
+      ur: {
+        subNav: ["🏠 ہوم", "🇮🇳 شخصیات", "🐅 جنگلی حیات", "🕰️ ٹائم لائن", "🎮 کوئز", "🛡️ مشن"],
+        legendsTitle: "تاریخ کی عظیم شخصیات، سائنسدانوں اور شعراء کی اصل آوازیں",
+        wildlifeTitle: "جنگلی جانوروں، پرندوں، فطرت اور خلا کی اصل آوازیں",
+        searchPh: "نام، جانور یا سال تلاش کریں..."
+      }
+    };
+
+    const d = pageDict[langCode] || pageDict.hi;
+    const subLinks = document.querySelectorAll("#universalSubNav a");
+    subLinks.forEach((a, i) => {
+      if (d.subNav[i]) a.textContent = d.subNav[i];
+    });
+
+    const currentFile = window.location.pathname.split("/").pop() || "index.html";
+    const h1 = document.querySelector(".hero-title");
+    if (h1 && currentFile === "legends.html") h1.textContent = d.legendsTitle;
+    if (h1 && currentFile === "wildlife.html") h1.textContent = d.wildlifeTitle;
+
+    const searchInp = document.getElementById("voiceSearchInput");
+    if (searchInp && currentFile !== "index.html") searchInp.placeholder = d.searchPh;
+  }
+
   function applyLanguage(langCode) {
     const langs = window.NISCHAY_LANGUAGES || {};
     if (!langs[langCode]) langCode = "hi";
@@ -298,6 +348,7 @@ window.NSRenderer = (function () {
       if (langObj[key]) el.setAttribute("placeholder", langObj[key]);
     });
 
+    translateSubPages(langCode);
     updateSpotlightBanner();
     renderVoicesGrid();
     renderTimeline();
