@@ -10,88 +10,23 @@
     const header = document.querySelector(".top-header");
     if (!header) return;
 
-    // Remove inline display:flex overlap on mobile
-    const oldQuickNav = header.querySelector(".desktop-quick-nav");
-    if (oldQuickNav) {
-      oldQuickNav.removeAttribute("style");
-    }
-
-    // Dark/Light Theme Button Setup
-    let headerRight = header.querySelector(".header-right");
-    if (!headerRight) {
-      headerRight = document.createElement("div");
-      headerRight.className = "header-right";
-      header.appendChild(headerRight);
-    }
-
+    const headerRight = header.querySelector(".header-right");
+    const themeBtn = document.getElementById("themeToggleBtn");
     const savedTheme = localStorage.getItem("ns_theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
-    let themeBtn = document.getElementById("themeToggleBtn");
-    if (!themeBtn) {
-      themeBtn = document.createElement("button");
-      themeBtn.id = "themeToggleBtn";
-      themeBtn.className = "theme-toggle-btn";
-      themeBtn.setAttribute("aria-label", "Toggle Dark/Light Mode");
-      headerRight.prepend(themeBtn);
+    if (themeBtn) {
+      themeBtn.textContent = savedTheme === "light" ? "🌙" : "☀️";
+      themeBtn.onclick = () => {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("ns_theme", next);
+        themeBtn.textContent = next === "light" ? "🌙" : "☀️";
+      };
     }
 
-    themeBtn.textContent = savedTheme === "light" ? "🌙" : "☀️";
-    themeBtn.onclick = () => {
-      const cur = document.documentElement.getAttribute("data-theme");
-      const next = cur === "light" ? "dark" : "light";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("ns_theme", next);
-      themeBtn.textContent = next === "light" ? "🌙" : "☀️";
-    };
-
-    // Clean Scrollable Sub-Nav Bar right below Header
-    if (!document.getElementById("universalSubNav")) {
-      const currentFile = window.location.pathname.split("/").pop() || "index.html";
-      const pages = [
-        { href: "index.html", label: "🏠 होम" },
-        { href: "legends.html", label: "🇮🇳 महापुरुष" },
-        { href: "wildlife.html", label: "🐅 जीव-जंतु" },
-        { href: "timeline.html", label: "🕰️ टाइमलाइन" },
-        { href: "quiz.html", label: "🎮 क्विज़" },
-        { href: "about.html", label: "🛡️ मिशन" }
-      ];
-
-      const subNav = document.createElement("nav");
-      subNav.id = "universalSubNav";
-      subNav.style.cssText = `
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        overflow-x: auto;
-        padding: 8px 14px;
-        background: var(--bg-surface);
-        border-bottom: 1px solid var(--border-subtle);
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      `;
-
-      subNav.innerHTML = pages
-        .map((p) => {
-          const isActive = currentFile === p.href;
-          return `
-            <a href="${p.href}" style="
-              text-decoration: none;
-              white-space: nowrap;
-              padding: 6px 13px;
-              border-radius: 999px;
-              font-size: 0.8rem;
-              font-weight: 700;
-              border: 1px solid ${isActive ? "var(--gold-primary)" : "var(--border-subtle)"};
-              background: ${isActive ? "rgba(245, 158, 11, 0.16)" : "var(--bg-card)"};
-              color: ${isActive ? "var(--gold-bright)" : "var(--text-primary)"};
-            ">${p.label}</a>
-          `;
-        })
-        .join("");
-
-      header.insertAdjacentElement("afterend", subNav);
-    }
+    if (headerRight) headerRight.setAttribute("data-shell-ready", "true");
   }
 
   // Stop & Close Audio Player completely (Works on all pages!)
@@ -105,10 +40,10 @@
     if (!closeBtn) {
       closeBtn = document.createElement("button");
       closeBtn.id = "closePlayerBtn";
-      closeBtn.className = "ctrl-btn";
+      closeBtn.className = "ctrl-btn player-close-btn";
       closeBtn.title = "प्लेयर बंद करें";
+      closeBtn.setAttribute("aria-label", "Close audio player");
       closeBtn.innerHTML = "✕";
-      closeBtn.style.cssText = "font-size: 1.15rem; color: #f43f5e; font-weight: 800; margin-left: 4px;";
       rightTools.appendChild(closeBtn);
     }
 
@@ -116,8 +51,11 @@
       if (audioEl) {
         audioEl.pause();
         audioEl.currentTime = 0;
+        audioEl.removeAttribute("src");
+        audioEl.load();
       }
       window.NSConfig.state.isPlaying = false;
+      window.NSConfig.state.playCountedForCurrentTrack = false;
       stickyBar.classList.add("hidden");
       if (window.NSRenderer) window.NSRenderer.renderVoicesGrid();
     };

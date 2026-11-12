@@ -219,3 +219,21 @@
     display: none;
   }
 }
+
+.player-close-btn {
+  color: #fb7185 !important;
+  font-size: 1.15rem !important;
+  font-weight: 800;
+  border-radius: 9px;
+  padding: 5px 8px;
+}
+
+.player-close-btn:hover {
+  color: #fff !important;
+  background: rgba(244, 63, 94, 0.18);
+}
+
+@media (max-width: 560px) {
+  .player-right-tools { gap: 6px; }
+  .player-close-btn { padding-inline: 6px; }
+}

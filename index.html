@@ -21,186 +21,9 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/player.css" />
 </head>
-<body>
+<body data-page="index">
 
-  <!-- ==================== 1. 3-LINE SIDE DRAWER MENU ==================== -->
-  <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
-  <aside id="sideDrawer" class="side-drawer" aria-label="Main Navigation Drawer">
-    <div class="drawer-header">
-      <div class="brand-lockup">
-        <div class="brand-badge">NS</div>
-        <div>
-          <h2 class="brand-title">NISCHAY SWAR</h2>
-          <span class="brand-sub" data-i18n="brandTag">निश्चय स्वर • 100% असली आवाज़</span>
-        </div>
-      </div>
-      <button id="closeDrawerBtn" class="icon-btn" aria-label="Close Menu">✕</button>
-    </div>
 
-    <div class="drawer-scroll">
-      <nav class="drawer-nav">
-        <p class="drawer-section-label">समर्पित पेज (Dedicated Pages)</p>
-        <a href="index.html" class="drawer-link active" style="text-decoration:none;">
-          <span class="nav-ico">🏠</span>
-          <span data-i18n="navHome">होम (संपूर्ण ध्वनि संग्रह)</span>
-        </a>
-        <a href="legends.html" class="drawer-link" style="text-decoration:none;">
-          <span class="nav-ico">🇮🇳</span>
-          <span>महापुरुष, वैज्ञानिक व कवि</span>
-        </a>
-        <a href="wildlife.html" class="drawer-link" style="text-decoration:none;">
-          <span class="nav-ico">🐅</span>
-          <span>जीव-जंतु, पक्षी व अंतरिक्ष</span>
-        </a>
-        <a href="timeline.html" class="drawer-link" style="text-decoration:none;">
-          <span class="nav-ico">🕰️</span>
-          <span>इतिहास की टाइमलाइन (1860–2026)</span>
-        </a>
-        <a href="quiz.html" class="drawer-link highlight-link" style="text-decoration:none;">
-          <span class="nav-ico">🎮</span>
-          <span>आवाज़ पहचानो क्विज़ गेम</span>
-        </a>
-        <a href="about.html" class="drawer-link" style="text-decoration:none;">
-          <span class="nav-ico">🛡️</span>
-          <span>मिशन व 100% Real सत्यापन</span>
-        </a>
-
-        <p class="drawer-section-label" data-i18n="menuExplore">त्वरित फ़िल्टर</p>
-        <button class="drawer-link" data-nav="trending">
-          <span class="nav-ico">🔥</span>
-          <span data-i18n="navTrending">सबसे ज़्यादा सुना गया (Trending)</span>
-        </button>
-        <button class="drawer-link" data-nav="favorites">
-          <span class="nav-ico">❤️</span>
-          <span data-i18n="navFavorites">मेरी पसंदीदा आवाज़ें</span>
-          <span id="favBadgeCount" class="pill-count">0</span>
-        </button>
-
-        <p class="drawer-section-label" data-i18n="menuHumanAlbums">मानव इतिहास एल्बम</p>
-        <button class="drawer-link" data-cat-jump="legends">
-          <span class="nav-ico">🏛️</span>
-          <span data-i18n="catLegends">अमर वाणी (महापुरुष)</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="scientists">
-          <span class="nav-ico">🚀</span>
-          <span data-i18n="catScientists">विज्ञान और प्रेरणा</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="poets">
-          <span class="nav-ico">✒️</span>
-          <span data-i18n="catPoets">साहित्य और शायरी</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="rare">
-          <span class="nav-ico">📻</span>
-          <span data-i18n="catRare">पहली गूँज (दुर्लभ रिकॉर्डिंग)</span>
-        </button>
-
-        <p class="drawer-section-label" data-i18n="menuNatureAlbums">जीव-जंतु और प्रकृति</p>
-        <button class="drawer-link" data-cat-jump="wildlife">
-          <span class="nav-ico">🦁</span>
-          <span data-i18n="catWildlife">जंगली जानवर (Wildlife)</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="birds">
-          <span class="nav-ico">🦚</span>
-          <span data-i18n="catBirds">पक्षियों की चहचहाहट (Birds)</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="nature">
-          <span class="nav-ico">🌧️</span>
-          <span data-i18n="catNature">प्रकृति व अंतरिक्ष (Nature & Space)</span>
-        </button>
-        <button class="drawer-link" data-cat-jump="instruments">
-          <span class="nav-ico">🎶</span>
-          <span data-i18n="catInstruments">शास्त्रीय वाद्ययंत्र (Instruments)</span>
-        </button>
-
-        <p class="drawer-section-label" data-i18n="menuPlatform">योगदान व नियम</p>
-        <button id="openSubmitFromMenu" class="drawer-link highlight-link">
-          <span class="nav-ico">📩</span>
-          <span data-i18n="navSubmit">असली आवाज़ भेजें (Submit)</span>
-        </button>
-        <button id="openVerifyInfoBtn" class="drawer-link">
-          <span class="nav-ico">✅</span>
-          <span data-i18n="navVerify">100% Real Verification नियम</span>
-        </button>
-      </nav>
-
-      <div class="drawer-footer-card">
-        <div class="zero-ai-pill">✅ ZERO AI • 100% AUTHENTIC</div>
-        <p data-i18n="drawerNote">हर ऑडियो को ऐतिहासिक अभिलेखागार और प्राकृतिक स्रोतों से जाँचने के बाद ही प्रकाशित किया जाता है।</p>
-        <div class="drawer-credit">A Nischay Ecosystem Project • Prince Kumar</div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- ==================== 2. STICKY TOP HEADER ==================== -->
-  <header class="top-header">
-    <div class="header-left">
-      <button id="openDrawerBtn" class="hamburger-btn" aria-label="Open Navigation Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <a href="index.html" class="header-brand" id="brandHomeReset">
-        <div class="logo-pulse">
-          <span class="bar b1"></span>
-          <span class="bar b2"></span>
-          <span class="bar b3"></span>
-        </div>
-        <div class="brand-text-wrap">
-          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
-          <span class="sub-name" data-i18n="headerSub">निश्चय स्वर • असली आवाज़ों का डिजिटल खज़ाना</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Real Multi-Page Navigation Links -->
-    <nav class="desktop-quick-nav" aria-label="Main Pages">
-      <a href="index.html" class="q-nav-btn active" style="text-decoration:none;">🏠 <span data-i18n="qAll">होम</span></a>
-      <a href="legends.html" class="q-nav-btn" style="text-decoration:none;">🇮🇳 <span data-i18n="qLegends">महापुरुष</span></a>
-      <a href="wildlife.html" class="q-nav-btn" style="text-decoration:none;">🐅 <span data-i18n="qWildlife">जीव-जंतु</span></a>
-      <a href="timeline.html" class="q-nav-btn" style="text-decoration:none;">🕰️ <span data-i18n="qTimeline">टाइमलाइन</span></a>
-      <a href="quiz.html" class="q-nav-btn" style="text-decoration:none;">🎮 क्विज़</a>
-      <a href="about.html" class="q-nav-btn" style="text-decoration:none;">🛡️ मिशन</a>
-    </nav>
-
-    <div class="header-right">
-      <!-- Dark / Light Mode Toggle Button -->
-      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark/Light Theme" title="डार्क / लाइट मोड बदलें">☀️</button>
-
-      <!-- 5-Language Switcher Dropdown -->
-      <div class="lang-dropdown-wrap">
-        <button id="langToggleBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
-          <span class="globe-ico">🌐</span>
-          <span id="currentLangLabel">हिन्दी</span>
-          <span class="caret">▾</span>
-        </button>
-        <div id="langMenu" class="lang-menu" role="menu">
-          <button class="lang-option active" data-lang="hi" role="menuitem">
-            <span>🇮🇳 हिन्दी (Hindi)</span>
-            <span class="check-mark">✓</span>
-          </button>
-          <button class="lang-option" data-lang="en" role="menuitem">
-            <span>🇬🇧 English</span>
-            <span class="check-mark">✓</span>
-          </button>
-          <button class="lang-option" data-lang="bho" role="menuitem">
-            <span>🌾 भोजपुरी (Bhojpuri)</span>
-            <span class="check-mark">✓</span>
-          </button>
-          <button class="lang-option" data-lang="bn" role="menuitem">
-            <span>🏵️ বাংলা (Bengali)</span>
-            <span class="check-mark">✓</span>
-          </button>
-          <button class="lang-option" data-lang="ur" role="menuitem">
-            <span>📜 اردو (Urdu)</span>
-            <span class="check-mark">✓</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ==================== 3. MAIN CONTENT AREA ==================== -->
   <main id="top" class="main-container">
 
     <!-- HERO SPOTLIGHT BANNER -->
@@ -220,10 +43,10 @@
 
         <!-- Multi-Page Quick Entry Buttons -->
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
-          <a href="legends.html" class="btn-secondary-glass" style="text-decoration:none;">🇮🇳 महापुरुष व वैज्ञानिक</a>
-          <a href="wildlife.html" class="btn-secondary-glass" style="text-decoration:none;">🐅 जीव-जंतु व अंतरिक्ष</a>
-          <a href="timeline.html" class="btn-secondary-glass" style="text-decoration:none;">🕰️ 1860–2026 इतिहास</a>
-          <a href="quiz.html" class="btn-primary-play" style="text-decoration:none;">🎮 आवाज़ क्विज़ खेलें</a>
+          <a href="legends.html" class="btn-secondary-glass" style="text-decoration:none;" data-page-i18n="common.quickLegends">🇮🇳 महापुरुष व वैज्ञानिक</a>
+          <a href="wildlife.html" class="btn-secondary-glass" style="text-decoration:none;" data-page-i18n="common.quickWildlife">🐅 जीव-जंतु व अंतरिक्ष</a>
+          <a href="timeline.html" class="btn-secondary-glass" style="text-decoration:none;" data-page-i18n="common.quickTimeline">🕰️ 1860–2026 इतिहास</a>
+          <a href="quiz.html" class="btn-primary-play" style="text-decoration:none;" data-page-i18n="common.quickQuiz">🎮 आवाज़ क्विज़ खेलें</a>
         </div>
 
         <!-- Live Platform Counters -->
@@ -247,7 +70,7 @@
       <div id="heroSpotlightCard" class="spotlight-card">
         <div class="spotlight-tag" data-i18n="spotlightTag">⭐ आज की विशेष ऐतिहासिक आवाज़</div>
         <div class="spotlight-body">
-          <img id="spotlightImg" src="images/legends/gandhi.jpg" alt="Featured Voice" class="spotlight-avatar" onerror="this.src='https://placehold.co/200x200/1e293b/f59e0b?text=Nischay+Swar'" />
+          <img id="spotlightImg" src="assets/voice-fallback.svg" alt="Featured Voice" class="spotlight-avatar" onerror="window.NSImageFallback(this)" />
           <div class="spotlight-info">
             <span id="spotlightYear" class="spotlight-year">1931 • अमर वाणी</span>
             <h3 id="spotlightName">महात्मा गांधी (Mahatma Gandhi)</h3>
@@ -394,14 +217,14 @@
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-heading">समर्पित पेज (Pages)</h4>
+          <h4 class="footer-heading" data-page-i18n="common.footerPages">समर्पित पेज (Pages)</h4>
           <ul class="footer-links">
-            <li><a href="index.html">🏠 मुख्य होम पेज</a></li>
-            <li><a href="legends.html">🇮🇳 महापुरुष, वैज्ञानिक व कवि</a></li>
-            <li><a href="wildlife.html">🐅 जीव-जंतु, पक्षी व अंतरिक्ष</a></li>
-            <li><a href="timeline.html">🕰️ इतिहास टाइमलाइन (1860–2026)</a></li>
-            <li><a href="quiz.html">🎮 आवाज़ पहचानो क्विज़ गेम</a></li>
-            <li><a href="about.html">🛡️ मिशन व सत्यापन नीति</a></li>
+            <li><a href="index.html" data-page-i18n="common.footerHome">🏠 मुख्य होम पेज</a></li>
+            <li><a href="legends.html" data-page-i18n="common.footerLegends">🇮🇳 महापुरुष, वैज्ञानिक व कवि</a></li>
+            <li><a href="wildlife.html" data-page-i18n="common.footerWildlife">🐅 जीव-जंतु, पक्षी व अंतरिक्ष</a></li>
+            <li><a href="timeline.html" data-page-i18n="common.footerTimeline">🕰️ इतिहास टाइमलाइन (1860–2026)</a></li>
+            <li><a href="quiz.html" data-page-i18n="common.footerQuiz">🎮 आवाज़ पहचानो क्विज़ गेम</a></li>
+            <li><a href="about.html" data-page-i18n="common.footerAbout">🛡️ मिशन व सत्यापन नीति</a></li>
           </ul>
         </div>
 
@@ -580,7 +403,7 @@
 
     <div class="player-inner">
       <div class="player-track-info" id="playerOpenDetailTrigger" title="कहानी व कमेंट्स खोलें">
-        <img id="playerAvatar" src="images/legends/gandhi.jpg" alt="Speaker" class="player-thumb" />
+        <img id="playerAvatar" src="assets/voice-fallback.svg" alt="Speaker" class="player-thumb" />
         <div class="player-meta">
           <div class="player-title-row">
             <span id="playerTrackTitle" class="player-title">महात्मा गांधी</span>
@@ -612,6 +435,8 @@
   <!-- ==================== 9. MODULAR DATA & JS ENGINE SCRIPTS ==================== -->
   <script src="js/lang-hi-en.js"></script>
   <script src="js/lang-regional.js"></script>
+  <script src="js/page-i18n.js"></script>
+  <script src="js/site-shell.js"></script>
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
   <script src="js/db-extended-archive.js"></script>

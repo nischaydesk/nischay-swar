@@ -13,49 +13,15 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/player.css" />
 </head>
-<body>
+<body data-page="timeline">
 
-  <header class="top-header">
-    <div class="header-left">
-      <a href="index.html" class="header-brand">
-        <div class="logo-pulse"><span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span></div>
-        <div class="brand-text-wrap">
-          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
-          <span class="sub-name">1860 से 2026 तक का ऐतिहासिक सफ़र</span>
-        </div>
-      </a>
-    </div>
-
-    <nav class="desktop-quick-nav" style="display:flex; overflow-x:auto;">
-      <a href="index.html" class="q-nav-btn" style="text-decoration:none;">🏠 होम</a>
-      <a href="legends.html" class="q-nav-btn" style="text-decoration:none;">🇮🇳 महापुरुष</a>
-      <a href="wildlife.html" class="q-nav-btn" style="text-decoration:none;">🐅 जीव-जंतु</a>
-      <a href="timeline.html" class="q-nav-btn active" style="text-decoration:none;">🕰️ टाइमलाइन</a>
-      <a href="quiz.html" class="q-nav-btn" style="text-decoration:none;">🎮 क्विज़</a>
-    </nav>
-
-    <div class="header-right">
-      <div class="lang-dropdown-wrap">
-        <button id="langToggleBtn" class="lang-btn">
-          <span>🌐</span> <span id="currentLangLabel">हिन्दी</span> <span>▾</span>
-        </button>
-        <div id="langMenu" class="lang-menu">
-          <button class="lang-option active" data-lang="hi"><span>🇮🇳 हिन्दी</span><span class="check-mark">✓</span></button>
-          <button class="lang-option" data-lang="en"><span>🇬🇧 English</span><span class="check-mark">✓</span></button>
-          <button class="lang-option" data-lang="bho"><span>🌾 भोजपुरी</span><span class="check-mark">✓</span></button>
-          <button class="lang-option" data-lang="bn"><span>🏵️ বাংলা</span><span class="check-mark">✓</span></button>
-          <button class="lang-option" data-lang="ur"><span>📜 اردو</span><span class="check-mark">✓</span></button>
-        </div>
-      </div>
-    </div>
-  </header>
 
   <main class="main-container">
     <section class="hero-section" style="grid-template-columns: 1fr;">
       <div class="hero-content">
         <div class="hero-badges">
-          <span class="badge-verified">🕰️ HISTORICAL EVOLUTION OF SOUND</span>
-          <span class="badge-era">166 YEARS OF RECORDED HISTORY</span>
+          <span class="badge-verified" data-page-i18n="timeline.badge1">🕰️ HISTORICAL EVOLUTION OF SOUND</span>
+          <span class="badge-era" data-page-i18n="timeline.badge2">166 YEARS OF RECORDED HISTORY</span>
         </div>
         <h1 class="hero-title" data-i18n="timelineTitle">🕰️ मानव इतिहास में आवाज़ रिकॉर्डिंग का सफ़र</h1>
         <p class="hero-desc" data-i18n="timelineSub">
@@ -71,7 +37,7 @@
 
     <!-- Chronological Audio Archive (Oldest to Newest) -->
     <div class="grid-header-bar">
-      <h2 class="section-heading">📻 कालानुक्रमिक ऑडियो अभिलेखागार (1860 से आज तक)</h2>
+      <h2 class="section-heading" data-page-i18n="timeline.archive">📻 कालानुक्रमिक ऑडियो अभिलेखागार (1860 से आज तक)</h2>
       <span id="visibleResultBadge" class="result-badge">0 Voices</span>
     </div>
     <section id="voicesGrid" class="voices-grid"></section>
@@ -88,16 +54,16 @@
               <span class="brand-sub">निश्चय स्वर डिजिटल आर्काइव</span>
             </div>
           </div>
-          <p class="footer-about-text">इतिहास से प्रकृति तक 100% असली आवाज़ों का डिजिटल खज़ाना।</p>
+          <p class="footer-about-text" data-page-i18n="timeline.about">इतिहास से प्रकृति तक 100% असली आवाज़ों का डिजिटल खज़ाना।</p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">सभी समर्पित पेज</h4>
+          <h4 class="footer-heading" data-page-i18n="common.footerPages">सभी समर्पित पेज</h4>
           <ul class="footer-links">
-            <li><a href="index.html">🏠 मुख्य होम पेज</a></li>
-            <li><a href="legends.html">🇮🇳 महापुरुष व वैज्ञानिक</a></li>
-            <li><a href="wildlife.html">🐅 जीव-जंतु व प्रकृति</a></li>
-            <li><a href="timeline.html">🕰️ इतिहास टाइमलाइन</a></li>
-            <li><a href="quiz.html">🎮 आवाज़ पहचानो क्विज़</a></li>
+            <li><a href="index.html" data-page-i18n="common.footerHome">🏠 मुख्य होम पेज</a></li>
+            <li><a href="legends.html" data-page-i18n="common.footerLegends">🇮🇳 महापुरुष व वैज्ञानिक</a></li>
+            <li><a href="wildlife.html" data-page-i18n="common.footerWildlife">🐅 जीव-जंतु व प्रकृति</a></li>
+            <li><a href="timeline.html" data-page-i18n="common.footerTimeline">🕰️ इतिहास टाइमलाइन</a></li>
+            <li><a href="quiz.html" data-page-i18n="common.footerQuiz">🎮 आवाज़ पहचानो क्विज़</a></li>
           </ul>
         </div>
       </div>
@@ -179,6 +145,8 @@
 
   <script src="js/lang-hi-en.js"></script>
   <script src="js/lang-regional.js"></script>
+  <script src="js/page-i18n.js"></script>
+  <script src="js/site-shell.js"></script>
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
   <script src="js/db-extended-archive.js"></script>

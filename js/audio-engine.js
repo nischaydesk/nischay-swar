@@ -31,7 +31,7 @@ window.NSAudio = (function () {
     if (avatar) {
       avatar.src = voice.photo;
       avatar.onerror = () => {
-        avatar.src = voice.fallbackPhoto || "https://placehold.co/100x100/1e293b/f59e0b?text=NS";
+        if (window.NSImageFallback) window.NSImageFallback(avatar);
       };
     }
     if (title) title.textContent = getLocalizedField(voice.name);

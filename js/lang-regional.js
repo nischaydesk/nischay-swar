@@ -30,6 +30,14 @@ window.NISCHAY_LANGUAGES.bho = {
   qWildlife: "जीव-जंतु आ पक्षी",
   qTimeline: "इतिहास 1860+",
 
+  navPageHome: "होम (सभ आवाज़ संग्रह)",
+  navPageLegends: "महापुरुष, वैज्ञानिक आ कवि",
+  navPageWildlife: "जीव-जंतु, पक्षी आ अंतरिक्ष",
+  navPageQuiz: "आवाज़ पहचानो क्विज़ गेम",
+  navPageAbout: "मिशन आ 100% Real जाँच",
+  qQuiz: "आवाज़ क्विज़",
+  qAbout: "मिशन",
+
   // Categories
   catAll: "सभ आवाज़",
   catLegends: "महापुरुष",
@@ -126,6 +134,14 @@ window.NISCHAY_LANGUAGES.bn = {
   qWildlife: "বন্যপ্রাণী ও পাখি",
   qTimeline: "ইতিহাস ১৮৬০+",
 
+  navPageHome: "হোম (সম্পূর্ণ ধ্বনি সংগ্রহ)",
+  navPageLegends: "মহাপুরুষ, বিজ্ঞানী ও কবি",
+  navPageWildlife: "বন্যপ্রাণী, পাখি ও মহাকাশ",
+  navPageQuiz: "কণ্ঠস্বর কুইজ",
+  navPageAbout: "মিশন ও ১০০% যাচাইকরণ",
+  qQuiz: "কণ্ঠস্বর কুইজ",
+  qAbout: "মিশন",
+
   // Categories
   catAll: "সব কণ্ঠস্বর",
   catLegends: "মহাপুরুষ",
@@ -221,6 +237,14 @@ window.NISCHAY_LANGUAGES.ur = {
   qLegends: "عظیم شخصیات",
   qWildlife: "جنگلی حیات و پرندے",
   qTimeline: "تاریخ 1860+",
+
+  navPageHome: "ہوم (مکمل صوتی ذخیرہ)",
+  navPageLegends: "شخصیات، سائنسدان اور شعراء",
+  navPageWildlife: "جنگلی حیات، پرندے اور خلا",
+  navPageQuiz: "آواز پہچانو کوئز",
+  navPageAbout: "مشن اور ۱۰۰٪ تصدیق",
+  qQuiz: "صوتی کوئز",
+  qAbout: "مشن",
 
   // Categories
   catAll: "تمام آوازیں",

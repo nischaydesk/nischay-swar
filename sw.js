@@ -2,7 +2,7 @@
    NISCHAY SWAR (निश्चय स्वर) — OFFLINE SERVICE WORKER (sw.js)
    ========================================================================== */
 
-const CACHE_NAME = "nischay-swar-v1";
+const CACHE_NAME = "nischay-swar-v2";
 const ASSETS_TO_CACHE = [
   "./",
   "index.html",
@@ -19,6 +19,9 @@ const ASSETS_TO_CACHE = [
   "css/player.css",
   "js/lang-hi-en.js",
   "js/lang-regional.js",
+  "js/page-i18n.js",
+  "js/site-shell.js",
+  "assets/voice-fallback.svg",
   "js/db-humans.js",
   "js/db-wildlife-nature.js",
   "js/db-extended-archive.js",

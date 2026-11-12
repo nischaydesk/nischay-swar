@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/player.css" />
   <style>
     .quiz-box { max-width: 680px; margin: 20px auto; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-card); text-align: center; }
     .quiz-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; font-size: 0.9rem; font-weight: 700; color: var(--gold-bright); }
@@ -24,25 +25,8 @@
     @media (max-width: 560px) { .quiz-options { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body>
+<body data-page="quiz">
 
-  <header class="top-header">
-    <div class="header-left">
-      <a href="index.html" class="header-brand">
-        <div class="logo-pulse"><span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span></div>
-        <div class="brand-text-wrap">
-          <span class="main-name">NISCHAY <span class="accent-gold">SWAR</span></span>
-          <span class="sub-name">असली आवाज़ पहचानो चैलेंज</span>
-        </div>
-      </a>
-    </div>
-    <nav class="desktop-quick-nav" style="display:flex; overflow-x:auto;">
-      <a href="index.html" class="q-nav-btn" style="text-decoration:none;">🏠 होम</a>
-      <a href="legends.html" class="q-nav-btn" style="text-decoration:none;">🇮🇳 महापुरुष</a>
-      <a href="wildlife.html" class="q-nav-btn" style="text-decoration:none;">🐅 जीव-जंतु</a>
-      <a href="quiz.html" class="q-nav-btn active" style="text-decoration:none;">🎮 आवाज़ क्विज़</a>
-    </nav>
-  </header>
 
   <main class="main-container">
     <div class="quiz-box" id="quizContainer">
@@ -51,17 +35,17 @@
         <span id="qScore">स्कोर: 0 🏆</span>
       </div>
 
-      <span class="badge-verified">🎧 LISTEN & GUESS THE REAL VOICE</span>
-      <h2 style="margin-top:12px; font-size:1.3rem;">इस असली आवाज़ को सुनें और सही नाम चुनें!</h2>
-      <p id="qHint" style="color:var(--text-secondary); font-size:0.86rem; margin-top:4px;">संकेत: प्ले बटन दबाकर ध्यान से सुनें</p>
+      <span class="badge-verified" data-page-i18n="quiz.badge">🎧 LISTEN & GUESS THE REAL VOICE</span>
+      <h2 style="margin-top:12px; font-size:1.3rem;" data-page-i18n="quiz.title">इस असली आवाज़ को सुनें और सही नाम चुनें!</h2>
+      <p id="qHint" style="color:var(--text-secondary); font-size:0.86rem; margin-top:4px;" data-page-i18n="quiz.hint">संकेत: प्ले बटन दबाकर ध्यान से सुनें</p>
 
       <audio id="quizAudioEl" preload="metadata"></audio>
       <button id="quizPlayBtn" class="quiz-play-big" title="Play Voice">▶</button>
-      <div id="qStatusText" style="font-size:0.8rem; color:var(--gold-bright);">आवाज़ सुनने के लिए ऊपर बटन दबाएं</div>
+      <div id="qStatusText" style="font-size:0.8rem; color:var(--gold-bright);" data-page-i18n="quiz.status">आवाज़ सुनने के लिए ऊपर बटन दबाएं</div>
 
       <div id="quizOptionsGrid" class="quiz-options"></div>
 
-      <button id="nextQuestionBtn" class="btn-primary-play hidden" style="margin-top:20px; width:100%;">अगला प्रश्न ➤</button>
+      <button id="nextQuestionBtn" class="btn-primary-play hidden" style="margin-top:20px; width:100%;" data-page-i18n="quiz.next">अगला प्रश्न ➤</button>
     </div>
   </main>
 
@@ -69,13 +53,25 @@
     <div class="footer-container">
       <div class="footer-bottom-bar">
         <p>© 2026 <strong>Nischay Swar (निश्चय स्वर)</strong> — Prince Kumar (Jamui, Bihar)</p>
-        <p><a href="index.html" style="color:var(--gold-bright); text-decoration:none;">← मुख्य संग्रहालय पर वापस जाएं</a></p>
+        <p><a href="index.html" style="color:var(--gold-bright); text-decoration:none;" data-page-i18n="quiz.back">← मुख्य संग्रहालय पर वापस जाएं</a></p>
       </div>
     </div>
   </footer>
 
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
+  <script src="js/lang-hi-en.js"></script>
+  <script src="js/lang-regional.js"></script>
+  <script src="js/page-i18n.js"></script>
+  <script src="js/site-shell.js"></script>
+  <script src="js/db-humans.js"></script>
+  <script src="js/db-wildlife-nature.js"></script>
+  <script src="js/db-extended-archive.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/engagement.js"></script>
+  <script src="js/ui-renderer.js"></script>
+  <script src="js/app.js"></script>
   <script>
     (function() {
       const allVoices = (window.NISCHAY_VOICES_DATA || []).slice();
@@ -94,20 +90,20 @@
         answered = false;
         nextBtn.classList.add("hidden");
         const target = shuffled[currentIdx];
-        document.getElementById("qProgress").textContent = `प्रश्न ${currentIdx + 1} / ${shuffled.length}`;
-        document.getElementById("qScore").textContent = `स्कोर: ${score} 🏆`;
-        document.getElementById("qHint").textContent = `संकेत: वर्ष ${target.year} • ${target.role.hi}`;
+        document.getElementById("qProgress").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.progress", { n: currentIdx + 1, total: shuffled.length });
+        document.getElementById("qScore").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.score", { score });
+        document.getElementById("qHint").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.hintYear", { year: target.year, role: window.NSConfig.getLocalizedField(target.role) });
 
         audioEl.src = target.audioUrl;
         playBtn.textContent = "▶";
-        statusText.textContent = "आवाज़ सुनने के लिए बटन दबाएं";
+        statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.status");
 
         // Pick 3 wrong options + 1 correct option
         const others = allVoices.filter(v => v.id !== target.id).sort(() => Math.random() - 0.5).slice(0, 3);
         const choices = [target, ...others].sort(() => Math.random() - 0.5);
 
         optionsGrid.innerHTML = choices.map(c => `
-          <button class="quiz-opt-btn" data-id="${c.id}">${c.name.hi}</button>
+          <button class="quiz-opt-btn" data-id="${c.id}">${window.NSConfig.getLocalizedField(c.name)}</button>
         `).join("");
 
         optionsGrid.querySelectorAll(".quiz-opt-btn").forEach(btn => {
@@ -130,14 +126,14 @@
         if (chosenId === correctId) {
           score += 20;
           selectedBtn.classList.add("correct");
-          statusText.textContent = "🎉 बिल्कुल सही जवाब! +20 अंक";
+          statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.correct");
         } else {
           selectedBtn.classList.add("wrong");
-          statusText.textContent = "❌ गलत जवाब! हरा वाला विकल्प सही उत्तर है।";
+          statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.wrong");
         }
 
-        document.getElementById("qScore").textContent = `स्कोर: ${score} 🏆`;
-        nextBtn.textContent = currentIdx < shuffled.length - 1 ? "अगला प्रश्न ➤" : "परिणाम देखें 🏆";
+        document.getElementById("qScore").textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.score", { score });
+        nextBtn.textContent = currentIdx < shuffled.length - 1 ? window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.next") : window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.result");
         nextBtn.classList.remove("hidden");
       }
 
@@ -145,7 +141,7 @@
         if (audioEl.paused) {
           audioEl.play();
           playBtn.textContent = "⏸";
-          statusText.textContent = "🎧 असली आवाज़ चल रही है... ध्यान से पहचानें!";
+          statusText.textContent = window.NSPageI18n.get(window.NSConfig.state.lang, "quiz.playing");
         } else {
           audioEl.pause();
           playBtn.textContent = "▶";
@@ -171,7 +167,9 @@
       });
 
       loadQuestion();
+      window.addEventListener("ns-language-changed", () => loadQuestion());
     })();
   </script>
+
 </body>
 </html>

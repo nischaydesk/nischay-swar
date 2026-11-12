@@ -6,6 +6,17 @@
 window.NSRenderer = (function () {
   "use strict";
 
+  const DEFAULT_IMAGE = "assets/voice-fallback.svg";
+  window.NS_DEFAULT_IMAGE = DEFAULT_IMAGE;
+
+  function applyImageFallback(image) {
+    if (!image || image.dataset.fallbackApplied === "true") return;
+    image.dataset.fallbackApplied = "true";
+    image.src = DEFAULT_IMAGE;
+  }
+
+  window.NSImageFallback = applyImageFallback;
+
   function getVoices() {
     return window.NISCHAY_VOICES_DATA || [];
   }
@@ -47,9 +58,7 @@ window.NSRenderer = (function () {
 
     if (img) {
       img.src = featured.photo;
-      img.onerror = () => {
-        img.src = featured.fallbackPhoto || "https://placehold.co/200x200/1e293b/f59e0b?text=Nischay+Swar";
-      };
+      img.onerror = () => applyImageFallback(img);
     }
     if (yr) yr.textContent = `${featured.year} • ${getCategoryLabel(featured.category)}`;
     if (name) name.textContent = getLocalizedField(featured.name);
@@ -158,7 +167,7 @@ window.NSRenderer = (function () {
                 alt="${getLocalizedField(voice.name)}"
                 class="card-photo"
                 loading="lazy"
-                onerror="this.src='${voice.fallbackPhoto || "https://placehold.co/400x300/1e293b/f59e0b?text=Nischay+Swar"}'"
+                onerror="window.NSImageFallback(this)"
               />
               <div class="card-media-gradient"></div>
               <div class="card-top-badges">
@@ -243,9 +252,7 @@ window.NSRenderer = (function () {
     state.activeModalVoiceId = voiceId;
     const imgEl = document.getElementById("modalSpeakerImg");
     imgEl.src = voice.photo;
-    imgEl.onerror = () => {
-      imgEl.src = voice.fallbackPhoto || "https://placehold.co/300x300/1e293b/f59e0b?text=Nischay+Swar";
-    };
+    imgEl.onerror = () => applyImageFallback(imgEl);
 
     document.getElementById("modalCategoryChip").textContent = getCategoryLabel(voice.category);
     document.getElementById("modalYearChip").textContent = `📅 ${voice.year}`;
@@ -348,7 +355,8 @@ window.NSRenderer = (function () {
       if (langObj[key]) el.setAttribute("placeholder", langObj[key]);
     });
 
-    translateSubPages(langCode);
+    if (window.NSPageI18n) window.NSPageI18n.apply(langCode);
+    window.dispatchEvent(new CustomEvent("ns-language-changed", { detail: { lang: langCode } }));
     updateSpotlightBanner();
     renderVoicesGrid();
     renderTimeline();

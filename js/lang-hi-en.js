@@ -30,6 +30,14 @@ window.NISCHAY_LANGUAGES.hi = {
   qWildlife: "जीव-जंतु व पक्षी",
   qTimeline: "इतिहास 1860+",
 
+  navPageHome: "होम (संपूर्ण ध्वनि संग्रह)",
+  navPageLegends: "महापुरुष, वैज्ञानिक व कवि",
+  navPageWildlife: "जीव-जंतु, पक्षी व अंतरिक्ष",
+  navPageQuiz: "आवाज़ पहचानो क्विज़ गेम",
+  navPageAbout: "मिशन व 100% Real सत्यापन",
+  qQuiz: "आवाज़ क्विज़",
+  qAbout: "मिशन",
+
   // Categories (Human + Wildlife + Birds + Nature)
   catAll: "सभी आवाज़ें",
   catLegends: "महापुरुष",

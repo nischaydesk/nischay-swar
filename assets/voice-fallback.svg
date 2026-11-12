@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Nischay Swar audio archive</title>
+  <desc id="desc">Abstract gold sound waves on a deep navy background</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="1" stop-color="#182b45"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="0.5" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="520" fill="url(#bg)"/>
+  <circle cx="660" cy="90" r="180" fill="#f59e0b" opacity=".12"/>
+  <circle cx="130" cy="420" r="180" fill="#10b981" opacity=".10"/>
+  <g fill="none" stroke="url(#wave)" stroke-linecap="round" filter="url(#glow)">
+    <path d="M75 270h52l24-94 30 190 34-244 35 292 35-184 32 68 35-31 32 3 31-4 35 31 32-68 35 184 35-292 34 244 30-190 24 94h52" stroke-width="13"/>
+    <path d="M90 336c70-40 130-40 198 0s130 40 198 0 128-40 224 0" stroke-width="3" opacity=".8"/>
+  </g>
+  <text x="400" y="445" fill="#f8fafc" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" letter-spacing="3">NISCHAY SWAR</text>
+  <text x="400" y="478" fill="#94a3b8" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">100% REAL AUDIO ARCHIVE</text>
+</svg>
