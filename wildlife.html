@@ -15,8 +15,53 @@
 </head>
 <body>
 
+  <!-- ==================== 3-LINE SIDE DRAWER MENU ==================== -->
+  <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+  <aside id="sideDrawer" class="side-drawer" aria-label="Main Navigation Drawer">
+    <div class="drawer-header">
+      <div class="brand-lockup">
+        <div class="brand-badge">NS</div>
+        <div>
+          <h2 class="brand-title">NISCHAY SWAR</h2>
+          <span class="brand-sub">निश्चय स्वर • 100% असली आवाज़</span>
+        </div>
+      </div>
+      <button id="closeDrawerBtn" class="icon-btn" aria-label="Close Menu">✕</button>
+    </div>
+
+    <div class="drawer-scroll">
+      <nav class="drawer-nav">
+        <p class="drawer-section-label">समर्पित पेज (Dedicated Pages)</p>
+        <a href="index.html" class="drawer-link"><span class="nav-ico">🏠</span><span>होम (संपूर्ण ध्वनि संग्रह)</span></a>
+        <a href="legends.html" class="drawer-link"><span class="nav-ico">🇮🇳</span><span>महापुरुष, वैज्ञानिक व कवि</span></a>
+        <a href="wildlife.html" class="drawer-link active"><span class="nav-ico">🐅</span><span>जीव-जंतु, पक्षी व अंतरिक्ष</span></a>
+        <a href="timeline.html" class="drawer-link"><span class="nav-ico">🕰️</span><span>इतिहास की टाइमलाइन (1860–2026)</span></a>
+        <a href="quiz.html" class="drawer-link highlight-link"><span class="nav-ico">🎮</span><span>आवाज़ पहचानो क्विज़ गेम</span></a>
+        <a href="about.html" class="drawer-link"><span class="nav-ico">🛡️</span><span>मिशन व 100% Real सत्यापन</span></a>
+
+        <p class="drawer-section-label">वन्यजीव व प्रकृति श्रेणियाँ</p>
+        <button class="drawer-link" data-nature-jump="all"><span class="nav-ico">🌍</span><span>संपूर्ण प्रकृति व जीव</span></button>
+        <button class="drawer-link" data-nature-jump="wildlife"><span class="nav-ico">🦁</span><span>जंगली जानवर (Wildlife)</span></button>
+        <button class="drawer-link" data-nature-jump="birds"><span class="nav-ico">🦚</span><span>पक्षियों की चहचहाहट (Birds)</span></button>
+        <button class="drawer-link" data-nature-jump="nature"><span class="nav-ico">🌌</span><span>प्रकृति व अंतरिक्ष (Space)</span></button>
+        <button class="drawer-link" data-nature-jump="instruments"><span class="nav-ico">🎶</span><span>शास्त्रीय वाद्ययंत्र</span></button>
+      </nav>
+
+      <div class="drawer-footer-card">
+        <div class="zero-ai-pill">✅ ZERO AI • 100% AUTHENTIC</div>
+        <p>पृथ्वी से अंतरिक्ष तक की सभी ध्वनियाँ प्रमाणित फील्ड रिकॉर्डिंग्स से ली गई हैं।</p>
+        <div class="drawer-credit">A Nischay Ecosystem Project • Prince Kumar</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== CLEAN STICKY TOP HEADER ==================== -->
   <header class="top-header">
     <div class="header-left">
+      <button id="openDrawerBtn" class="hamburger-btn" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </button>
+
       <a href="index.html" class="header-brand">
         <div class="logo-pulse">
           <span class="bar b1"></span>
@@ -30,14 +75,17 @@
       </a>
     </div>
 
-    <nav class="desktop-quick-nav" style="display:flex; overflow-x:auto;">
-      <a href="index.html" class="q-nav-btn" style="text-decoration:none;">🏠 होम</a>
-      <a href="legends.html" class="q-nav-btn" style="text-decoration:none;">🇮🇳 महापुरुष व वैज्ञानिक</a>
-      <a href="wildlife.html" class="q-nav-btn active" style="text-decoration:none;">🐅 जीव-जंतु व प्रकृति</a>
-      <a href="quiz.html" class="q-nav-btn" style="text-decoration:none;">🎮 आवाज़ क्विज़</a>
+    <nav class="desktop-quick-nav">
+      <a href="index.html" class="q-nav-btn">🏠 होम</a>
+      <a href="legends.html" class="q-nav-btn">🇮🇳 महापुरुष</a>
+      <a href="wildlife.html" class="q-nav-btn active">🐅 जीव-जंतु</a>
+      <a href="timeline.html" class="q-nav-btn">🕰️ टाइमलाइन</a>
+      <a href="quiz.html" class="q-nav-btn">🎮 क्विज़</a>
+      <a href="about.html" class="q-nav-btn">🛡️ मिशन</a>
     </nav>
 
     <div class="header-right">
+      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme" title="डार्क / लाइट मोड">☀️</button>
       <div class="lang-dropdown-wrap">
         <button id="langToggleBtn" class="lang-btn">
           <span>🌐</span> <span id="currentLangLabel">हिन्दी</span> <span>▾</span>
@@ -115,7 +163,9 @@
             <li><a href="index.html">🏠 मुख्य होम पेज</a></li>
             <li><a href="legends.html">🇮🇳 महापुरुष व वैज्ञानिक</a></li>
             <li><a href="wildlife.html">🐅 जीव-जंतु व प्रकृति</a></li>
+            <li><a href="timeline.html">🕰️ इतिहास टाइमलाइन</a></li>
             <li><a href="quiz.html">🎮 आवाज़ पहचानो क्विज़</a></li>
+            <li><a href="about.html">🛡️ मिशन व सत्यापन नीति</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -131,7 +181,7 @@
     </div>
   </footer>
 
-  <!-- DETAIL MODAL & STICKY PLAYER -->
+  <!-- DETAIL MODAL -->
   <div id="voiceDetailModal" class="modal-backdrop hidden">
     <div class="modal-card detail-modal-card">
       <button id="closeDetailModalBtn" class="modal-close-btn">✕</button>
@@ -176,6 +226,7 @@
     </div>
   </div>
 
+  <!-- STICKY AUDIO PLAYER WITH CLOSE (✕) BUTTON -->
   <div id="stickyAudioPlayer" class="sticky-player hidden">
     <audio id="htmlAudioElement" preload="metadata"></audio>
     <div class="player-progress-wrap" id="progressBarContainer"><div id="playerProgressFill" class="player-progress-fill"></div></div>
@@ -196,6 +247,7 @@
         <span class="time-display"><span id="currentTimeText">0:00</span> / <span id="durationTimeText">0:00</span></span>
         <button id="playerSpeedBtn" class="speed-pill">1x</button>
         <button id="playerQuickLikeBtn" class="player-like-btn">🤍</button>
+        <button id="closePlayerBtn" class="ctrl-btn" title="प्लेयर बंद करें (Stop & Close)" style="font-size:1.1rem; color:#f43f5e;">✕</button>
       </div>
     </div>
   </div>
@@ -205,6 +257,7 @@
   <script src="js/lang-regional.js"></script>
   <script src="js/db-humans.js"></script>
   <script src="js/db-wildlife-nature.js"></script>
+  <script src="js/db-extended-archive.js"></script>
   <script src="js/config.js"></script>
   <script src="js/audio-engine.js"></script>
   <script src="js/engagement.js"></script>
@@ -216,12 +269,21 @@
       window.NISCHAY_VOICES_DATA = (window.NISCHAY_VOICES_DATA || []).filter(v => natureCats.includes(v.category));
       window.NSRenderer.renderVoicesGrid();
 
+      function filterNature(cat) {
+        document.querySelectorAll("[data-nature-cat]").forEach(b => b.classList.toggle("active", b.dataset.natureCat === cat));
+        window.NSConfig.state.category = cat;
+        window.NSRenderer.renderVoicesGrid();
+      }
+
       document.querySelectorAll("[data-nature-cat]").forEach(btn => {
+        btn.addEventListener("click", () => filterNature(btn.dataset.natureCat));
+      });
+
+      document.querySelectorAll("[data-nature-jump]").forEach(btn => {
         btn.addEventListener("click", () => {
-          document.querySelectorAll("[data-nature-cat]").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          window.NSConfig.state.category = btn.dataset.natureCat;
-          window.NSRenderer.renderVoicesGrid();
+          filterNature(btn.dataset.natureJump);
+          document.getElementById("sideDrawer")?.classList.remove("open");
+          document.getElementById("drawerOverlay")?.classList.remove("open");
         });
       });
     });
