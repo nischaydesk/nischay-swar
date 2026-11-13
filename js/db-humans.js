@@ -12,11 +12,11 @@ window.NISCHAY_VOICES_DATA.push(
     featured: true,
     category: "legends",
     year: 1931,
-    duration: "01:12",
+    duration: "06:05",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg/500px-Mahatma-Gandhi%2C_studio%2C_1931.jpg",
     fallbackPhoto: "images/legends/gandhi.jpg",
-    audioUrl: "https://upload.wikimedia.org/wikipedia/commons/4/45/Mahatma_Gandhi_-_His_Spiritual_Message_to_the_World_%281931%29.ogg",
-    source: "Columbia Records / Wikimedia Commons (Public Domain, Oct 1931)",
+    audioUrl: "https://upload.wikimedia.org/wikipedia/commons/9/97/Gandhi_-_His_Spiritual_Message_to_the_World%2C_17_October_1931.mp3",
+    source: "Wikimedia Commons / Internet Archive (Public Domain Mark 1.0)",
     basePlays: 4820,
     baseLikes: 1290,
     name: {
@@ -166,8 +166,8 @@ window.NISCHAY_VOICES_DATA.push(
     duration: "00:22",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Edouard-Leon_Scott_de_Martinville.jpg/500px-Edouard-Leon_Scott_de_Martinville.jpg",
     fallbackPhoto: "images/legends/1860-first.jpg",
-    audioUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c8/1860-Scott-Au-Clair-de-la-Lune-05-09.ogg",
-    source: "FirstSounds.org / Phonautograph Archive (9 April 1860)",
+    audioUrl: "https://www.firstsounds.org/sounds/Scott-Feaster-No-36.mp3",
+    source: "First Sounds (CC BY 4.0; credit First Sounds: https://www.firstsounds.org/)",
     basePlays: 3890,
     baseLikes: 1120,
     name: {
@@ -236,12 +236,12 @@ window.NISCHAY_VOICES_DATA.push(
     id: "edison-1878",
     featured: false,
     category: "rare",
-    year: 1878,
-    duration: "00:34",
+    year: 1927,
+    duration: "00:18",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Thomas_Edison2.jpg/500px-Thomas_Edison2.jpg",
     fallbackPhoto: "images/scientists/edison.jpg",
-    audioUrl: "https://upload.wikimedia.org/wikipedia/commons/6/64/Thomas_Edison_-_Mary_Had_a_Little_Lamb_%281927_re-enactment%29.ogg",
-    source: "Edison National Historic Site / Public Domain",
+    audioUrl: "https://www.gutenberg.org/files/10137/mp3/10137-001.mp3",
+    source: "Project Gutenberg eBook 10137 (Public Domain in the USA)",
     basePlays: 2670,
     baseLikes: 740,
     name: {
@@ -252,18 +252,18 @@ window.NISCHAY_VOICES_DATA.push(
       ur: "تھامس الوا ایڈیسن"
     },
     role: {
-      hi: "फोनोग्राफ के आविष्कारक • दुर्लभ रिकॉर्डिंग",
-      en: "Inventor of the Phonograph • Historic Recording",
-      bho: "आवाज़ रिकॉर्डिंग मशीन के आविष्कारक",
-      bn: "ফোনোগ্রাফের আবিষ্কারক • বিরল রেকর্ডিং",
-      ur: "فونوگراف کے موجد • تاریخی ریکارڈنگ"
+      hi: "फोनोग्राफ के आविष्कारक • 1927 की पुनः प्रस्तुति",
+      en: "Phonograph inventor • 1927 reenactment",
+      bho: "फोनोग्राफ के आविष्कारक • 1927 के पुनः प्रस्तुति",
+      bn: "ফোনোগ্রাফের উদ্ভাবক • ১৯২৭ সালের পুনঃপ্রদর্শন",
+      ur: "فونوگراف کے موجد • 1927 کی دوبارہ پیشکش"
     },
     bio: {
-      hi: "आवाज़ को रिकॉर्ड करके वापस सुनने की मशीन (Phonograph) बनाने वाले महान वैज्ञानिक थॉमस एडिसन द्वारा 'Mary Had a Little Lamb' का ऐतिहासिक पाठ।",
-      en: "Thomas Alva Edison reciting 'Mary Had a Little Lamb' — recreating the iconic words he spoke into the world's first working phonograph.",
-      bho: "पहिला बेर आवाज़ रिकॉर्ड करके सुनावे वाला मशीन बनावे वाला एडिसन के असली आवाज़।",
-      bn: "শব্দ রেকর্ডিং যন্ত্র ফোনোগ্রাফের আবিষ্কারক টমাস এডিসনের ঐতিহাসিক কণ্ঠস্বর।",
-      ur: "آواز ریکارڈ کرنے والی مشین کے موجد تھامس ایڈیسن کی تاریخی آواز۔"
+      hi: "12 अगस्त 1927 को एडिसन ने 'Mary Had a Little Lamb' के अपने 1877 फोनोग्राफ पाठ का पुनः प्रदर्शन किया; मूल 1877 रिकॉर्डिंग बची नहीं।",
+      en: "On 12 August 1927, Edison reenacted his 1877 phonograph recitation of 'Mary Had a Little Lamb'; the original 1877 recording did not survive.",
+      bho: "12 अगस्त 1927 के एडिसन 'Mary Had a Little Lamb' के अपना 1877 फोनोग्राफ पाठ फेर से प्रस्तुत कइलें; मूल 1877 रिकॉर्डिंग ना बचल।",
+      bn: "১৯২৭ সালের ১২ আগস্ট এডিসন 'Mary Had a Little Lamb'-এর ১৮৭৭ সালের ফোনোগ্রাফ আবৃত্তি পুনরায় উপস্থাপন করেন; মূল ১৮৭৭ রেকর্ডিংটি টিকে নেই।",
+      ur: "12 اگست 1927 کو ایڈیسن نے 'Mary Had a Little Lamb' کی اپنی 1877 فونوگراف قرأت دوبارہ پیش کی؛ اصل 1877 ریکارڈنگ محفوظ نہیں رہی۔"
     },
     initialComments: []
   }
