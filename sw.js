@@ -1,5 +1,5 @@
 /* NISCHAY SWAR — route-aware offline shell cache */
-const CACHE_NAME = "nischay-swar-v4";
+const CACHE_NAME = "nischay-swar-v5";
 const APP_CACHE_PREFIX = "nischay-swar-v";
 const ASSETS_TO_CACHE = [
   "./", "index.html", "legends.html", "wildlife.html", "timeline.html", "quiz.html",

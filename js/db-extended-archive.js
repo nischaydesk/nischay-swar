@@ -31,7 +31,7 @@ window.NISCHAY_VOICES_DATA.push(
   },
 
   {
-    id: "indian-elephant-trumpet", featured: false, category: "wildlife", year: 2017, duration: "00:24",
+    id: "indian-elephant-trumpet", featured: false, category: "wildlife", year: 2017, duration: "00:01",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Elephas_maximus_%28Bandipur%29.jpg/500px-Elephas_maximus_%28Bandipur%29.jpg", fallbackPhoto: "images/wildlife/elephant.jpg", audioUrl: "https://upload.wikimedia.org/wikipedia/commons/4/40/Elephant_voice_-_trumpeting.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original", source: "Wikimedia Commons (CC0 1.0; source creator: தகவலுழவன்)", basePlays: 3420, baseLikes: 1150,
     name: { hi: "जंगली हाथी की चिंघाड़ (Indian Elephant)", en: "Wild Elephant Trumpet Call", bho: "जंगली हाथी के जोरदार चिंघाड़", bn: "বন্য হাতির গর্জন (Trumpet)", ur: "جنگلی ہاتھی کی چنگھاڑ" },
     role: { hi: "भारत का विरासत पशु • Elephas maximus indicus", en: "National Heritage Animal of India • Elephas maximus", bho: "भारत के विरासत पशु • विशालकाय हाथी", bn: "ভারতের ঐতিহ্যবাহী প্রাণী • বন্য হাতি", ur: "ہندوستان کا ورثہ جانور • جنگلی ہاتھی" },
